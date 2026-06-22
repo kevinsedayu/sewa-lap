@@ -26,10 +26,12 @@ export default function UserBookingPage() {
       const { data: { user } } = await supabase.auth.getUser()
       setUser(user)
 
-      // Ambil profil user untuk prefill nomor telepon
-      const { data: profile } = await supabase.from('profiles').select('phone').eq('id', user.id).single()
-      if (profile?.phone) {
-        setPhone(profile.phone)
+      if (user) {
+        // Ambil profil user untuk prefill nomor telepon
+        const { data: profile } = await supabase.from('profiles').select('phone').eq('id', user?.id as string).single()
+        if (profile?.phone) {
+          setPhone(profile.phone)
+        }
       }
 
       // Ambil booking yang sudah dipesan (online/offline) atau libur untuk mencegah double booking
@@ -61,6 +63,11 @@ export default function UserBookingPage() {
     
     if (!tanggal || !sesi || !phone || !file) {
       setError('Harap lengkapi semua data, termasuk nomor telepon dan unggah bukti pembayaran.')
+      return
+    }
+
+    if (!user) {
+      setError('Anda harus login terlebih dahulu.')
       return
     }
 
