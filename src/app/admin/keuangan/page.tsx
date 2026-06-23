@@ -50,7 +50,7 @@ export default async function AdminKeuanganPage() {
   const totalPengeluaran = semuaTransaksi.filter(t => t.tipe === 'pengeluaran').reduce((sum, t) => sum + t.jumlah, 0)
 
   return (
-    <div style={{ padding: '32px', maxWidth: '1000px' }}>
+    <div className="page-content" style={{ maxWidth: '1000px' }}>
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
           Laporan Keuangan

@@ -157,7 +157,7 @@ export default function UserBookingPage() {
   const today = new Date().toISOString().split('T')[0]
 
   return (
-    <div style={{ padding: '32px', maxWidth: '800px', margin: '0 auto', fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="page-content" style={{ maxWidth: '800px', margin: '0 auto', fontFamily: "'Inter', system-ui, sans-serif" }}>
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#09090b', marginBottom: '8px' }}>
           Booking Lapangan
@@ -211,7 +211,7 @@ export default function UserBookingPage() {
 
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, marginBottom: '8px' }}>Pilih Sesi</label>
-              <div style={{ display: 'flex', gap: '12px' }}>
+              <div className="booking-sesi-row" style={{ display: 'flex', gap: '12px' }}>
                 <label style={{ 
                   flex: 1, padding: '16px', border: '1px solid', borderRadius: '8px', cursor: 'pointer',
                   borderColor: sesi === 'pagi' ? '#09090b' : '#e4e4e7',

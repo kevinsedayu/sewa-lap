@@ -9,7 +9,7 @@ export default async function AdminKalenderPage() {
     .select('*, profiles(full_name)')
 
   return (
-    <div style={{ padding: '32px', maxWidth: '1000px' }}>
+    <div className="page-content" style={{ maxWidth: '1000px' }}>
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
           Kalender Ketersediaan

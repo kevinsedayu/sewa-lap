@@ -17,7 +17,7 @@ export default async function UserProfilePage() {
     .single()
 
   return (
-    <div style={{ padding: '32px', maxWidth: '800px' }}>
+    <div className="page-content" style={{ maxWidth: '800px' }}>
       <div style={{ marginBottom: '32px' }}>
         <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.025em', margin: '0 0 8px' }}>
           Profil Saya

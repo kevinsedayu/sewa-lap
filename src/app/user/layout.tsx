@@ -26,9 +26,9 @@ export default async function UserLayout({
   if (role !== 'user') redirect('/admin/dashboard')
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#fafafa', fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="app-shell">
       <UserSidebar user={{ email: user.email!, name: profile?.full_name || 'User' }} />
-      <main style={{ flex: 1, marginLeft: 0, minWidth: 0 }}>
+      <main className="app-main">
         {children}
       </main>
     </div>

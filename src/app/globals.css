@@ -16,6 +16,7 @@
     --error: #ef4444;
     --warning: #f59e0b;
     --radius: 0.75rem;
+    --bottom-nav-height: 64px;
   }
 
   * {
@@ -53,5 +54,285 @@
   button {
     cursor: pointer;
     font-family: inherit;
+  }
+}
+
+/* =============================================
+   LAYOUT: App shell with sidebar
+   ============================================= */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #fafafa;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* =============================================
+   SIDEBAR: Desktop visible, hidden on mobile
+   ============================================= */
+.sidebar-desktop {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.bottom-nav {
+  display: none;
+}
+
+/* =============================================
+   PAGE CONTENT: Responsive padding
+   ============================================= */
+.page-content {
+  padding: 32px;
+  max-width: 1200px;
+}
+
+/* =============================================
+   RESPONSIVE TABLES: Scroll on mobile
+   ============================================= */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* =============================================
+   BOOKING CARDS: Card view for mobile tables
+   ============================================= */
+.booking-card-list {
+  display: none;
+}
+
+.booking-table-view {
+  display: block;
+}
+
+/* =============================================
+   STATS GRID
+   ============================================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+/* =============================================
+   DASHBOARD HEADER
+   ============================================= */
+.dashboard-header-text {
+  font-size: 48px;
+}
+
+.facility-card {
+  flex: 0 0 calc(50% - 8px);
+  height: 300px;
+}
+
+/* =============================================
+   GREETING ROW
+   ============================================= */
+.greeting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+/* =============================================
+   CTA BANNER
+   ============================================= */
+.cta-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* =============================================
+   MOBILE BREAKPOINT (max 768px)
+   ============================================= */
+@media (max-width: 768px) {
+
+  /* Hide desktop sidebar */
+  .sidebar-desktop {
+    display: none !important;
+  }
+
+  /* Show bottom navigation bar */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--bottom-nav-height);
+    background: #ffffff;
+    border-top: 1px solid #e4e4e7;
+    z-index: 100;
+    align-items: stretch;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+  }
+
+  .bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #a1a1aa;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 6px 4px;
+    transition: color 0.15s, background 0.15s;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    min-width: 0;
+  }
+
+  .bottom-nav-item.active {
+    color: #09090b;
+  }
+
+  .bottom-nav-item span {
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  /* Main content needs bottom padding for nav bar */
+  .app-main {
+    padding-bottom: var(--bottom-nav-height);
+  }
+
+  /* Page content padding reduced */
+  .page-content {
+    padding: 20px 16px;
+  }
+
+  /* Dashboard header text smaller */
+  .dashboard-header-text {
+    font-size: 28px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  /* Facility cards: full width on mobile */
+  .facility-card {
+    flex: 0 0 calc(85% - 8px);
+    height: 200px;
+  }
+
+  /* Stats grid: 2 columns on mobile */
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  /* Greeting row stacks vertically */
+  .greeting-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .greeting-row a,
+  .greeting-row button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* CTA banner stacks vertically */
+  .cta-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cta-banner a {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Tables: hide on mobile, show cards instead */
+  .booking-table-view {
+    display: none;
+  }
+
+  .booking-card-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Booking page form */
+  .booking-sesi-row {
+    flex-direction: column !important;
+  }
+
+  /* Auth pages */
+  .auth-form-container {
+    padding: 24px 16px !important;
+    align-items: flex-start !important;
+    padding-top: 48px !important;
+  }
+
+  /* Profile/form pages */
+  .page-form-card {
+    padding: 20px 16px !important;
+  }
+
+  /* Admin table wrapper */
+  .admin-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Bigger touch targets for inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents iOS zoom */
+    min-height: 44px;
+  }
+
+  /* Buttons: minimum 44px tall for touch */
+  button[type="submit"],
+  a.btn-primary,
+  .btn-touch {
+    min-height: 44px;
+  }
+}
+
+/* =============================================
+   SMALL MOBILE (max 480px)
+   ============================================= */
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stats-card-value {
+    font-size: 22px !important;
+  }
+
+  .dashboard-header-text {
+    font-size: 22px !important;
   }
 }

@@ -15,7 +15,7 @@ export default async function AdminBookingPage() {
   const cancelled = bookings?.filter(b => b.status === 'cancelled').length ?? 0
 
   return (
-    <div style={{ padding: '32px', maxWidth: '1200px' }}>
+    <div className="page-content" style={{ maxWidth: '1200px' }}>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.025em', margin: '0 0 4px' }}>

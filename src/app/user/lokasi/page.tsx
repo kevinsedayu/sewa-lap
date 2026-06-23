@@ -3,7 +3,7 @@ export default function UserLokasiPage() {
   const mapsEmbedUrl = 'https://maps.google.com/maps?q=lapangan+sepakbola&output=embed'
 
   return (
-    <div style={{ padding: '32px', maxWidth: '900px', fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="page-content" style={{ maxWidth: '900px', fontFamily: "'Inter', system-ui, sans-serif" }}>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.025em', margin: '0 0 6px' }}>
