@@ -245,7 +245,7 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
       )}
 
       {/* Table Laporan */}
-      <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', overflow: 'hidden' }}>
+      <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
           <thead>
             <tr style={{ borderBottom: '1px solid #f4f4f5', background: '#fafafa' }}>

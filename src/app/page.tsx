@@ -33,15 +33,9 @@ export default async function Home() {
       {/* Navbar / Header */}
       <header style={{ 
         background: '#ffffff', borderBottom: '1px solid #e4e4e7', 
-        padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        padding: '16px 24px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center',
         position: 'sticky', top: 0, zIndex: 50, boxShadow: '0 2px 10px rgba(0,0,0,0.03)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '24px' }}>⚽</span>
-          <h1 className={anton.className} style={{ margin: 0, fontSize: '20px', color: '#166534', letterSpacing: '1px', textTransform: 'uppercase' }}>
-            Sewa Lap
-          </h1>
-        </div>
         <div>
           {user ? (
             <Link href={dashboardPath} style={{
