@@ -36,7 +36,8 @@ const bottomNavItems = [
   { href: '/user/dashboard', label: 'Home', icon: LayoutDashboard },
   { href: '/user/booking', label: 'Booking', icon: CalendarDays },
   { href: '/user/riwayat', label: 'Riwayat', icon: History },
-  { href: '/user/kalender', label: 'Kalender', icon: CalendarDays },
+  { href: '/user/lokasi', label: 'Lokasi', icon: MapPin },
+  { href: '/user/keuangan', label: 'Keuangan', icon: Wallet },
   { href: '/user/profil', label: 'Profil', icon: User },
 ]
 
