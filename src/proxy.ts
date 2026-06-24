@@ -35,9 +35,9 @@ export async function proxy(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
 
-  // Public routes - accessible without login
-  const publicRoutes = ['/login', '/register', '/auth/callback']
-  if (publicRoutes.includes(pathname)) {
+  // Public routes - accessible without login but redirects to dashboard if logged in
+  const authRoutes = ['/login', '/register', '/auth/callback']
+  if (authRoutes.includes(pathname)) {
     if (user) {
       // Already logged in - redirect to appropriate dashboard
       const { data: profile } = await supabase
@@ -54,6 +54,11 @@ export async function proxy(request: NextRequest) {
         new URL(role === 'admin' ? '/admin/dashboard' : '/user/dashboard', request.url)
       )
     }
+    return supabaseResponse
+  }
+
+  // Pure public routes
+  if (pathname === '/') {
     return supabaseResponse
   }
 
