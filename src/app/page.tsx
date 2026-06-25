@@ -27,6 +27,19 @@ export default async function Home() {
     .select('*')
     .limit(1)
     .single()
+  // Parse fasilitas JSON for sessions
+  let sesiList: any[] = [
+    { id: 'pagi', nama: 'Sesi Pagi', jam: '07:00-12:00', harga: 200000 },
+    { id: 'sore', nama: 'Sesi Sore', jam: '15:00-18:00', harga: 250000 }
+  ]
+  try {
+    if (typeof lapangan?.fasilitas === 'string') {
+      const parsed = JSON.parse(lapangan.fasilitas)
+      if (parsed.sesi && Array.isArray(parsed.sesi)) sesiList = parsed.sesi
+    } else if (lapangan?.fasilitas?.sesi && Array.isArray(lapangan.fasilitas.sesi)) {
+      sesiList = lapangan.fasilitas.sesi
+    }
+  } catch(e) {}
 
   return (
     <div style={{ minHeight: '100vh', background: '#fafafa', fontFamily: "'Inter', system-ui, sans-serif", paddingBottom: '40px' }}>
@@ -125,8 +138,13 @@ export default async function Home() {
           <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', padding: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
             <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 6px', color: '#09090b' }}>{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
             <p style={{ fontSize: '13px', color: '#52525b', margin: '0 0 12px', lineHeight: '1.5' }}>{lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap.'}</p>
-            <div style={{ fontSize: '13px', fontWeight: 600, color: '#16a34a' }}>
-              Sesi Pagi: Rp 200.000 &nbsp;|&nbsp; Sesi Sore: Rp 250.000
+            <div style={{ fontSize: '13px', fontWeight: 600, color: '#16a34a', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {sesiList.map((s: any, idx: number) => (
+                <span key={s.id}>
+                  {s.nama}: Rp {s.harga.toLocaleString('id-ID')}
+                  {idx < sesiList.length - 1 && <span style={{ color: '#a1a1aa', margin: '0 8px' }}>|</span>}
+                </span>
+              ))}
             </div>
           </div>
         </div>

@@ -18,8 +18,11 @@ export default function UserBookingPage() {
   const router = useRouter()
   const supabase = createClient()
 
-  const HARGA_PAGI = 200000
-  const HARGA_SORE = 250000
+  const [activeSesiList, setActiveSesiList] = useState<any[]>([
+    { id: 'pagi', nama: 'Sesi Pagi', jam: '07:00-12:00', harga: 200000 },
+    { id: 'sore', nama: 'Sesi Sore', jam: '15:00-18:00', harga: 250000 }
+  ])
+  const [lapanganId, setLapanganId] = useState<string>('')
 
   useEffect(() => {
     async function loadData() {
@@ -42,6 +45,16 @@ export default function UserBookingPage() {
       
       if (data) {
         setBookedSessions(data as any)
+      }
+
+      const { data: lapangan } = await supabase.from('lapangan').select('id, fasilitas').limit(1).single()
+      if (lapangan) {
+        setLapanganId(lapangan.id)
+        try {
+          let parsed = lapangan.fasilitas
+          if (typeof parsed === 'string') parsed = JSON.parse(parsed)
+          if (parsed?.sesi && Array.isArray(parsed.sesi)) setActiveSesiList(parsed.sesi)
+        } catch(e) {}
       }
     }
     loadData()
@@ -97,14 +110,7 @@ export default function UserBookingPage() {
         .from('bukti-pembayaran')
         .getPublicUrl(filePath)
 
-      // 2. Ambil ID lapangan pertama (karena hanya ada 1 lapangan)
-      const { data: lapanganData, error: lapanganError } = await supabase
-        .from('lapangan')
-        .select('id')
-        .limit(1)
-        .single()
-        
-      if (lapanganError || !lapanganData) {
+      if (!lapanganId) {
         throw new Error('Data lapangan belum tersedia. Harap hubungi admin.')
       }
 
@@ -118,16 +124,18 @@ export default function UserBookingPage() {
           role: user.email === 'admin@sewa.com' ? 'admin' : 'user'
         }, { onConflict: 'id' })
 
-      // 3. Simpan Data Booking
-      const totalHarga = sesi === 'pagi' ? HARGA_PAGI : HARGA_SORE
-      const jamMulai = sesi === 'pagi' ? '07:00:00' : '15:00:00'
-      const jamSelesai = sesi === 'pagi' ? '12:00:00' : '18:00:00'
+      const selectedSesi = activeSesiList.find(s => s.id === sesi)
+      if (!selectedSesi) throw new Error("Sesi tidak valid")
+      const jamArr = selectedSesi.jam.split('-')
+      const totalHarga = selectedSesi.harga
+      const jamMulai = (jamArr[0] || '00:00') + ':00'
+      const jamSelesai = (jamArr[1] || '00:00') + ':00'
 
       const { error: insertError } = await supabase
         .from('sewa')
         .insert({
           user_id: user.id,
-          lapangan_id: lapanganData.id,
+          lapangan_id: lapanganId,
           tanggal,
           sesi,
           jam_mulai: jamMulai,
@@ -211,48 +219,29 @@ export default function UserBookingPage() {
 
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', fontSize: '14px', fontWeight: 500, marginBottom: '8px' }}>Pilih Sesi</label>
-              <div className="booking-sesi-row" style={{ display: 'flex', gap: '12px' }}>
-                <label style={{ 
-                  flex: 1, padding: '16px', border: '1px solid', borderRadius: '8px', cursor: 'pointer',
-                  borderColor: sesi === 'pagi' ? '#09090b' : '#e4e4e7',
-                  background: sesi === 'pagi' ? '#fafafa' : '#fff',
-                  opacity: tanggal && isSessionBooked(tanggal, 'pagi') ? 0.5 : 1
-                }}>
-                  <input 
-                    type="radio" 
-                    name="sesi" 
-                    value="pagi" 
-                    checked={sesi === 'pagi'} 
-                    onChange={() => setSesi('pagi')} 
-                    disabled={tanggal ? isSessionBooked(tanggal, 'pagi') : false}
-                    style={{ display: 'none' }} 
-                  />
-                  <div style={{ fontWeight: 600, fontSize: '15px', color: '#09090b' }}>Sesi Pagi</div>
-                  <div style={{ fontSize: '13px', color: '#71717a', marginTop: '4px' }}>07:00 - 12:00</div>
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginTop: '8px' }}>Rp {HARGA_PAGI.toLocaleString('id-ID')}</div>
-                  {tanggal && isSessionBooked(tanggal, 'pagi') && <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px' }}>Sudah dibooking</div>}
-                </label>
-
-                <label style={{ 
-                  flex: 1, padding: '16px', border: '1px solid', borderRadius: '8px', cursor: 'pointer',
-                  borderColor: sesi === 'sore' ? '#09090b' : '#e4e4e7',
-                  background: sesi === 'sore' ? '#fafafa' : '#fff',
-                  opacity: tanggal && isSessionBooked(tanggal, 'sore') ? 0.5 : 1
-                }}>
-                  <input 
-                    type="radio" 
-                    name="sesi" 
-                    value="sore" 
-                    checked={sesi === 'sore'} 
-                    onChange={() => setSesi('sore')}
-                    disabled={tanggal ? isSessionBooked(tanggal, 'sore') : false} 
-                    style={{ display: 'none' }} 
-                  />
-                  <div style={{ fontWeight: 600, fontSize: '15px', color: '#09090b' }}>Sesi Sore</div>
-                  <div style={{ fontSize: '13px', color: '#71717a', marginTop: '4px' }}>15:00 - 18:00</div>
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginTop: '8px' }}>Rp {HARGA_SORE.toLocaleString('id-ID')}</div>
-                  {tanggal && isSessionBooked(tanggal, 'sore') && <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px' }}>Sudah dibooking</div>}
-                </label>
+              <div className="booking-sesi-row" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                {activeSesiList.map(s => (
+                  <label key={s.id} style={{ 
+                    flex: 1, minWidth: '150px', padding: '16px', border: '1px solid', borderRadius: '8px', cursor: 'pointer',
+                    borderColor: sesi === s.id ? '#09090b' : '#e4e4e7',
+                    background: sesi === s.id ? '#fafafa' : '#fff',
+                    opacity: tanggal && isSessionBooked(tanggal, s.id) ? 0.5 : 1
+                  }}>
+                    <input 
+                      type="radio" 
+                      name="sesi" 
+                      value={s.id} 
+                      checked={sesi === s.id} 
+                      onChange={() => setSesi(s.id)} 
+                      disabled={tanggal ? isSessionBooked(tanggal, s.id) : false}
+                      style={{ display: 'none' }} 
+                    />
+                    <div style={{ fontWeight: 600, fontSize: '15px', color: '#09090b' }}>{s.nama}</div>
+                    <div style={{ fontSize: '13px', color: '#71717a', marginTop: '4px' }}>{s.jam}</div>
+                    <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginTop: '8px' }}>Rp {s.harga.toLocaleString('id-ID')}</div>
+                    {tanggal && isSessionBooked(tanggal, s.id) && <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px' }}>Sudah dibooking</div>}
+                  </label>
+                ))}
               </div>
             </div>
           </div>

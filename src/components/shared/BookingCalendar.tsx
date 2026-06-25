@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -25,6 +25,21 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
   const [tipeInput, setTipeInput] = useState<'booking' | 'lainnya'>('booking')
   const [namaPenyewa, setNamaPenyewa] = useState('')
   const [catatanLainnya, setCatatanLainnya] = useState('')
+
+  const [activeSesiList, setActiveSesiList] = useState<any[]>([
+    { id: 'pagi', nama: 'Sesi Pagi', jam: '07:00-12:00', harga: 200000 },
+    { id: 'sore', nama: 'Sesi Sore', jam: '15:00-18:00', harga: 250000 }
+  ])
+
+  useEffect(() => {
+    supabase.from('lapangan').select('fasilitas').limit(1).single().then(({ data }) => {
+      try {
+        let parsed = data?.fasilitas
+        if (typeof parsed === 'string') parsed = JSON.parse(parsed)
+        if (parsed?.sesi && Array.isArray(parsed.sesi)) setActiveSesiList(parsed.sesi)
+      } catch(e) {}
+    })
+  }, [])
 
   const year = currentDate.getFullYear()
   const month = currentDate.getMonth()
@@ -61,19 +76,21 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
 
     try {
       // 1. Get Lapangan ID and Harga
-      const { data: lapangan } = await supabase.from('lapangan').select('id, harga_per_jam').limit(1).single()
+      const { data: lapangan } = await supabase.from('lapangan').select('id, fasilitas').limit(1).single()
       if (!lapangan) throw new Error("Data lapangan tidak ditemukan")
 
       // 2. Get Current Admin User
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) throw new Error("Anda harus login")
 
-      const jamMulai = modalSesi === 'pagi' ? '07:00' : '15:00'
-      const jamSelesai = modalSesi === 'pagi' ? '12:00' : '18:00'
+      const selectedSesi = activeSesiList.find(s => s.id === modalSesi)
+      const jamArr = selectedSesi ? selectedSesi.jam.split('-') : ['00:00', '00:00']
+      const jamMulai = jamArr[0] || '00:00'
+      const jamSelesai = jamArr[1] || '00:00'
       
       const status = tipeInput === 'booking' ? 'completed' : 'maintenance'
       const catatan = tipeInput === 'booking' ? namaPenyewa : catatanLainnya
-      const totalHarga = tipeInput === 'booking' ? lapangan.harga_per_jam : 0
+      const totalHarga = (tipeInput === 'booking' && selectedSesi) ? selectedSesi.harga : 0
 
       const { error } = await supabase.from('sewa').insert({
         user_id: user.id, // Admin's user_id since it's offline input
@@ -135,22 +152,21 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
           {/* Tanggal */}
           {Array.from({ length: daysInMonth }).map((_, i) => {
             const day = i + 1
-            const pagiBooking = getBooking(day, 'pagi')
-            const soreBooking = getBooking(day, 'sore')
 
-            const renderSesi = (sesiInfo: CalendarBooking | undefined, sesiType: 'pagi' | 'sore') => {
+            const renderSesi = (sesiInfo: CalendarBooking | undefined, sesiTypeObj: any) => {
               if (!sesiInfo) {
                 return (
                   <div 
-                    onClick={() => openModal(day, sesiType)}
+                    key={sesiTypeObj.id}
+                    onClick={() => openModal(day, sesiTypeObj.id)}
                     style={{
                       fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
                       background: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0',
                       cursor: isAdmin ? 'pointer' : 'default'
                     }}
-                    title={isAdmin ? `Klik untuk input jadwal ${sesiType}` : ''}
+                    title={isAdmin ? `Klik untuk input jadwal ${sesiTypeObj.nama}` : ''}
                   >
-                    {sesiType === 'pagi' ? 'Pagi (Kosong)' : 'Sore (Kosong)'}
+                    {sesiTypeObj.nama.replace('Sesi ', '')} (Kosong)
                   </div>
                 )
               }
@@ -163,12 +179,12 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
               const detailText = isMaintenance ? `Lainnya: ${sesiInfo.catatan || 'Ditutup'}` : `Booking: ${sesiInfo.catatan || sesiInfo.penyewa || 'Penuh'}`
 
               return (
-                <div style={{
+                <div key={sesiTypeObj.id} style={{
                   fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
                   background: bgColor, color: textColor, border: `1px solid ${borderColor}`,
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
                   cursor: 'default'
-                }} title={isAdmin ? `${sesiType === 'pagi' ? 'Pagi' : 'Sore'} - ${detailText}` : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}>
+                }} title={isAdmin ? `${sesiTypeObj.nama} - ${detailText}` : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}>
                   {isAdmin ? detailText : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}
                 </div>
               )
@@ -180,8 +196,7 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
                 display: 'flex', flexDirection: 'column', gap: '4px'
               }}>
                 <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginBottom: '4px' }}>{day}</div>
-                {renderSesi(pagiBooking, 'pagi')}
-                {renderSesi(soreBooking, 'sore')}
+                {activeSesiList.map(sesi => renderSesi(getBooking(day, sesi.id), sesi))}
               </div>
             )
           })}

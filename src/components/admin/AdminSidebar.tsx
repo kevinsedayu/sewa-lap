@@ -15,6 +15,7 @@ import {
   Shield,
   Wallet,
   BookOpen,
+  Settings,
 } from 'lucide-react'
 
 interface AdminSidebarProps {
@@ -25,6 +26,7 @@ const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/booking', label: 'Kelola Booking', icon: BookOpen },
   { href: '/admin/kalender', label: 'Kalender', icon: CalendarDays },
+  { href: '/admin/info-lapangan', label: 'Info Lapangan', icon: Settings },
   { href: '/admin/lokasi', label: 'Lokasi Lapangan', icon: MapPin },
   { href: '/admin/users', label: 'Pengguna', icon: Users },
   { href: '/admin/keuangan', label: 'Laporan Keuangan', icon: Wallet },
@@ -33,7 +35,7 @@ const navItems = [
 const bottomNavItems = [
   { href: '/admin/dashboard', label: 'Home', icon: LayoutDashboard },
   { href: '/admin/booking', label: 'Booking', icon: BookOpen },
-  { href: '/admin/kalender', label: 'Kalender', icon: CalendarDays },
+  { href: '/admin/info-lapangan', label: 'Info', icon: Settings },
   { href: '/admin/lokasi', label: 'Lokasi', icon: MapPin },
   { href: '/admin/users', label: 'Users', icon: Users },
   { href: '/admin/keuangan', label: 'Keuangan', icon: Wallet },
