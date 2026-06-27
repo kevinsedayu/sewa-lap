@@ -21,6 +21,26 @@ export default async function UserDashboard() {
 
   const { data: lapangan } = await supabase.from('lapangan').select('*').limit(1).single()
 
+  let sesiList: any[] = []
+  if (lapangan?.fasilitas) {
+    if (Array.isArray(lapangan.fasilitas)) {
+      sesiList = lapangan.fasilitas.map((f: string) => JSON.parse(f))
+    } else if (typeof lapangan.fasilitas === 'string') {
+      try {
+        const p = JSON.parse(lapangan.fasilitas)
+        if (p.sesi && Array.isArray(p.sesi)) sesiList = p.sesi
+      } catch (e) {}
+    } else if (lapangan.fasilitas.sesi && Array.isArray(lapangan.fasilitas.sesi)) {
+      sesiList = lapangan.fasilitas.sesi
+    }
+  }
+  if (sesiList.length === 0) {
+    sesiList = [
+      { id: 'pagi', nama: 'Sesi Pagi', jam: '07:00-12:00', harga: 200000 },
+      { id: 'sore', nama: 'Sesi Sore', jam: '15:00-18:00', harga: 250000 }
+    ]
+  }
+
   const hour = new Date().getHours()
   const greeting = hour < 12 ? 'Selamat pagi' : hour < 15 ? 'Selamat siang' : hour < 18 ? 'Selamat sore' : 'Selamat malam'
 
@@ -124,8 +144,13 @@ export default async function UserDashboard() {
         <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', padding: '16px' }}>
           <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 6px', color: '#09090b' }}>{lapangan?.nama || 'Nama Lapangan'}</h3>
           <p style={{ fontSize: '13px', color: '#52525b', margin: '0 0 12px', lineHeight: '1.5' }}>{lapangan?.deskripsi || 'Deskripsi belum ditambahkan.'}</p>
-          <div style={{ fontSize: '13px', fontWeight: 600, color: '#16a34a' }}>
-            Sesi Pagi: Rp 200.000 &nbsp;|&nbsp; Sesi Sore: Rp 250.000
+          <div style={{ fontSize: '13px', fontWeight: 600, color: '#16a34a', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            {sesiList.map((s: any, idx: number) => (
+              <span key={s.id}>
+                {s.nama}: Rp {s.harga.toLocaleString('id-ID')}
+                {idx < sesiList.length - 1 && <span style={{ color: '#a1a1aa', margin: '0 8px' }}>|</span>}
+              </span>
+            ))}
           </div>
         </div>
       </div>
