@@ -34,9 +34,15 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
   useEffect(() => {
     supabase.from('lapangan').select('fasilitas').limit(1).single().then(({ data }) => {
       try {
-        let parsed = data?.fasilitas
-        if (typeof parsed === 'string') parsed = JSON.parse(parsed)
-        if (parsed?.sesi && Array.isArray(parsed.sesi)) setActiveSesiList(parsed.sesi)
+        if (Array.isArray(data?.fasilitas)) {
+          const parsedSesi = data.fasilitas.map((item: any) => 
+            typeof item === 'string' ? JSON.parse(item) : item
+          )
+          if (parsedSesi.length > 0) setActiveSesiList(parsedSesi)
+        } else if (typeof data?.fasilitas === 'string') {
+          const parsed = JSON.parse(data.fasilitas)
+          if (parsed?.sesi && Array.isArray(parsed.sesi)) setActiveSesiList(parsed.sesi)
+        }
       } catch(e) {}
     })
   }, [])

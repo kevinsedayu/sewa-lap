@@ -23,7 +23,16 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
   ]
   
   try {
-    if (typeof initialData?.fasilitas === 'string') {
+    if (Array.isArray(initialData?.fasilitas)) {
+      // It's an array of JSON strings (or already parsed objects)
+      const parsedSesi = initialData.fasilitas.map((item: any) => 
+        typeof item === 'string' ? JSON.parse(item) : item
+      )
+      if (parsedSesi.length > 0) {
+        initialSesi = parsedSesi
+      }
+    } else if (typeof initialData?.fasilitas === 'string') {
+      // Fallback if it's somehow a single JSON string
       const parsed = JSON.parse(initialData.fasilitas)
       if (parsed.sesi && Array.isArray(parsed.sesi)) {
         initialSesi = parsed.sesi
@@ -58,7 +67,8 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
   const handleSave = async () => {
     setIsSaving(true)
     try {
-      const fasilitasJson = JSON.stringify({ sesi: sesiList })
+      // Map sessions to array of strings so it stores correctly in text[] column
+      const fasilitasArray = sesiList.map(sesi => JSON.stringify(sesi))
       
       const { error } = await supabase
         .from('lapangan')
@@ -66,7 +76,7 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
           nama,
           deskripsi,
           alamat,
-          fasilitas: fasilitasJson
+          fasilitas: fasilitasArray
         })
         .eq('id', initialData.id)
 

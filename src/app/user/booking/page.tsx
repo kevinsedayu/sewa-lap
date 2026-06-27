@@ -51,9 +51,15 @@ export default function UserBookingPage() {
       if (lapangan) {
         setLapanganId(lapangan.id)
         try {
-          let parsed = lapangan.fasilitas
-          if (typeof parsed === 'string') parsed = JSON.parse(parsed)
-          if (parsed?.sesi && Array.isArray(parsed.sesi)) setActiveSesiList(parsed.sesi)
+          if (Array.isArray(lapangan.fasilitas)) {
+            const parsedSesi = lapangan.fasilitas.map((item: any) => 
+              typeof item === 'string' ? JSON.parse(item) : item
+            )
+            if (parsedSesi.length > 0) setActiveSesiList(parsedSesi)
+          } else if (typeof lapangan.fasilitas === 'string') {
+            const parsed = JSON.parse(lapangan.fasilitas)
+            if (parsed?.sesi && Array.isArray(parsed.sesi)) setActiveSesiList(parsed.sesi)
+          }
         } catch(e) {}
       }
     }

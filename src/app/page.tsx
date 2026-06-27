@@ -33,7 +33,12 @@ export default async function Home() {
     { id: 'sore', nama: 'Sesi Sore', jam: '15:00-18:00', harga: 250000 }
   ]
   try {
-    if (typeof lapangan?.fasilitas === 'string') {
+    if (Array.isArray(lapangan?.fasilitas)) {
+      const parsedSesi = lapangan.fasilitas.map((item: any) => 
+        typeof item === 'string' ? JSON.parse(item) : item
+      )
+      if (parsedSesi.length > 0) sesiList = parsedSesi
+    } else if (typeof lapangan?.fasilitas === 'string') {
       const parsed = JSON.parse(lapangan.fasilitas)
       if (parsed.sesi && Array.isArray(parsed.sesi)) sesiList = parsed.sesi
     } else if (lapangan?.fasilitas?.sesi && Array.isArray(lapangan.fasilitas.sesi)) {
