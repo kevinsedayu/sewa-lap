@@ -14,7 +14,6 @@ export type Sesi = {
 export default function InfoLapanganClient({ initialData }: { initialData: any }) {
   const [nama, setNama] = useState(initialData?.nama || '')
   const [deskripsi, setDeskripsi] = useState(initialData?.deskripsi || '')
-  const [alamat, setAlamat] = useState(initialData?.alamat || '')
   
   // Parse fasilitas JSON for sessions. If parsing fails or doesn't exist, use default
   let initialSesi: Sesi[] = [
@@ -55,7 +54,9 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
   }
 
   const handleRemoveSesi = (index: number) => {
-    setSesiList(sesiList.filter((_, i) => i !== index))
+    if (window.confirm("Apakah Anda yakin ingin menghapus sesi ini?")) {
+      setSesiList(sesiList.filter((_, i) => i !== index))
+    }
   }
 
   const handleSesiChange = (index: number, field: keyof Sesi, value: string | number) => {
@@ -75,7 +76,6 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
         .update({
           nama,
           deskripsi,
-          alamat,
           fasilitas: fasilitasArray
         })
         .eq('id', initialData.id)
@@ -108,13 +108,6 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
             <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>Deskripsi</label>
             <textarea 
               value={deskripsi} onChange={e => setDeskripsi(e.target.value)} rows={3}
-              style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #d4d4d8', fontSize: '14px' }} 
-            />
-          </div>
-          <div>
-            <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>Alamat Singkat</label>
-            <input 
-              type="text" value={alamat} onChange={e => setAlamat(e.target.value)}
               style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #d4d4d8', fontSize: '14px' }} 
             />
           </div>
