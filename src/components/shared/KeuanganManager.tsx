@@ -9,6 +9,7 @@ export type TransaksiKeuangan = {
   jumlah: number
   keterangan: string
   tanggal: string
+  created_at: string
   sumber?: 'Sewa' | 'Manual'
 }
 
@@ -59,7 +60,11 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
         .single()
 
       if (!error && data) {
-        setTransaksi(transaksi.map(t => t.id === editingId ? { ...data, sumber: 'Manual' } : t).sort((a, b) => new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime()))
+        setTransaksi(transaksi.map(t => t.id === editingId ? { ...data, sumber: 'Manual' } : t).sort((a, b) => {
+          const dateDiff = new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime();
+          if (dateDiff !== 0) return dateDiff;
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        }))
         setShowForm(false)
         resetForm()
       } else {
@@ -73,7 +78,11 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
         .single()
 
       if (!error && data) {
-        setTransaksi([{ ...data, sumber: 'Manual' }, ...transaksi].sort((a, b) => new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime()))
+        setTransaksi([{ ...data, sumber: 'Manual' }, ...transaksi].sort((a, b) => {
+          const dateDiff = new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime();
+          if (dateDiff !== 0) return dateDiff;
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        }))
         setShowForm(false)
         resetForm()
       } else {

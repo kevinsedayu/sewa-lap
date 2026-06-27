@@ -13,7 +13,7 @@ export default async function AdminKeuanganPage() {
   // 2. Ambil data dari tabel sewa (pemasukan otomatis dari booking yang selesai/dikonfirmasi)
   const { data: sewaData } = await supabase
     .from('sewa')
-    .select('id, total_harga, tanggal, profiles(full_name)')
+    .select('id, total_harga, tanggal, created_at, profiles(full_name)')
     .in('status', ['completed', 'confirmed'])
 
   // Gabungkan dan format data
@@ -26,6 +26,7 @@ export default async function AdminKeuanganPage() {
       jumlah: Number(item.jumlah),
       keterangan: item.keterangan,
       tanggal: item.tanggal,
+      created_at: item.created_at,
       sumber: 'Manual'
     }))
   }
@@ -37,13 +38,18 @@ export default async function AdminKeuanganPage() {
       jumlah: Number(item.total_harga),
       keterangan: `Sewa oleh ${(item.profiles as any)?.full_name || 'User'}`,
       tanggal: item.tanggal,
+      created_at: item.created_at,
       sumber: 'Sewa'
     }))
     semuaTransaksi = [...semuaTransaksi, ...sewaTransaksi]
   }
 
-  // Urutkan berdasarkan tanggal terbaru
-  semuaTransaksi.sort((a, b) => new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime())
+  // Urutkan berdasarkan tanggal terbaru, lalu created_at terbaru
+  semuaTransaksi.sort((a, b) => {
+    const dateDiff = new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime();
+    if (dateDiff !== 0) return dateDiff;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  })
 
   // Hitung total awal
   const totalPemasukan = semuaTransaksi.filter(t => t.tipe === 'pemasukan').reduce((sum, t) => sum + t.jumlah, 0)
