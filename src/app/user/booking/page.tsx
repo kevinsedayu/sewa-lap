@@ -276,7 +276,7 @@ export default function UserBookingPage() {
               <div style={{ marginTop: '16px', borderTop: '1px dashed #d4d4d8', paddingTop: '12px' }}>
                 <div style={{ fontSize: '13px', color: '#71717a' }}>Total yang harus dibayar:</div>
                 <div style={{ fontSize: '18px', fontWeight: 700, color: '#09090b' }}>
-                  Rp {(sesi === 'pagi' ? HARGA_PAGI : HARGA_SORE).toLocaleString('id-ID')}
+                  Rp {(activeSesiList.find(s => s.id === sesi)?.harga || 0).toLocaleString('id-ID')}
                 </div>
               </div>
             </div>
