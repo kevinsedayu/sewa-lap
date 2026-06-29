@@ -17,7 +17,7 @@ export default async function UserKeuanganPage() {
   // Jika RLS membatasi, kita akan fallback ke "User"
   const { data: sewaData } = await supabase
     .from('sewa')
-    .select('id, total_harga, tanggal')
+    .select('id, total_harga, tanggal, created_at')
     .in('status', ['completed', 'confirmed'])
 
   // Gabungkan dan format data
@@ -30,6 +30,7 @@ export default async function UserKeuanganPage() {
       jumlah: Number(item.jumlah),
       keterangan: item.keterangan,
       tanggal: item.tanggal,
+      created_at: item.created_at,
       sumber: 'Manual'
     }))
   }
@@ -41,13 +42,18 @@ export default async function UserKeuanganPage() {
       jumlah: Number(item.total_harga),
       keterangan: `Sewa Lapangan`, // Disamarkan untuk privasi user
       tanggal: item.tanggal,
+      created_at: item.created_at,
       sumber: 'Sewa'
     }))
     semuaTransaksi = [...semuaTransaksi, ...sewaTransaksi]
   }
 
-  // Urutkan berdasarkan tanggal terbaru
-  semuaTransaksi.sort((a, b) => new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime())
+  // Urutkan berdasarkan tanggal terbaru, lalu created_at terbaru
+  semuaTransaksi.sort((a, b) => {
+    const dateDiff = new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime();
+    if (dateDiff !== 0) return dateDiff;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  })
 
   // Hitung total awal
   const totalPemasukan = semuaTransaksi.filter(t => t.tipe === 'pemasukan').reduce((sum, t) => sum + t.jumlah, 0)
