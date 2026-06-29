@@ -72,8 +72,6 @@ export default function LoginPage() {
             </div>
           </div>
 
-          </div>
-
           {!isForgotPassword && (
             <div className="field-group">
               <div className="field-label-row">
