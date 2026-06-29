@@ -25,6 +25,15 @@ export default function UserBookingPage() {
   const [lapanganId, setLapanganId] = useState<string>('')
 
   useEffect(() => {
+    // Ambil tanggal dan sesi dari URL jika ada (redirect dari kalender)
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const qTanggal = params.get('tanggal')
+      const qSesi = params.get('sesi')
+      if (qTanggal) setTanggal(qTanggal)
+      if (qSesi) setSesi(qSesi)
+    }
+
     async function loadData() {
       const { data: { user } } = await supabase.auth.getUser()
       setUser(user)

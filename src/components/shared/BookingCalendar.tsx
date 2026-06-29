@@ -164,13 +164,20 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
                 return (
                   <div 
                     key={sesiTypeObj.id}
-                    onClick={() => openModal(day, sesiTypeObj.id)}
+                    onClick={() => {
+                      if (isAdmin) {
+                        openModal(day, sesiTypeObj.id)
+                      } else {
+                        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+                        router.push(`/user/booking?tanggal=${dateStr}&sesi=${sesiTypeObj.id}`)
+                      }
+                    }}
                     style={{
                       fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
                       background: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0',
-                      cursor: isAdmin ? 'pointer' : 'default'
+                      cursor: 'pointer'
                     }}
-                    title={isAdmin ? `Klik untuk input jadwal ${sesiTypeObj.nama}` : ''}
+                    title={isAdmin ? `Klik untuk input jadwal ${sesiTypeObj.nama}` : `Klik untuk booking ${sesiTypeObj.nama}`}
                   >
                     {sesiTypeObj.nama.replace('Sesi ', '')} (Kosong)
                   </div>
