@@ -31,10 +31,10 @@ const navItems = [
   { href: '/user/profil', label: 'Profil', icon: User },
 ]
 
-// Bottom nav items: only the most important ones for mobile
 const bottomNavItems = [
   { href: '/user/dashboard', label: 'Home', icon: LayoutDashboard },
   { href: '/user/booking', label: 'Booking', icon: CalendarDays },
+  { href: '/user/kalender', label: 'Kalender', icon: CalendarDays },
   { href: '/user/riwayat', label: 'Riwayat', icon: History },
   { href: '/user/lokasi', label: 'Lokasi', icon: MapPin },
   { href: '/user/keuangan', label: 'Keuangan', icon: Wallet },
