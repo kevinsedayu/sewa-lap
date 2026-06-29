@@ -82,3 +82,20 @@ export async function logout() {
   revalidatePath('/', 'layout')
   redirect('/login')
 }
+
+export async function resetPassword(formData: FormData) {
+  const supabase = await createClient()
+  const email = formData.get('email') as string
+
+  // Note: NEXT_PUBLIC_SITE_URL or request origin could be used, assuming localhost for now or env var
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl}/update-password`,
+  })
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  return { success: 'Tautan reset password telah dikirim ke email Anda. Silakan periksa inbox atau folder spam.' }
+}

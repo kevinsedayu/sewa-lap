@@ -3,20 +3,29 @@
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
 import { Eye, EyeOff, Mail, Lock, Loader2 } from 'lucide-react'
-import { login } from '../actions'
+import { login, resetPassword } from '../actions'
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
+  const [isForgotPassword, setIsForgotPassword] = useState(false)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
+    setSuccess(null)
     const formData = new FormData(e.currentTarget)
     startTransition(async () => {
-      const result = await login(formData)
-      if (result?.error) setError(result.error)
+      if (isForgotPassword) {
+        const result = await resetPassword(formData)
+        if (result?.error) setError(result.error)
+        if (result?.success) setSuccess(result.success)
+      } else {
+        const result = await login(formData)
+        if (result?.error) setError(result.error)
+      }
     })
   }
 
@@ -24,9 +33,13 @@ export default function LoginPage() {
     <div className="auth-form-container">
       <div className="auth-form-card">
         <div className="auth-form-header">
-          <h2 className="auth-title">Masuk ke akun</h2>
-          <p className="auth-subtitle">Belum punya akun?{' '}
-            <Link href="/register" className="auth-link">Daftar sekarang</Link>
+          <h2 className="auth-title">{isForgotPassword ? 'Lupa Password' : 'Masuk ke akun'}</h2>
+          <p className="auth-subtitle">
+            {isForgotPassword ? (
+              <>Ingat password Anda? <button type="button" onClick={() => { setIsForgotPassword(false); setError(null); setSuccess(null); }} className="auth-link" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 'inherit' }}>Masuk di sini</button></>
+            ) : (
+              <>Belum punya akun? <Link href="/register" className="auth-link">Daftar sekarang</Link></>
+            )}
           </p>
         </div>
 
@@ -36,9 +49,15 @@ export default function LoginPage() {
           </div>
         )}
 
+        {success && (
+          <div className="alert-error" style={{ background: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0' }}>
+            <span>{success}</span>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="field-group">
-            <label className="field-label" htmlFor="email">Email</label>
+            <label className="field-label" htmlFor="email">Email terdaftar</label>
             <div className="field-wrapper">
               <Mail className="field-icon" size={16} />
               <input
@@ -53,38 +72,42 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="field-group">
-            <div className="field-label-row">
-              <label className="field-label" htmlFor="password">Password</label>
-              <Link href="#" className="forgot-link">Lupa password?</Link>
-            </div>
-            <div className="field-wrapper">
-              <Lock className="field-icon" size={16} />
-              <input
-                id="password"
-                name="password"
-                type={showPassword ? 'text' : 'password'}
-                className="field-input field-input-padded"
-                placeholder="Masukkan password"
-                required
-                autoComplete="current-password"
-              />
-              <button
-                type="button"
-                className="field-eye"
-                onClick={() => setShowPassword(!showPassword)}
-                tabIndex={-1}
-              >
-                {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
-              </button>
-            </div>
           </div>
+
+          {!isForgotPassword && (
+            <div className="field-group">
+              <div className="field-label-row">
+                <label className="field-label" htmlFor="password">Password</label>
+                <button type="button" onClick={() => { setIsForgotPassword(true); setError(null); setSuccess(null); }} className="forgot-link" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: '13px' }}>Lupa password?</button>
+              </div>
+              <div className="field-wrapper">
+                <Lock className="field-icon" size={16} />
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  className="field-input field-input-padded"
+                  placeholder="Masukkan password"
+                  required={!isForgotPassword}
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  className="field-eye"
+                  onClick={() => setShowPassword(!showPassword)}
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                </button>
+              </div>
+            </div>
+          )}
 
           <button type="submit" className="btn-primary" disabled={isPending}>
             {isPending ? (
               <><Loader2 size={16} className="spin" /><span>Memproses...</span></>
             ) : (
-              <span>Masuk</span>
+              <span>{isForgotPassword ? 'Kirim Link Reset' : 'Masuk'}</span>
             )}
           </button>
         </form>
