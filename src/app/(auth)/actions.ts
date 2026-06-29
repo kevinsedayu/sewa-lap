@@ -87,8 +87,13 @@ export async function resetPassword(formData: FormData) {
   const supabase = await createClient()
   const email = formData.get('email') as string
 
-  // Note: NEXT_PUBLIC_SITE_URL or request origin could be used, assuming localhost for now or env var
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  // Deteksi URL (Gunakan Vercel URL jika ada, jika tidak gunakan localhost)
+  let siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL || 'http://localhost:3000'
+  // VERCEL_URL biasanya tidak mengandung https://, jadi kita tambahkan jika perlu
+  if (siteUrl && !siteUrl.startsWith('http')) {
+    siteUrl = `https://${siteUrl}`
+  }
+
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${siteUrl}/update-password`,
   })
