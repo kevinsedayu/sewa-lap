@@ -53,10 +53,32 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
     setSesiList([...sesiList, { id: newId, nama: '', jam: '', harga: 0 }])
   }
 
-  const handleRemoveSesi = (index: number) => {
-    if (window.confirm("Apakah Anda yakin ingin menghapus sesi ini?")) {
-      setSesiList(sesiList.filter((_, i) => i !== index))
+  const handleRemoveSesi = async (index: number) => {
+    const sesiToRemove = sesiList[index]
+    
+    if (!window.confirm(`Apakah Anda yakin ingin menghapus "${sesiToRemove.nama || sesiToRemove.id}"?\n\nCatatan: Riwayat booking user pada sesi ini akan tetap tersimpan. Hanya entri "Lainnya/Perawatan" yang akan dihapus.`)) {
+      return
     }
+
+    try {
+      // Hapus HANYA data 'maintenance' (Lainnya/Perawatan) yang diinput admin
+      // Booking user (pending, confirmed, completed) TETAP dipertahankan
+      const { error } = await supabase
+        .from('sewa')
+        .delete()
+        .eq('sesi', sesiToRemove.id)
+        .eq('status', 'maintenance')
+
+      if (error) {
+        console.error('Gagal menghapus data maintenance sesi:', error.message)
+        alert('Peringatan: Gagal menghapus entri perawatan sesi ini dari database: ' + error.message)
+      }
+    } catch (err: any) {
+      console.error('Error saat menghapus sesi:', err)
+    }
+
+    // Hapus sesi dari daftar UI
+    setSesiList(sesiList.filter((_, i) => i !== index))
   }
 
   const handleSesiChange = (index: number, field: keyof Sesi, value: string | number) => {

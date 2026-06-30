@@ -69,6 +69,19 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
     return bookings.find(b => b.tanggal === dateStr && b.sesi === sesi && (b.status === 'confirmed' || b.status === 'pending' || b.status === 'completed' || b.status === 'maintenance'))
   }
 
+  // Cari booking user yg sesinya sudah dihapus dari daftar aktif (orphan bookings)
+  // Hanya yang bukan maintenance (booking user asli)
+  const getOrphanBookings = (day: number) => {
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+    const activeSesiIds = new Set(activeSesiList.map((s: any) => s.id))
+    return bookings.filter(b =>
+      b.tanggal === dateStr &&
+      !activeSesiIds.has(b.sesi) &&
+      b.status !== 'maintenance' &&
+      (b.status === 'confirmed' || b.status === 'pending' || b.status === 'completed')
+    )
+  }
+
   const openModal = (day: number, sesi: string) => {
     if (!isAdmin) return
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
@@ -225,6 +238,9 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
               )
             }
             
+            // Booking dari sesi yg sudah dihapus admin (tampilkan tetap merah agar riwayat tidak hilang)
+            const orphanBookings = getOrphanBookings(day)
+
             return (
               <div key={day} style={{ 
                 minHeight: '80px', padding: '8px', border: '1px solid #e4e4e7', borderRadius: '8px',
@@ -232,6 +248,17 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
               }}>
                 <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginBottom: '4px' }}>{day}</div>
                 {activeSesiList.map(sesi => renderSesi(getBooking(day, sesi.id), sesi))}
+                {/* Tampilkan booking sesi yang sudah dihapus (orphan) */}
+                {orphanBookings.map(b => (
+                  <div key={`orphan-${b.sesi}-${b.tanggal}`} style={{
+                    fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
+                    background: '#fee2e2', color: '#b91c1c', border: '1px solid #fecaca',
+                    whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                    cursor: 'default'
+                  }} title={isAdmin ? `Sesi dihapus (${b.sesi}): ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}>
+                    {isAdmin ? `[${b.sesi}] ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}
+                  </div>
+                ))}
               </div>
             )
           })}
