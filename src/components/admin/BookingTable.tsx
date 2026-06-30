@@ -60,11 +60,14 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
             : `Halo ${nama},\n\nMohon maaf, peminjaman lapangan sepak bola Anda belum dapat kami setujui.\n\nSilakan kirimkan nomor rekening Anda agar proses pengembalian dana dapat dilakukan.\n\nTerima kasih.`
           
           try {
-            const res = await fetch('https://creole-giggle-stimulate.ngrok-free.dev/api/message/send', {
+            const apiUrl = process.env.NEXT_PUBLIC_WA_API_URL || 'https://creole-giggle-stimulate.ngrok-free.dev/api/message/send'
+            const apiKey = process.env.NEXT_PUBLIC_WA_API_KEY || ''
+            
+            const res = await fetch(apiUrl, {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': 'wakey_e6a0995da6264413a9e60edcbc88fb6b'
+                'Authorization': apiKey
               },
               body: JSON.stringify({ to: phone, text: message })
             })
