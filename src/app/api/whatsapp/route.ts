@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-const WA_API_URL = process.env.WA_API_URL || 'https://creole-giggle-stimulate.ngrok-free.dev/api/message/send'
+const WA_API_URL = process.env.WA_API_URL || 'https://silent-asleep-supermom.ngrok-free.dev/api/message/send'
 const WA_API_KEY = process.env.WA_API_KEY || 'wakey_e6a0995da6264413a9e60edcbc88fb6b'
 
 export async function POST(request: Request) {
