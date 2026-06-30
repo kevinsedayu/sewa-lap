@@ -59,6 +59,10 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
   const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
   const dayNames = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
 
+  // Real-time check for today (resetting time to 00:00:00)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
   // Cek apakah sesi dibooking
   const getBooking = (day: number, sesi: string) => {
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
@@ -158,9 +162,27 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
           {/* Tanggal */}
           {Array.from({ length: daysInMonth }).map((_, i) => {
             const day = i + 1
+            const cellDate = new Date(year, month, day)
+            const isPast = cellDate < today
 
             const renderSesi = (sesiInfo: CalendarBooking | undefined, sesiTypeObj: any) => {
               if (!sesiInfo) {
+                if (isPast) {
+                  return (
+                    <div 
+                      key={sesiTypeObj.id}
+                      style={{
+                        fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
+                        background: '#f4f4f5', color: '#a1a1aa', border: '1px solid #e4e4e7',
+                        cursor: 'not-allowed'
+                      }}
+                      title="Sesi sudah berlalu"
+                    >
+                      {sesiTypeObj.nama.replace('Sesi ', '')} (Berlalu)
+                    </div>
+                  )
+                }
+
                 return (
                   <div 
                     key={sesiTypeObj.id}
@@ -217,12 +239,15 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
         </div>
 
         {/* Legenda */}
-        <div style={{ display: 'flex', gap: '16px', marginTop: '20px', fontSize: '12px', color: '#71717a' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px', fontSize: '12px', color: '#71717a' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{ width: '12px', height: '12px', background: '#dcfce7', border: '1px solid #bbf7d0', borderRadius: '3px' }} /> Tersedia
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{ width: '12px', height: '12px', background: '#fee2e2', border: '1px solid #fecaca', borderRadius: '3px' }} /> Terbooking
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ width: '12px', height: '12px', background: '#f4f4f5', border: '1px solid #e4e4e7', borderRadius: '3px' }} /> Berlalu
           </div>
           {isAdmin && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
