@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
 
+const WA_API_URL = process.env.WA_API_URL || 'https://creole-giggle-stimulate.ngrok-free.dev/api/message/send'
+const WA_API_KEY = process.env.WA_API_KEY || 'wakey_e6a0995da6264413a9e60edcbc88fb6b'
+
 export async function POST(request: Request) {
   try {
     const { phone, message } = await request.json()
@@ -11,37 +14,30 @@ export async function POST(request: Request) {
       )
     }
 
-    const token = process.env.FONNTE_TOKEN
-    if (!token) {
-      console.error('FONNTE_TOKEN belum diatur di environment variable')
-      return NextResponse.json(
-        { error: 'Konfigurasi server bermasalah (Token tidak ditemukan)' },
-        { status: 500 }
-      )
-    }
-
-    // Fonnte API menggunakan FormData atau JSON, standardnya FormData
-    const formData = new FormData()
-    formData.append('target', phone)
-    formData.append('message', message)
-    formData.append('countryCode', '62') // Default ke kode negara Indonesia
-
-    const response = await fetch('https://api.fonnte.com/send', {
+    const response = await fetch(WA_API_URL, {
       method: 'POST',
       headers: {
-        Authorization: token,
+        'Content-Type': 'application/json',
+        'X-Api-Key': WA_API_KEY,
+        'ngrok-skip-browser-warning': '1',
       },
-      body: formData,
+      body: JSON.stringify({ to: phone, text: message }),
     })
 
-    const result = await response.json()
+    const resultText = await response.text()
+    let result: any
+    try {
+      result = JSON.parse(resultText)
+    } catch {
+      result = { raw: resultText }
+    }
 
-    if (result.status) {
+    if (response.ok) {
       return NextResponse.json({ success: true, result })
     } else {
-      console.error('Fonnte Error:', result)
+      console.error('WA API Error:', response.status, result)
       return NextResponse.json(
-        { error: 'Gagal mengirim pesan via Fonnte', details: result },
+        { error: 'Gagal mengirim pesan WhatsApp', status: response.status, details: result },
         { status: 500 }
       )
     }

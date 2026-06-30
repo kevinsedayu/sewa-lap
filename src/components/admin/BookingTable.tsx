@@ -60,23 +60,17 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
             : `Halo ${nama},\n\nMohon maaf, peminjaman lapangan sepak bola Anda belum dapat kami setujui.\n\nSilakan kirimkan nomor rekening Anda agar proses pengembalian dana dapat dilakukan.\n\nTerima kasih.`
           
           try {
-            const apiUrl = process.env.NEXT_PUBLIC_WA_API_URL || 'https://creole-giggle-stimulate.ngrok-free.dev/api/message/send'
-            const apiKey = process.env.NEXT_PUBLIC_WA_API_KEY || ''
-            
-            const res = await fetch(apiUrl, {
+            const res = await fetch('/api/whatsapp', {
               method: 'POST',
-              headers: { 
-                'Content-Type': 'application/json',
-                'X-Api-Key': apiKey,
-                'ngrok-skip-browser-warning': '1'
-              },
-              body: JSON.stringify({ to: phone, text: message })
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ phone, message })
             })
             
+            const result = await res.json()
+            
             if (!res.ok) {
-              const errorText = await res.text()
-              console.error("WhatsApp API Error:", res.status, errorText)
-              alert(`Status berhasil diupdate, tetapi gagal mengirim notifikasi WhatsApp.\n\nError Code: ${res.status}\nResponse: ${errorText}`)
+              console.error("WhatsApp API Error:", result)
+              alert(`Status berhasil diupdate, tetapi gagal mengirim notifikasi WhatsApp.\n\nError: ${result.error || 'Unknown'}\nDetail: ${JSON.stringify(result.details || '')}`)
             } else {
               alert('Status berhasil diupdate dan notifikasi WhatsApp terkirim!')
             }
