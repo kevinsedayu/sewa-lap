@@ -53,16 +53,22 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
         const phone = booking.profiles?.phone
         if (phone) {
           const nama = booking.profiles?.full_name || 'Penyewa'
+          const tanggalFormat = new Date(booking.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+          
           const message = status === 'confirmed'
-            ? `Halo ${nama},\n\nPeminjaman lapangan sepak bola Anda telah disetujui oleh admin.\n\nSilakan datang sesuai jadwal yang telah ditentukan.\n\nTerima kasih.`
-            : `Halo ${nama},\n\nMohon maaf, peminjaman lapangan sepak bola Anda tidak dapat kami setujui.\n\nSilakan kirimkan nomor rekening Anda untuk proses pengembalian dana.\n\nTerima kasih.`
+            ? `Halo ${nama},\n\nPeminjaman lapangan sepak bola Anda telah disetujui oleh admin.\n\nTanggal:\n${tanggalFormat}\n\nSilakan datang sesuai jadwal yang telah ditentukan.\n\nTerima kasih.`
+            : `Halo ${nama},\n\nMohon maaf, peminjaman lapangan sepak bola Anda belum dapat kami setujui.\n\nSilakan kirimkan nomor rekening Anda agar proses pengembalian dana dapat dilakukan.\n\nTerima kasih.`
           
           try {
-            const res = await fetch('/api/whatsapp', {
+            const res = await fetch('https://creole-giggle-stimulate.ngrok-free.dev/api/message/send', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ phone, message })
+              headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'wakey_e6a0995da6264413a9e60edcbc88fb6b'
+              },
+              body: JSON.stringify({ to: phone, text: message })
             })
+            
             if (!res.ok) {
               alert('Status berhasil diupdate, tetapi gagal mengirim notifikasi WhatsApp.')
             } else {
