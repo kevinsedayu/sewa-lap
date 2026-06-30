@@ -67,7 +67,7 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': apiKey,
+                'X-Api-Key': apiKey,
                 'ngrok-skip-browser-warning': '1'
               },
               body: JSON.stringify({ to: phone, text: message })
