@@ -67,18 +67,22 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': apiKey
+                'Authorization': apiKey,
+                'ngrok-skip-browser-warning': '1'
               },
               body: JSON.stringify({ to: phone, text: message })
             })
             
             if (!res.ok) {
-              alert('Status berhasil diupdate, tetapi gagal mengirim notifikasi WhatsApp.')
+              const errorText = await res.text()
+              console.error("WhatsApp API Error:", res.status, errorText)
+              alert(`Status berhasil diupdate, tetapi gagal mengirim notifikasi WhatsApp.\n\nError Code: ${res.status}\nResponse: ${errorText}`)
             } else {
               alert('Status berhasil diupdate dan notifikasi WhatsApp terkirim!')
             }
-          } catch (err) {
-            alert('Status berhasil diupdate, tetapi terjadi error saat mengirim WhatsApp.')
+          } catch (err: any) {
+            console.error("WhatsApp API Fetch Error:", err)
+            alert(`Status berhasil diupdate, tetapi terjadi error saat koneksi ke API WhatsApp.\n\nError: ${err.message}`)
           }
         } else {
           alert('Status berhasil diupdate, namun notifikasi WA tidak terkirim karena nomor telepon kosong.')
