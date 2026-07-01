@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
 
 const WA_API_URL = process.env.WA_API_URL || 'https://silent-asleep-supermom.ngrok-free.dev/api/message/send'
-const WA_API_KEY = process.env.WA_API_KEY || 'wakey_e6a0995da6264413a9e60edcbc88fb6b'
+const WA_API_KEY = process.env.WA_API_KEY || 'wakey_26a585fed2fd468992fb56f9b640f470'
+const WA_SESSION = process.env.WA_SESSION || 'kevin'
 
 export async function POST(request: Request) {
   try {
@@ -21,7 +22,7 @@ export async function POST(request: Request) {
         'X-Api-Key': WA_API_KEY,
         'ngrok-skip-browser-warning': '1',
       },
-      body: JSON.stringify({ to: phone, text: message }),
+      body: JSON.stringify({ to: phone, text: message, session: WA_SESSION }),
     })
 
     const resultText = await response.text()
