@@ -147,7 +147,7 @@ export default async function UserDashboard() {
           <div style={{ fontSize: '13px', fontWeight: 600, color: '#16a34a', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             {sesiList.map((s: any, idx: number) => (
               <span key={s.id}>
-                {s.nama}: Rp {s.harga.toLocaleString('id-ID')}
+                {s.nama} ({s.jam || 'Jam belum diatur'}): Rp {s.harga.toLocaleString('id-ID')}
                 {idx < sesiList.length - 1 && <span style={{ color: '#a1a1aa', margin: '0 8px' }}>|</span>}
               </span>
             ))}
