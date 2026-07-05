@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 
-const WABLAS_API_HOST = process.env.WABLAS_API_HOST || 'https://smg.wablas.com'
-const WABLAS_TOKEN = process.env.WABLAS_TOKEN || 'fd3RsoJCYHGShHuvvBOiuvlfTjcMcjCR3O69mFj8jLmdJPqYMwDhn8c'
-const WABLAS_SECRET_KEY = process.env.WABLAS_SECRET_KEY || 'sEWYnSAK'
+const WA_API_URL = process.env.WA_API_URL || 'https://silent-asleep-supermom.ngrok-free.dev/api/message/send'
+const WA_API_KEY = process.env.WA_API_KEY || 'wakey_26a585fed2fd468992fb56f9b640f470'
+const WA_SESSION = process.env.WA_SESSION || 'kevin'
 
 export async function POST(request: Request) {
   try {
@@ -15,29 +15,14 @@ export async function POST(request: Request) {
       )
     }
 
-    // 4. Jika nomor diawali 08, ubah otomatis menjadi 62 sebelum dikirim
-    let formattedPhone = phone
-    if (formattedPhone.startsWith('08')) {
-      formattedPhone = '628' + formattedPhone.slice(2)
-    }
-
-    // Menggunakan endpoint Wablas standar (v1) karena v2 mengembalikan 502 Bad Gateway
-    const url = `${WABLAS_API_HOST.replace(/\/$/, '')}/api/send-message`
-    
-    // Format Header Wablas dengan Secret Key: Authorization: {token}.{secret_key}
-    const authHeader = WABLAS_SECRET_KEY ? `${WABLAS_TOKEN}.${WABLAS_SECRET_KEY}` : WABLAS_TOKEN
-
-    const formData = new URLSearchParams()
-    formData.append('phone', formattedPhone)
-    formData.append('message', message)
-
-    const response = await fetch(url, {
+    const response = await fetch(WA_API_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': authHeader,
+        'Content-Type': 'application/json',
+        'X-Api-Key': WA_API_KEY,
+        'ngrok-skip-browser-warning': '1',
       },
-      body: formData.toString(),
+      body: JSON.stringify({ to: phone, text: message, session: WA_SESSION }),
     })
 
     const resultText = await response.text()
@@ -48,10 +33,10 @@ export async function POST(request: Request) {
       result = { raw: resultText }
     }
 
-    if (response.ok && result.status !== false) {
+    if (response.ok) {
       return NextResponse.json({ success: true, result })
     } else {
-      console.error('Wablas API Error:', response.status, result)
+      console.error('WA API Error:', response.status, result)
       return NextResponse.json(
         { error: 'Gagal mengirim pesan WhatsApp', status: response.status, details: result },
         { status: 500 }
@@ -65,4 +50,3 @@ export async function POST(request: Request) {
     )
   }
 }
-
