@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 const WABLAS_API_HOST = process.env.WABLAS_API_HOST || 'https://smg.wablas.com'
 const WABLAS_TOKEN = process.env.WABLAS_TOKEN || 'fd3RsoJCYHGShHuvvBOiuvlfTjcMcjCR3O69mFj8jLmdJPqYMwDhn8c'
+const WABLAS_SECRET_KEY = process.env.WABLAS_SECRET_KEY || 'sEWYnSAK'
 
 export async function POST(request: Request) {
   try {
@@ -23,11 +24,14 @@ export async function POST(request: Request) {
     // Menggunakan endpoint Wablas v2
     const url = `${WABLAS_API_HOST.replace(/\/$/, '')}/api/v2/send-message`
     
+    // Format Header Wablas dengan Secret Key: Authorization: {token}.{secret_key}
+    const authHeader = WABLAS_SECRET_KEY ? `${WABLAS_TOKEN}.${WABLAS_SECRET_KEY}` : WABLAS_TOKEN
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': WABLAS_TOKEN,
+        'Authorization': authHeader,
       },
       body: JSON.stringify({
         data: [
