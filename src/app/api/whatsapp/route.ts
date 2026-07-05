@@ -21,26 +21,23 @@ export async function POST(request: Request) {
       formattedPhone = '628' + formattedPhone.slice(2)
     }
 
-    // Menggunakan endpoint Wablas v2
-    const url = `${WABLAS_API_HOST.replace(/\/$/, '')}/api/v2/send-message`
+    // Menggunakan endpoint Wablas standar (v1) karena v2 mengembalikan 502 Bad Gateway
+    const url = `${WABLAS_API_HOST.replace(/\/$/, '')}/api/send-message`
     
     // Format Header Wablas dengan Secret Key: Authorization: {token}.{secret_key}
     const authHeader = WABLAS_SECRET_KEY ? `${WABLAS_TOKEN}.${WABLAS_SECRET_KEY}` : WABLAS_TOKEN
 
+    const formData = new URLSearchParams()
+    formData.append('phone', formattedPhone)
+    formData.append('message', message)
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': authHeader,
       },
-      body: JSON.stringify({
-        data: [
-          {
-            phone: formattedPhone,
-            message: message,
-          }
-        ]
-      }),
+      body: formData.toString(),
     })
 
     const resultText = await response.text()
