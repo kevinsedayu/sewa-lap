@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   keywords: ["sewa lapangan", "booking lapangan", "sepakbola", "futsal"],
 };
 
+import NextTopLoader from 'nextjs-toploader';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +30,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className={inter.variable}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <NextTopLoader
+          color="#16a34a"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #16a34a,0 0 5px #16a34a"
+        />
+        {children}
+      </body>
     </html>
   );
 }
