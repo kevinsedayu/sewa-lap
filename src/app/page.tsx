@@ -47,30 +47,26 @@ export default async function Home() {
   } catch(e) {}
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fafafa', fontFamily: "'Inter', system-ui, sans-serif", paddingBottom: '40px' }}>
+    <div className="min-h-screen bg-zinc-50 font-sans pb-12">
       {/* Navbar / Header */}
-      <header style={{ 
-        background: '#ffffff', borderBottom: '1px solid #e4e4e7', 
-        padding: '16px 24px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center',
-        position: 'sticky', top: 0, zIndex: 50, boxShadow: '0 2px 10px rgba(0,0,0,0.03)'
-      }}>
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 px-6 py-4 flex justify-end items-center shadow-sm">
         <div>
           {user ? (
-            <Link href={dashboardPath} style={{
-              background: '#09090b', color: '#fafafa', padding: '10px 20px', borderRadius: '8px', 
-              fontSize: '14px', fontWeight: 600, textDecoration: 'none'
-            }}>
+            <Link 
+              href={dashboardPath} 
+              className="bg-zinc-900 hover:bg-zinc-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm"
+            >
               Ke Dashboard
             </Link>
           ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <span className="hide-on-mobile" style={{ fontSize: '14px', color: '#52525b', fontWeight: 500 }}>
+            <div className="flex items-center gap-4">
+              <span className="hidden sm:inline-block text-sm text-zinc-600 font-medium">
                 Ingin mau booking?
               </span>
-              <Link href="/login" style={{
-                background: '#166534', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', 
-                fontSize: '14px', fontWeight: 600, textDecoration: 'none', boxShadow: '0 4px 12px rgba(22, 101, 52, 0.2)'
-              }}>
+              <Link 
+                href="/login" 
+                className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-[0_4px_12px_rgba(5,150,105,0.2)] hover:shadow-[0_4px_16px_rgba(5,150,105,0.3)] hover:-translate-y-0.5"
+              >
                 Login
               </Link>
             </div>
@@ -79,57 +75,45 @@ export default async function Home() {
       </header>
 
       {/* Main Content */}
-      <div className="page-content" style={{ maxWidth: '1000px', margin: '0 auto', paddingTop: '24px' }}>
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
         
         {/* Header Photo & Title */}
-        <div style={{ marginBottom: '24px', textAlign: 'center' }}>
-          <h2 className={`${anton.className} dashboard-header-text`} style={{ 
-            color: '#166534', letterSpacing: '2px', margin: '0 0 12px 0', 
-            textTransform: 'uppercase', textShadow: '2px 2px 0px rgba(0,0,0,0.12)' 
-          }}>
+        <div className="mb-12 text-center">
+          <h1 className={`${anton.className} text-4xl sm:text-5xl text-emerald-800 tracking-wide uppercase mb-6 drop-shadow-sm`}>
             Gelora Bumi Mintarsih
-          </h2>
-          <div style={{
-            width: '100%', height: '180px', borderRadius: '12px',
-            overflow: 'hidden', boxShadow: '0 8px 20px -5px rgba(0,0,0,0.12)',
-            marginBottom: '16px'
-          }}>
-            <img src="/lapangan.jpeg" alt="Gelora Bumi Mintarsih" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </h1>
+          <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden shadow-lg mb-6 relative group">
+            <img 
+              src="/lapangan.jpeg" 
+              alt="Gelora Bumi Mintarsih" 
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
           </div>
-          <p style={{ fontSize: '15px', color: '#52525b', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
+          <p className="text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed">
             Sistem penyewaan lapangan sepakbola online. Silakan cek jadwal yang masih kosong pada kalender di bawah ini, dan lakukan login untuk mulai booking!
           </p>
         </div>
 
         {/* Fasilitas Slider */}
-        <div style={{ marginBottom: '32px' }}>
-          <h2 className={`${anton.className} dashboard-header-text`} style={{
-            color: '#166534', marginBottom: '12px', letterSpacing: '1px',
-            textTransform: 'uppercase', textAlign: 'center', textShadow: '2px 2px 0px rgba(0,0,0,0.12)',
-          }}>
+        <div className="mb-16">
+          <h2 className={`${anton.className} text-2xl text-emerald-800 mb-6 tracking-wide uppercase text-center drop-shadow-sm`}>
             Fasilitas Kami
           </h2>
-          <div style={{
-            display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory',
-            gap: '12px', paddingBottom: '8px', scrollbarWidth: 'none', msOverflowStyle: 'none',
-          }}>
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
             {[
               { src: '/lapangan2.jpeg', label: 'Lapangan Standart Nasional' },
               { src: '/toilet.jpeg', label: 'Toilet Bersih' },
               { src: '/mushola.jpeg', label: 'Mushola' },
               { src: '/bench.jpeg', label: 'Bench Pemain' }
             ].map((img, i) => (
-              <div key={i} className="facility-card" style={{
-                scrollSnapAlign: 'center', borderRadius: '12px', overflow: 'hidden',
-                position: 'relative', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', flexShrink: 0,
-              }}>
-                <img src={img.src} alt={img.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0,
-                  background: 'linear-gradient(transparent, rgba(0,0,0,0.75))',
-                  color: 'white', padding: '20px 12px 12px', textAlign: 'center',
-                  fontSize: '14px', fontWeight: 600,
-                }}>
+              <div key={i} className="snap-center shrink-0 w-[260px] h-[180px] rounded-xl overflow-hidden relative shadow-md group">
+                <img 
+                  src={img.src} 
+                  alt={img.label} 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white p-4 pt-12 text-center text-sm font-semibold">
                   {img.label}
                 </div>
               </div>
@@ -138,26 +122,28 @@ export default async function Home() {
         </div>
 
         {/* Info Lapangan */}
-        <div style={{ marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginBottom: '12px' }}>Informasi Lapangan</h2>
-          <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', padding: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 6px', color: '#09090b' }}>{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
-            <p style={{ fontSize: '13px', color: '#52525b', margin: '0 0 12px', lineHeight: '1.5' }}>{lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap.'}</p>
-            <div style={{ fontSize: '13px', fontWeight: 600, color: '#16a34a', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        <div className="mb-12">
+          <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Informasi Lapangan</h2>
+          <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+            <h3 className="text-xl font-bold text-zinc-900 mb-2">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
+            <p className="text-zinc-600 mb-6 leading-relaxed">{lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap.'}</p>
+            
+            <div className="flex flex-wrap gap-3">
               {sesiList.map((s: any, idx: number) => (
-                <span key={s.id}>
-                  {s.nama}: Rp {s.harga.toLocaleString('id-ID')}
-                  {idx < sesiList.length - 1 && <span style={{ color: '#a1a1aa', margin: '0 8px' }}>|</span>}
-                </span>
+                <div key={s.id} className="bg-emerald-50 border border-emerald-100 rounded-lg px-4 py-2.5 flex items-center gap-2">
+                  <span className="text-sm font-semibold text-emerald-800">{s.nama}</span>
+                  <span className="text-emerald-300">|</span>
+                  <span className="text-sm font-bold text-emerald-600">Rp {s.harga.toLocaleString('id-ID')}</span>
+                </div>
               ))}
             </div>
           </div>
         </div>
 
         {/* Calendar Section */}
-        <div style={{ marginBottom: '12px' }}>
-          <h2 style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginBottom: '12px' }}>Jadwal Ketersediaan</h2>
-          <div style={{ background: '#ffffff', borderRadius: '16px', border: '1px solid #e4e4e7', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
+        <div className="mb-8">
+          <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Jadwal Ketersediaan</h2>
+          <div className="bg-white rounded-2xl border border-zinc-200/80 overflow-hidden shadow-sm">
             <BookingCalendar 
               isAdmin={false} 
               bookings={(allBookings || []).map(b => ({
@@ -169,7 +155,7 @@ export default async function Home() {
             />
           </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

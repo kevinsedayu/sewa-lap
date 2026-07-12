@@ -26,9 +26,9 @@ export default async function AdminLayout({
   if (role !== 'admin') redirect('/user/dashboard')
 
   return (
-    <div className="app-shell">
+    <div className="min-h-screen bg-[#fafafa]">
       <AdminSidebar user={{ email: user.email!, name: profile?.full_name || 'Admin' }} />
-      <main className="app-main">
+      <main className="w-full">
         {children}
       </main>
     </div>

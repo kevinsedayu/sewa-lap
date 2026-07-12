@@ -10,12 +10,12 @@ import {
   Users,
   MapPin,
   LogOut,
-  ChevronLeft,
-  ChevronRight,
   Shield,
   Wallet,
   BookOpen,
   Settings,
+  Menu,
+  X,
 } from 'lucide-react'
 
 interface AdminSidebarProps {
@@ -32,19 +32,9 @@ const navItems = [
   { href: '/admin/keuangan', label: 'Laporan Keuangan', icon: Wallet },
 ]
 
-const bottomNavItems = [
-  { href: '/admin/dashboard', label: 'Home', icon: LayoutDashboard },
-  { href: '/admin/booking', label: 'Booking', icon: BookOpen },
-  { href: '/admin/kalender', label: 'Kalender', icon: CalendarDays },
-  { href: '/admin/info-lapangan', label: 'Info', icon: Settings },
-  { href: '/admin/lokasi', label: 'Lokasi', icon: MapPin },
-  { href: '/admin/users', label: 'Users', icon: Users },
-  { href: '/admin/keuangan', label: 'Keuangan', icon: Wallet },
-]
-
 export default function AdminSidebar({ user }: AdminSidebarProps) {
   const pathname = usePathname()
-  const [collapsed, setCollapsed] = useState(false)
+  const [open, setOpen] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
 
   const handleLogout = async () => {
@@ -54,164 +44,93 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <aside className="sidebar-desktop" style={{
-        width: collapsed ? '64px' : '220px',
-        minHeight: '100vh',
-        background: '#ffffff',
-        borderRight: '1px solid #e4e4e7',
-        flexDirection: 'column',
-        transition: 'width 0.2s ease',
-        flexShrink: 0,
-        position: 'sticky',
-        top: 0,
-        height: '100vh',
-        overflow: 'hidden',
-      }}>
-        {/* Brand */}
-        <div style={{
-          padding: collapsed ? '20px 0' : '20px 18px',
-          borderBottom: '1px solid #e4e4e7',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: collapsed ? 'center' : 'space-between',
-          minHeight: '64px',
-        }}>
-          {!collapsed && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '9px', overflow: 'hidden' }}>
-              <div style={{
-                width: '30px', height: '30px', background: '#09090b',
-                borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0,
-              }}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fafafa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /><path d="M2 12h20" />
-                </svg>
-              </div>
-              <span style={{ fontSize: '14px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
-                BumiMintarsih
-              </span>
-            </div>
-          )}
-          {collapsed && (
-            <div style={{
-              width: '30px', height: '30px', background: '#09090b',
-              borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fafafa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* Hamburger Button — always visible top-left */}
+      <button
+        onClick={() => setOpen(true)}
+        className="fixed top-4 left-4 z-50 w-10 h-10 flex items-center justify-center rounded-lg bg-zinc-900 text-white shadow-md hover:bg-zinc-700 transition-colors"
+        aria-label="Buka menu"
+      >
+        <Menu size={20} />
+      </button>
+
+      {/* Overlay backdrop */}
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* Drawer Sidebar */}
+      <aside
+        className={`fixed top-0 left-0 h-full z-50 w-[260px] bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-200 min-h-[64px]">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center shrink-0 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /><path d="M2 12h20" />
               </svg>
             </div>
-          )}
+            <span className="text-sm font-bold text-zinc-900 tracking-tight">BumiMintarsih</span>
+          </div>
           <button
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              background: 'none', border: '1px solid #e4e4e7', borderRadius: '6px',
-              width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', color: '#a1a1aa', flexShrink: 0,
-              marginLeft: collapsed ? '0' : '4px',
-            }}
+            onClick={() => setOpen(false)}
+            className="w-8 h-8 flex items-center justify-center rounded-lg border border-zinc-200 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-50 transition-colors"
           >
-            {collapsed ? <ChevronRight size={13} /> : <ChevronLeft size={13} />}
+            <X size={16} />
           </button>
         </div>
 
         {/* Admin Badge */}
-        {!collapsed && (
-          <div style={{ padding: '10px 18px', borderBottom: '1px solid #e4e4e7' }}>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '5px',
-              background: '#f4f4f5', borderRadius: '5px', padding: '3px 8px',
-            }}>
-              <Shield size={11} color="#52525b" />
-              <span style={{ fontSize: '11px', color: '#52525b', fontWeight: 600, letterSpacing: '0.04em' }}>ADMIN</span>
-            </div>
+        <div className="px-5 py-3 border-b border-zinc-200">
+          <div className="inline-flex items-center gap-1.5 bg-zinc-100 rounded-md px-2 py-1">
+            <Shield size={12} className="text-zinc-500" />
+            <span className="text-[10px] font-bold text-zinc-600 tracking-wider">ADMIN</span>
           </div>
-        )}
+        </div>
 
         {/* Nav */}
-        <nav style={{ flex: 1, padding: collapsed ? '12px 0' : '12px 10px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+        <nav className="flex-1 flex flex-col gap-1 overflow-y-auto px-3 py-4">
           {navItems.map(({ href, label, icon: Icon }) => {
             const active = pathname === href
             return (
-              <Link key={href} href={href} style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: collapsed ? '10px 0' : '9px 10px',
-                justifyContent: collapsed ? 'center' : 'flex-start',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                fontSize: '13px',
-                fontWeight: active ? 600 : 400,
-                color: active ? '#09090b' : '#71717a',
-                background: active ? '#f4f4f5' : 'transparent',
-                transition: 'background 0.12s, color 0.12s',
-                whiteSpace: 'nowrap',
-              }}
-                title={collapsed ? label : undefined}
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors whitespace-nowrap ${
+                  active
+                    ? 'bg-emerald-50 text-emerald-700 font-bold'
+                    : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
+                }`}
               >
-                <Icon size={16} style={{ flexShrink: 0 }} />
-                {!collapsed && <span>{label}</span>}
+                <Icon size={18} className="shrink-0" />
+                <span>{label}</span>
               </Link>
             )
           })}
         </nav>
 
         {/* User & Logout */}
-        <div style={{ borderTop: '1px solid #e4e4e7', padding: collapsed ? '12px 0' : '12px 10px' }}>
-          {!collapsed && (
-            <div style={{ padding: '8px 10px', marginBottom: '4px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#09090b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user.name}
-              </div>
-              <div style={{ fontSize: '11px', color: '#a1a1aa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user.email}
-              </div>
-            </div>
-          )}
+        <div className="border-t border-zinc-200 px-3 py-4">
+          <div className="px-3 pb-3 mb-2">
+            <div className="text-sm font-bold text-zinc-900 truncate">{user.name}</div>
+            <div className="text-xs text-zinc-500 truncate">{user.email}</div>
+          </div>
           <button
             onClick={handleLogout}
             disabled={loggingOut}
-            title={collapsed ? 'Keluar' : undefined}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '10px',
-              justifyContent: collapsed ? 'center' : 'flex-start',
-              width: '100%', padding: collapsed ? '10px 0' : '9px 10px',
-              background: 'none', border: 'none', borderRadius: '8px',
-              fontSize: '13px', color: '#ef4444', cursor: 'pointer',
-              fontFamily: 'inherit', fontWeight: 500,
-              transition: 'background 0.12s',
-              opacity: loggingOut ? 0.5 : 1,
-            }}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50 transition-colors"
           >
-            <LogOut size={15} style={{ flexShrink: 0 }} />
-            {!collapsed && <span>{loggingOut ? 'Keluar...' : 'Keluar'}</span>}
+            <LogOut size={18} className="shrink-0" />
+            <span>{loggingOut ? 'Keluar...' : 'Keluar'}</span>
           </button>
         </div>
       </aside>
-
-      {/* Mobile Bottom Navigation */}
-      <nav className="bottom-nav">
-        {bottomNavItems.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href
-          return (
-            <Link key={href} href={href} className={`bottom-nav-item${active ? ' active' : ''}`}>
-              <Icon size={20} />
-              <span>{label}</span>
-            </Link>
-          )
-        })}
-        <button
-          className="bottom-nav-item"
-          onClick={handleLogout}
-          disabled={loggingOut}
-          style={{ color: '#ef4444' }}
-        >
-          <LogOut size={20} />
-          <span>{loggingOut ? '...' : 'Keluar'}</span>
-        </button>
-      </nav>
     </>
   )
 }

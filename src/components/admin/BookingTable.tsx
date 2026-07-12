@@ -91,9 +91,9 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
   const filtered = filter === 'all' ? bookings : bookings.filter(b => b.status === filter)
 
   return (
-    <div>
+    <div className="space-y-4">
       {/* Filter Tabs */}
-      <div style={{ display: 'flex', gap: '6px', marginBottom: '20px', flexWrap: 'wrap' }}>
+      <div className="flex flex-wrap gap-2 mb-4">
         {[
           { key: 'all', label: 'Semua' },
           { key: 'pending', label: 'Menunggu' },
@@ -104,23 +104,15 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
           <button
             key={f.key}
             onClick={() => setFilter(f.key)}
-            style={{
-              padding: '6px 14px',
-              borderRadius: '20px',
-              border: '1px solid',
-              borderColor: filter === f.key ? '#09090b' : '#e4e4e7',
-              background: filter === f.key ? '#09090b' : '#ffffff',
-              color: filter === f.key ? '#fafafa' : '#71717a',
-              fontSize: '12px',
-              fontWeight: 500,
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-              transition: 'all 0.15s',
-            }}
+            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+              filter === f.key
+                ? 'bg-zinc-900 border-zinc-900 text-white shadow-sm'
+                : 'bg-white border-zinc-200 text-zinc-500 hover:border-zinc-300 hover:text-zinc-700'
+            }`}
           >
             {f.label}
             {f.key !== 'all' && (
-              <span style={{ marginLeft: '6px', opacity: 0.7 }}>
+              <span className={`ml-1.5 ${filter === f.key ? 'opacity-70' : 'opacity-50'}`}>
                 ({bookings.filter(b => b.status === f.key).length})
               </span>
             )}
@@ -129,104 +121,80 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
       </div>
 
       {/* Table */}
-      <div style={{
-        background: '#ffffff',
-        border: '1px solid #e4e4e7',
-        borderRadius: '12px',
-        overflow: 'hidden',
-      }}>
+      <div className="bg-white border border-zinc-200/80 rounded-2xl overflow-hidden shadow-sm">
         {filtered.length > 0 ? (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '700px' }}>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[700px] text-left border-collapse">
               <thead>
-                <tr style={{ borderBottom: '1px solid #f4f4f5', background: '#fafafa' }}>
+                <tr className="bg-zinc-50/50 border-b border-zinc-200/80">
                   {['Penyewa', 'Tanggal', 'Sesi', 'Total', 'Bukti', 'Status', 'Aksi'].map(h => (
-                    <th key={h} style={{
-                      padding: '12px 16px', textAlign: 'left',
-                      fontSize: '11px', fontWeight: 600,
-                      color: '#71717a', letterSpacing: '0.05em',
-                      textTransform: 'uppercase',
-                    }}>{h}</th>
+                    <th key={h} className="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+                      {h}
+                    </th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-zinc-200/80">
                 {filtered.map((b, i) => (
-                  <tr key={b.id} style={{
-                    borderBottom: i < filtered.length - 1 ? '1px solid #f4f4f5' : 'none',
-                  }}>
-                    <td style={{ padding: '14px 16px' }}>
-                      <div style={{ fontSize: '13px', fontWeight: 600, color: '#09090b' }}>
+                  <tr key={b.id} className="hover:bg-zinc-50/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="text-sm font-medium text-zinc-900">
                         {b.profiles?.full_name || 'Tidak diketahui'}
                       </div>
-                      <div style={{ fontSize: '11px', color: '#a1a1aa', marginTop: '2px' }}>
+                      <div className="text-xs text-zinc-500 mt-0.5">
                         {b.profiles?.phone || '-'}
                       </div>
                     </td>
-                    <td style={{ padding: '14px 16px', fontSize: '13px', color: '#3f3f46' }}>
+                    <td className="px-6 py-4 text-sm font-medium text-zinc-900">
                       {new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </td>
-                    <td style={{ padding: '14px 16px', fontSize: '13px', color: '#3f3f46', whiteSpace: 'nowrap' }}>
-                      <div style={{ fontWeight: 600, textTransform: 'capitalize' }}>{b.sesi}</div>
-                      <div style={{ fontSize: '11px', color: '#a1a1aa' }}>{b.jam_mulai?.slice(0, 5)} – {b.jam_selesai?.slice(0, 5)}</div>
+                    <td className="px-6 py-4 text-sm text-zinc-600 font-medium whitespace-nowrap">
+                      <div className="font-semibold capitalize text-zinc-900">{b.sesi}</div>
+                      <div className="text-xs text-zinc-500">{b.jam_mulai?.slice(0, 5)} – {b.jam_selesai?.slice(0, 5)}</div>
                     </td>
-                    <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 600, color: '#09090b', whiteSpace: 'nowrap' }}>
+                    <td className="px-6 py-4 text-sm font-bold text-zinc-900 whitespace-nowrap">
                       Rp {Number(b.total_harga).toLocaleString('id-ID')}
                     </td>
-                    <td style={{ padding: '14px 16px', fontSize: '12px' }}>
+                    <td className="px-6 py-4 text-sm font-medium">
                       {b.bukti_pembayaran ? (
                         <a 
                           href={b.bukti_pembayaran} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          style={{ color: '#6366f1', textDecoration: 'none', fontWeight: 500 }}
+                          className="text-indigo-600 hover:text-indigo-800 transition-colors underline underline-offset-2"
                         >
                           Lihat Bukti
                         </a>
                       ) : (
-                        <span style={{ color: '#a1a1aa' }}>-</span>
+                        <span className="text-zinc-400">-</span>
                       )}
                     </td>
-                    <td style={{ padding: '14px 16px' }}>
-                      <span style={{
-                        display: 'inline-block', padding: '3px 10px',
-                        borderRadius: '20px', fontSize: '11px', fontWeight: 600,
-                        background: (statusColor[b.status] || '#a1a1aa') + '18',
-                        color: statusColor[b.status] || '#a1a1aa',
-                        whiteSpace: 'nowrap',
-                      }}>
+                    <td className="px-6 py-4 text-sm">
+                      <span 
+                        className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider whitespace-nowrap"
+                        style={{
+                          background: (statusColor[b.status] || '#a1a1aa') + '15',
+                          color: statusColor[b.status] || '#a1a1aa',
+                        }}
+                      >
                         {statusLabel[b.status] || b.status}
                       </span>
                     </td>
-                    <td style={{ padding: '14px 16px' }}>
-                      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    <td className="px-6 py-4">
+                      <div className="flex flex-wrap gap-2">
                         {b.status === 'pending' && (
                           <>
                             <button
                               onClick={() => updateStatus(b.id, 'confirmed')}
                               disabled={loadingId === b.id}
-                              style={{
-                                padding: '5px 12px', border: 'none',
-                                borderRadius: '6px', fontSize: '11px',
-                                fontWeight: 600, cursor: 'pointer',
-                                background: '#22c55e', color: '#fff',
-                                fontFamily: 'inherit',
-                                opacity: loadingId === b.id ? 0.5 : 1,
-                              }}
+                              className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 transition-colors shadow-sm"
                             >
                               ✓ Setujui
                             </button>
                             <button
                               onClick={() => updateStatus(b.id, 'cancelled')}
                               disabled={loadingId === b.id}
-                              style={{
-                                padding: '5px 12px', border: '1px solid #e4e4e7',
-                                borderRadius: '6px', fontSize: '11px',
-                                fontWeight: 600, cursor: 'pointer',
-                                background: '#fff', color: '#ef4444',
-                                fontFamily: 'inherit',
-                                opacity: loadingId === b.id ? 0.5 : 1,
-                              }}
+                              className="px-3 py-1.5 rounded-lg text-xs font-bold text-red-600 bg-white border border-red-200 hover:bg-red-50 disabled:opacity-50 transition-colors"
                             >
                               ✕ Tolak
                             </button>
@@ -236,20 +204,13 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
                           <button
                             onClick={() => updateStatus(b.id, 'completed')}
                             disabled={loadingId === b.id}
-                            style={{
-                              padding: '5px 12px', border: 'none',
-                              borderRadius: '6px', fontSize: '11px',
-                              fontWeight: 600, cursor: 'pointer',
-                              background: '#6366f1', color: '#fff',
-                              fontFamily: 'inherit',
-                              opacity: loadingId === b.id ? 0.5 : 1,
-                            }}
+                            className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 transition-colors shadow-sm"
                           >
                             ✓ Selesai
                           </button>
                         )}
                         {(b.status === 'cancelled' || b.status === 'completed') && (
-                          <span style={{ fontSize: '11px', color: '#d4d4d8' }}>—</span>
+                          <span className="text-zinc-300 font-bold">—</span>
                         )}
                       </div>
                     </td>
@@ -259,9 +220,9 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
             </table>
           </div>
         ) : (
-          <div style={{ padding: '48px 24px', textAlign: 'center', color: '#a1a1aa' }}>
-            <div style={{ fontSize: '32px', marginBottom: '8px' }}>📭</div>
-            <p style={{ fontSize: '14px', margin: 0 }}>Tidak ada booking dengan filter ini</p>
+          <div className="py-20 text-center">
+            <div className="text-5xl mb-4 opacity-30">📭</div>
+            <p className="text-sm font-medium text-zinc-500">Tidak ada booking dengan filter ini</p>
           </div>
         )}
       </div>
