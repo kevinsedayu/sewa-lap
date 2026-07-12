@@ -1,8 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { Anton } from 'next/font/google'
 import BookingCalendar from '@/components/shared/BookingCalendar'
-
-const anton = Anton({ weight: '400', subsets: ['latin'] })
 
 export default async function AuthLayout({
   children,
@@ -30,15 +27,15 @@ export default async function AuthLayout({
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           {/* Header BUMI MINTARSIH */}
           <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-            <h1 className={anton.className} style={{ 
-              fontSize: '48px', 
+            <h1 style={{ 
+              fontSize: '40px', 
               color: '#166534', 
-              letterSpacing: '2px', 
+              letterSpacing: '-0.02em', 
               margin: '0 0 16px 0',
               textTransform: 'uppercase',
-              textShadow: '3px 3px 0px rgba(0,0,0,0.15), 6px 6px 0px rgba(0,0,0,0.05)'
+              fontWeight: 800
             }}>
-              Sewa Gelora Bumi Mintarsih
+              Gelora Bumi Mintarsih
             </h1>
             <div style={{ 
               width: '100%', 
@@ -57,13 +54,13 @@ export default async function AuthLayout({
 
           {/* Fasilitas Kami */}
           <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-            <h2 className={anton.className} style={{ 
-              fontSize: '48px', 
+            <h2 style={{ 
+              fontSize: '24px', 
               color: '#166534', 
-              marginBottom: '16px', 
-              letterSpacing: '2px',
+              marginBottom: '20px', 
+              letterSpacing: '-0.02em',
               textTransform: 'uppercase',
-              textShadow: '3px 3px 0px rgba(0,0,0,0.15), 6px 6px 0px rgba(0,0,0,0.05)'
+              fontWeight: 800
             }}>
               Fasilitas Kami
             </h2>
