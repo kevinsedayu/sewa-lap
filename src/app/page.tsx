@@ -1,9 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import BookingCalendar from '@/components/shared/BookingCalendar'
-import { Anton } from 'next/font/google'
-
-const anton = Anton({ weight: '400', subsets: ['latin'] })
 
 export default async function Home() {
   const supabase = await createClient()
@@ -48,56 +45,78 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-zinc-50 font-sans pb-12">
-      {/* Navbar / Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 px-6 py-4 flex justify-end items-center shadow-sm">
-        <div>
-          {user ? (
-            <Link 
-              href={dashboardPath} 
-              className="bg-zinc-900 hover:bg-zinc-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm"
-            >
-              Ke Dashboard
-            </Link>
-          ) : (
-            <div className="flex items-center gap-4">
-              <span className="hidden sm:inline-block text-sm text-zinc-600 font-medium">
-                Ingin mau booking?
-              </span>
-              <Link 
-                href="/login" 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-[0_4px_12px_rgba(5,150,105,0.2)] hover:shadow-[0_4px_16px_rgba(5,150,105,0.3)] hover:-translate-y-0.5"
-              >
-                Login
-              </Link>
+      {/* Top Navbar Bar */}
+      <div className="w-full">
+        <header className="flex items-center justify-between px-6 py-4 bg-zinc-900 text-white shadow-sm z-50">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /><path d="M2 12h20" />
+              </svg>
             </div>
-          )}
+            <span className="text-lg font-bold tracking-wide">Gelora Bumi Mintarsih</span>
+          </div>
+
+          <div>
+            {user ? (
+              <Link 
+                href={dashboardPath} 
+                className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm"
+              >
+                Ke Dashboard
+              </Link>
+            ) : (
+              <div className="flex items-center gap-4">
+                <span className="hidden sm:inline-block text-sm text-zinc-400 font-medium">
+                  Ingin mau booking?
+                </span>
+                <Link 
+                  href="/login" 
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-[0_4px_12px_rgba(5,150,105,0.2)] hover:-translate-y-0.5"
+                >
+                  Login
+                </Link>
+              </div>
+            )}
+          </div>
+        </header>
+
+        {/* Hero Image — full width, clean, NO text overlay */}
+        <div className="w-full h-[220px] sm:h-[360px] relative overflow-hidden">
+          <img
+            src="/lapangan.jpeg"
+            alt="Gelora Bumi Mintarsih"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
         </div>
-      </header>
+
+        {/* Marquee Ticker — scrolling text below hero */}
+        <div className="marquee-wrapper bg-emerald-700 py-1.5 border-y border-emerald-600">
+          <div className="marquee-track">
+            {[...Array(8)].map((_, i) => (
+              <span key={i} className="flex items-center gap-6 px-6 font-bold text-sm uppercase" style={{ color: '#ffffff', letterSpacing: '0.05em' }}>
+                Gelora Bumi Mintarsih Kalisegoro
+                <span style={{ color: '#a7f3d0', fontSize: '10px' }}>✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14">
         
-        {/* Header Photo & Title */}
-        <div className="mb-12 text-center">
-          <h1 className={`${anton.className} text-4xl sm:text-5xl text-emerald-800 tracking-wide uppercase mb-6 drop-shadow-sm`}>
-            Gelora Bumi Mintarsih
-          </h1>
-          <div className="w-full h-[240px] sm:h-[320px] rounded-2xl overflow-hidden shadow-lg mb-6 relative group">
-            <img 
-              src="/lapangan.jpeg" 
-              alt="Gelora Bumi Mintarsih" 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
-          </div>
+        {/* Intro Text */}
+        <div className="mb-14 text-center">
           <p className="text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed">
             Sistem penyewaan lapangan sepakbola online. Silakan cek jadwal yang masih kosong pada kalender di bawah ini, dan lakukan login untuk mulai booking!
           </p>
         </div>
 
-        {/* Fasilitas Slider */}
-        <div className="mb-16">
-          <h2 className={`${anton.className} text-2xl text-emerald-800 mb-6 tracking-wide uppercase text-center drop-shadow-sm`}>
+        {/* Kalender Jadwal Kosong */}
+        <div>
+          <h2 className="text-2xl font-bold text-emerald-800 mb-6 tracking-tight uppercase text-center">
             Fasilitas Kami
           </h2>
           <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
