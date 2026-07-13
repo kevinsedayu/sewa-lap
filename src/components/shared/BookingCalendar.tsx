@@ -11,9 +11,10 @@ export type CalendarBooking = {
   status: string
   penyewa?: string
   catatan?: string
+  user_id?: string
 }
 
-export default function BookingCalendar({ bookings, isAdmin = false }: { bookings: CalendarBooking[], isAdmin?: boolean }) {
+export default function BookingCalendar({ bookings, isAdmin = false, currentUserId }: { bookings: CalendarBooking[], isAdmin?: boolean, currentUserId?: string }) {
   const [currentDate, setCurrentDate] = useState(new Date())
   const router = useRouter()
   const supabase = createClient()
@@ -188,6 +189,7 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
             const renderSesi = (sesiInfo: CalendarBooking | undefined, sesiTypeObj: any) => {
               if (!sesiInfo) {
                 if (isPast) {
+                  // User: past with no booking -> plain Berlalu (no booking info shown)
                   return (
                     <div 
                       key={sesiTypeObj.id}
@@ -221,6 +223,36 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
               }
 
               const isMaintenance = sesiInfo.status === 'maintenance'
+              const isOwnBooking = !isAdmin && currentUserId && sesiInfo.user_id === currentUserId
+
+              // USER VIEW: past dates → always show generic Berlalu (hide who booked)
+              if (!isAdmin && isPast) {
+                return (
+                  <div
+                    key={sesiTypeObj.id}
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-zinc-100 text-zinc-400 border border-zinc-200 cursor-not-allowed w-full justify-center"
+                    title="Sesi sudah berlalu"
+                  >
+                    <Info size={12} />
+                    <span className="truncate">{sesiTypeObj.nama.replace('Sesi ', '')}</span>
+                  </div>
+                )
+              }
+
+              // USER VIEW: future own booking → show "Booking Saya" in blue
+              if (!isAdmin && isOwnBooking) {
+                const label = sesiInfo.catatan || sesiInfo.penyewa || 'Booking Saya'
+                return (
+                  <div key={sesiTypeObj.id}
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-blue-50 text-blue-700 border-blue-200"
+                    title={`Booking Anda: ${label}`}
+                  >
+                    <CheckCircle2 size={12} className="shrink-0 text-blue-500" />
+                    <span className="truncate">Saya: {label}</span>
+                  </div>
+                )
+              }
+
               const detailText = isMaintenance ? (sesiInfo.catatan || 'Ditutup') : (sesiInfo.catatan || sesiInfo.penyewa || 'Penuh')
 
               return (
@@ -265,23 +297,28 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
           </div>
         </div>
 
-        {/* Legenda */}
-        <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-zinc-500">
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 size={14} className="text-emerald-600" /> Tersedia
-          </div>
-          <div className="flex items-center gap-1.5">
-            <XCircle size={14} className="text-red-600" /> Terbooking
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Info size={14} className="text-zinc-400" /> Berlalu
-          </div>
-          {isAdmin && (
+          {/* Legenda */}
+          <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-zinc-500">
             <div className="flex items-center gap-1.5">
-              <AlertCircle size={14} className="text-amber-600" /> Perawatan/Libur
+              <CheckCircle2 size={14} className="text-emerald-600" /> Tersedia
             </div>
-          )}
-        </div>
+            <div className="flex items-center gap-1.5">
+              <XCircle size={14} className="text-red-600" /> {isAdmin ? 'Terbooking' : 'Penuh'}
+            </div>
+            {!isAdmin && (
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 size={14} className="text-blue-500" /> Booking Saya
+              </div>
+            )}
+            <div className="flex items-center gap-1.5">
+              <Info size={14} className="text-zinc-400" /> Berlalu
+            </div>
+            {isAdmin && (
+              <div className="flex items-center gap-1.5">
+                <AlertCircle size={14} className="text-amber-600" /> Perawatan/Libur
+              </div>
+            )}
+          </div>
       </div>
 
       {/* Modal Input Admin */}

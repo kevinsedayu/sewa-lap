@@ -4,9 +4,12 @@ import BookingCalendar from '@/components/shared/BookingCalendar'
 export default async function UserKalenderPage() {
   const supabase = await createClient()
 
+  // Get current logged in user
+  const { data: { user } } = await supabase.auth.getUser()
+
   const { data: allBookings } = await supabase
     .from('sewa')
-    .select('tanggal, sesi, status, catatan')
+    .select('tanggal, sesi, status, catatan, user_id')
 
   return (
     <div className="page-content" style={{ maxWidth: '1000px' }}>
@@ -20,12 +23,14 @@ export default async function UserKalenderPage() {
       </div>
 
       <BookingCalendar 
-        isAdmin={false} 
+        isAdmin={false}
+        currentUserId={user?.id}
         bookings={(allBookings || []).map(b => ({
           tanggal: b.tanggal,
           sesi: b.sesi,
           status: b.status,
-          catatan: b.catatan
+          catatan: b.catatan,
+          user_id: b.user_id
         }))}
       />
     </div>
