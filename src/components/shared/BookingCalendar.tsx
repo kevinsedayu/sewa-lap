@@ -239,16 +239,16 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                 )
               }
 
-              // USER VIEW: future own booking → show "Booking Saya" in blue
+              // USER VIEW: future own booking → show name in vivid blue
               if (!isAdmin && isOwnBooking) {
                 const label = sesiInfo.catatan || sesiInfo.penyewa || 'Booking Saya'
                 return (
                   <div key={sesiTypeObj.id}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-blue-50 text-blue-700 border-blue-200"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-blue-600 text-white border-blue-700"
                     title={`Booking Anda: ${label}`}
                   >
-                    <CheckCircle2 size={12} className="shrink-0 text-blue-500" />
-                    <span className="truncate">Saya: {label}</span>
+                    <CheckCircle2 size={12} className="shrink-0" />
+                    <span className="truncate">{label}</span>
                   </div>
                 )
               }
