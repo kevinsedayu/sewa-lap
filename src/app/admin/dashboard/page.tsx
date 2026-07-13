@@ -73,7 +73,7 @@ export default async function AdminDashboard() {
         {/* Top Navbar Bar */}
         <div className="flex items-center pl-20 pr-6 py-4 bg-zinc-900 text-white">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-full object-cover bg-white shrink-0 shadow-sm" />
+            <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-full object-contain bg-white shrink-0 shadow-lg ring-2 ring-emerald-500/30 p-0.5 transition-transform hover:scale-105" />
             <span className="text-lg font-bold tracking-wide">Gelora Bumi Mintarsih</span>
           </div>
         </div>
