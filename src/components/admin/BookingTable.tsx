@@ -23,6 +23,7 @@ const statusColor: Record<string, string> = {
   cancelled: '#ef4444',
   completed: '#6366f1',
   maintenance: '#a78bfa',
+  cancel_request: '#f97316',
 }
 const statusLabel: Record<string, string> = {
   pending: 'Menunggu',
@@ -30,6 +31,7 @@ const statusLabel: Record<string, string> = {
   cancelled: 'Dibatalkan',
   completed: 'Selesai',
   maintenance: 'Perawatan',
+  cancel_request: 'Minta Pembatalan',
 }
 
 export default function BookingTable({ initialBookings }: { initialBookings: Booking[] }) {
@@ -134,6 +136,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
           {[
             { key: 'all', label: 'Semua' },
             { key: 'pending', label: 'Menunggu' },
+            { key: 'cancel_request', label: 'Minta Batal' },
             { key: 'confirmed', label: 'Dikonfirmasi' },
             { key: 'completed', label: 'Selesai' },
             { key: 'cancelled', label: 'Dibatalkan' },
@@ -224,6 +227,18 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                           <button onClick={() => openModal('cancel', b.id)} disabled={loadingId === b.id}
                             className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-orange-600 bg-white border border-orange-200 hover:bg-orange-50 disabled:opacity-50 transition-colors whitespace-nowrap">
                             <Ban size={12} /> Batalkan
+                          </button>
+                        </>)}
+                        {/* Admin: Setujui atau Tolak request pembatalan dari user */}
+                        {b.status === 'cancel_request' && (<>
+                          <div className="text-[10px] font-semibold text-orange-600 mb-1 whitespace-nowrap">⚠️ Minta Batal</div>
+                          <button onClick={() => updateStatus(b.id, 'cancelled')} disabled={loadingId === b.id}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-red-500 hover:bg-red-600 disabled:opacity-50 transition-colors shadow-sm whitespace-nowrap">
+                            <CheckCircle2 size={12} /> Setujui Batal
+                          </button>
+                          <button onClick={() => updateStatus(b.id, 'confirmed')} disabled={loadingId === b.id}
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-emerald-700 bg-white border border-emerald-200 hover:bg-emerald-50 disabled:opacity-50 transition-colors whitespace-nowrap">
+                            <XCircle size={12} /> Tolak Batal
                           </button>
                         </>)}
                         {['cancelled','completed','maintenance'].includes(b.status) && (
