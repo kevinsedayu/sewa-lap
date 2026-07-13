@@ -68,7 +68,7 @@ export default function UserSidebar({ user }: UserSidebarProps) {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-200 min-h-[64px]">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-full object-contain bg-white shrink-0 shadow-sm ring-2 ring-zinc-200/50 p-0.5" />
+            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-md transition-transform hover:scale-105" />
             <span className="text-sm font-bold text-zinc-900 tracking-tight">BumiMintarsih</span>
           </div>
           <button

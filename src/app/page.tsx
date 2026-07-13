@@ -49,7 +49,7 @@ export default async function Home() {
       <div className="w-full">
         <header className="flex items-center justify-between px-6 py-4 bg-zinc-900 text-white shadow-sm z-50">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-full object-contain bg-white shrink-0 shadow-lg ring-2 ring-emerald-500/30 p-0.5 transition-transform hover:scale-105" />
+            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-md transition-transform hover:scale-105" />
             <span className="text-lg font-bold tracking-wide">Gelora Bumi Mintarsih</span>
           </div>
 
