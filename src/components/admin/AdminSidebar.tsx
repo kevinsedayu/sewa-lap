@@ -24,7 +24,7 @@ interface AdminSidebarProps {
 
 const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/booking', label: 'Kelola Booking', icon: BookOpen },
+  { href: '/admin/booking', label: 'Kelola Persewaan', icon: BookOpen },
   { href: '/admin/kalender', label: 'Kalender', icon: CalendarDays },
   { href: '/admin/info-lapangan', label: 'Info Lapangan', icon: Settings },
   { href: '/admin/lokasi', label: 'Lokasi Lapangan', icon: MapPin },

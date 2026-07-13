@@ -22,7 +22,7 @@ interface UserSidebarProps {
 
 const navItems = [
   { href: '/user/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/user/booking', label: 'Booking', icon: CalendarDays },
+  { href: '/user/booking', label: 'Sewa', icon: CalendarDays },
   { href: '/user/kalender', label: 'Kalender', icon: CalendarDays },
   { href: '/user/lokasi', label: 'Lokasi', icon: MapPin },
   { href: '/user/riwayat', label: 'Riwayat', icon: History },
