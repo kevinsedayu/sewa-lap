@@ -121,7 +121,7 @@ export default function UserBookingPage() {
     }
 
     if (isSessionBooked(tanggal, sesi)) {
-      setError('Jadwal ini sudah dibooking. Silakan pilih tanggal atau sesi lain.')
+      setError('Jadwal ini sudah dipesan. Silakan pilih tanggal atau sesi lain.')
       return
     }
 
@@ -207,7 +207,7 @@ export default function UserBookingPage() {
     <div className="page-content" style={{ maxWidth: '800px', margin: '0 auto', fontFamily: "'Inter', system-ui, sans-serif" }}>
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#09090b', marginBottom: '8px' }}>
-          Booking Lapangan
+          Sewa Lapangan
         </h1>
         <p style={{ fontSize: '14px', color: '#71717a' }}>
           Pilih jadwal bermain Anda dan unggah bukti transfer.
@@ -227,7 +227,7 @@ export default function UserBookingPage() {
               <div>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: '#15803d' }}>Selamat! Anda adalah Member Setia</div>
                 <div style={{ fontSize: '13px', color: '#16a34a' }}>
-                  Sudah sewa <strong>{userBookingCount}x</strong> — Diskon <strong>{discountPct}%</strong> otomatis aktif untuk booking ini!
+                  Sudah sewa <strong>{userBookingCount}x</strong> — Diskon <strong>{discountPct}%</strong> otomatis aktif untuk penyewaan ini!
                 </div>
               </div>
             </div>
@@ -247,7 +247,7 @@ export default function UserBookingPage() {
 
       {success ? (
         <div style={{ padding: '24px', background: '#dcfce7', color: '#166534', borderRadius: '12px', border: '1px solid #bbf7d0', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '18px', marginBottom: '8px' }}>✅ Booking Berhasil Dibuat!</h2>
+          <h2 style={{ fontSize: '18px', marginBottom: '8px' }}>✅ Sewa Berhasil Dibuat!</h2>
           <p style={{ fontSize: '14px' }}>Menunggu konfirmasi admin. Mengalihkan ke dashboard...</p>
         </div>
       ) : (
@@ -309,7 +309,7 @@ export default function UserBookingPage() {
                     <div style={{ fontWeight: 600, fontSize: '15px', color: '#09090b' }}>{s.nama}</div>
                     <div style={{ fontSize: '13px', color: '#71717a', marginTop: '4px' }}>{s.jam}</div>
                     <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginTop: '8px' }}>Rp {s.harga.toLocaleString('id-ID')}</div>
-                    {tanggal && isSessionBooked(tanggal, s.id) && <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px' }}>Sudah dibooking</div>}
+                    {tanggal && isSessionBooked(tanggal, s.id) && <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px' }}>Sudah disewa</div>}
                   </label>
                 ))}
               </div>
@@ -380,7 +380,7 @@ export default function UserBookingPage() {
               opacity: isSubmitting || (tanggal && isSessionBooked(tanggal, sesi)) ? 0.7 : 1
             }}
           >
-            {isSubmitting ? 'Memproses Booking...' : 'Kirim Booking'}
+            {isSubmitting ? 'Memproses...' : 'Kirim Sewa'}
           </button>
         </form>
       )}

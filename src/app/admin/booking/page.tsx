@@ -19,10 +19,10 @@ export default async function AdminBookingPage() {
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.025em', margin: '0 0 4px' }}>
-          Kelola Booking
+          Kelola Persewaan
         </h1>
         <p style={{ fontSize: '13px', color: '#71717a', margin: 0 }}>
-          Konfirmasi, tolak, atau tandai booking sebagai selesai
+          Konfirmasi, tolak, atau tandai persewaan sebagai selesai
         </p>
       </div>
 
