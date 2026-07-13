@@ -24,6 +24,13 @@ export default function UserBookingPage() {
   ])
   const [lapanganId, setLapanganId] = useState<string>('')
 
+  // Discount state
+  const [discountActive, setDiscountActive] = useState(false)
+  const [discountMinBooking, setDiscountMinBooking] = useState(10)
+  const [discountPct, setDiscountPct] = useState(10)
+  const [userBookingCount, setUserBookingCount] = useState(0)
+  const isEligibleForDiscount = discountActive && userBookingCount >= discountMinBooking
+
   useEffect(() => {
     // Ambil tanggal dan sesi dari URL jika ada (redirect dari kalender)
     if (typeof window !== 'undefined') {
@@ -56,9 +63,13 @@ export default function UserBookingPage() {
         setBookedSessions(data as any)
       }
 
-      const { data: lapangan } = await supabase.from('lapangan').select('id, fasilitas').limit(1).single()
+      const { data: lapangan } = await supabase.from('lapangan').select('id, fasilitas, discount_active, discount_min_booking, discount_pct').limit(1).single()
       if (lapangan) {
         setLapanganId(lapangan.id)
+        // Load discount config
+        setDiscountActive(lapangan.discount_active ?? false)
+        setDiscountMinBooking(lapangan.discount_min_booking ?? 10)
+        setDiscountPct(lapangan.discount_pct ?? 10)
         try {
           if (Array.isArray(lapangan.fasilitas)) {
             const parsedSesi = lapangan.fasilitas.map((item: any) => 
@@ -70,6 +81,16 @@ export default function UserBookingPage() {
             if (parsed?.sesi && Array.isArray(parsed.sesi)) setActiveSesiList(parsed.sesi)
           }
         } catch(e) {}
+      }
+
+      // Hitung total booking user yang sudah completed/confirmed
+      if (user) {
+        const { count } = await supabase
+          .from('sewa')
+          .select('id', { count: 'exact', head: true })
+          .eq('user_id', user.id)
+          .in('status', ['confirmed', 'completed'])
+        setUserBookingCount(count ?? 0)
       }
     }
     loadData()
@@ -142,7 +163,10 @@ export default function UserBookingPage() {
       const selectedSesi = activeSesiList.find(s => s.id === sesi)
       if (!selectedSesi) throw new Error("Sesi tidak valid")
       const jamArr = selectedSesi.jam.split('-')
-      const totalHarga = selectedSesi.harga
+      const hargaAsli = selectedSesi.harga
+      const totalHarga = isEligibleForDiscount
+        ? Math.round(hargaAsli * (1 - discountPct / 100))
+        : hargaAsli
       const jamMulai = (jamArr[0] || '00:00') + ':00'
       const jamSelesai = (jamArr[1] || '00:00') + ':00'
 
@@ -189,6 +213,37 @@ export default function UserBookingPage() {
           Pilih jadwal bermain Anda dan unggah bukti transfer.
         </p>
       </div>
+
+      {/* Banner Diskon Loyalitas */}
+      {discountActive && (
+        <div style={{
+          marginBottom: '20px', padding: '14px 18px', borderRadius: '12px',
+          background: isEligibleForDiscount ? '#f0fdf4' : '#fafafa',
+          border: `1px solid ${isEligibleForDiscount ? '#86efac' : '#e4e4e7'}`
+        }}>
+          {isEligibleForDiscount ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '22px' }}>🎉</span>
+              <div>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: '#15803d' }}>Selamat! Anda adalah Member Setia</div>
+                <div style={{ fontSize: '13px', color: '#16a34a' }}>
+                  Sudah sewa <strong>{userBookingCount}x</strong> — Diskon <strong>{discountPct}%</strong> otomatis aktif untuk booking ini!
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '18px' }}>🏷️</span>
+              <div>
+                <div style={{ fontSize: '14px', fontWeight: 600, color: '#3f3f46' }}>Program Diskon Loyalitas Aktif</div>
+                <div style={{ fontSize: '13px', color: '#71717a' }}>
+                  Sewa <strong>{discountMinBooking - userBookingCount}x lagi</strong> untuk dapat diskon <strong>{discountPct}%</strong>! (Anda sudah sewa {userBookingCount}x)
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {success ? (
         <div style={{ padding: '24px', background: '#dcfce7', color: '#166534', borderRadius: '12px', border: '1px solid #bbf7d0', textAlign: 'center' }}>
@@ -284,9 +339,21 @@ export default function UserBookingPage() {
               
               <div style={{ marginTop: '16px', borderTop: '1px dashed #d4d4d8', paddingTop: '12px' }}>
                 <div style={{ fontSize: '13px', color: '#71717a' }}>Total yang harus dibayar:</div>
-                <div style={{ fontSize: '18px', fontWeight: 700, color: '#09090b' }}>
-                  Rp {(activeSesiList.find(s => s.id === sesi)?.harga || 0).toLocaleString('id-ID')}
-                </div>
+                {isEligibleForDiscount ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '4px' }}>
+                    <div style={{ fontSize: '16px', color: '#a1a1aa', textDecoration: 'line-through' }}>
+                      Rp {(activeSesiList.find(s => s.id === sesi)?.harga || 0).toLocaleString('id-ID')}
+                    </div>
+                    <div style={{ fontSize: '22px', fontWeight: 700, color: '#16a34a' }}>
+                      Rp {Math.round((activeSesiList.find(s => s.id === sesi)?.harga || 0) * (1 - discountPct / 100)).toLocaleString('id-ID')}
+                    </div>
+                    <span style={{ background: '#dcfce7', color: '#15803d', fontSize: '12px', fontWeight: 700, padding: '2px 8px', borderRadius: '100px' }}>-{discountPct}%</span>
+                  </div>
+                ) : (
+                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#09090b' }}>
+                    Rp {(activeSesiList.find(s => s.id === sesi)?.harga || 0).toLocaleString('id-ID')}
+                  </div>
+                )}
               </div>
             </div>
 

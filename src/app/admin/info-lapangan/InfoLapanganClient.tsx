@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { Tag } from 'lucide-react'
 
 export type Sesi = {
   id: string
@@ -15,6 +16,11 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
   const [nama, setNama] = useState(initialData?.nama || '')
   const [deskripsi, setDeskripsi] = useState(initialData?.deskripsi || '')
   
+  // Discount loyalty state
+  const [discountActive, setDiscountActive] = useState<boolean>(initialData?.discount_active ?? false)
+  const [discountMinBooking, setDiscountMinBooking] = useState<number>(initialData?.discount_min_booking ?? 10)
+  const [discountPct, setDiscountPct] = useState<number>(initialData?.discount_pct ?? 10)
+
   // Parse fasilitas JSON for sessions. If parsing fails or doesn't exist, use default
   let initialSesi: Sesi[] = [
     { id: 'pagi', nama: 'Sesi Pagi', jam: '07:00-12:00', harga: 200000 },
@@ -98,7 +104,10 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
         .update({
           nama,
           deskripsi,
-          fasilitas: fasilitasArray
+          fasilitas: fasilitasArray,
+          discount_active: discountActive,
+          discount_min_booking: discountMinBooking,
+          discount_pct: discountPct
         })
         .eq('id', initialData.id)
 
@@ -189,6 +198,79 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Pengaturan Diskon Loyalitas */}
+      <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', padding: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+          <Tag size={18} style={{ color: '#16a34a' }} />
+          <h2 style={{ fontSize: '16px', fontWeight: 600, margin: 0, color: '#09090b' }}>Diskon Loyalitas Pelanggan</h2>
+        </div>
+        <p style={{ fontSize: '13px', color: '#71717a', marginBottom: '20px' }}>
+          Berikan diskon otomatis kepada pelanggan yang sudah mencapai jumlah sewa tertentu.
+        </p>
+
+        {/* Toggle Aktif */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', background: discountActive ? '#f0fdf4' : '#fafafa', border: `1px solid ${discountActive ? '#bbf7d0' : '#e4e4e7'}`, borderRadius: '8px', marginBottom: '16px', transition: 'all 0.2s' }}>
+          <div>
+            <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b' }}>Aktifkan Fitur Diskon</div>
+            <div style={{ fontSize: '12px', color: '#71717a', marginTop: '2px' }}>
+              {discountActive ? '✅ Diskon aktif — pelanggan memenuhi syarat akan mendapat potongan harga' : 'Fitur diskon saat ini nonaktif'}
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setDiscountActive(!discountActive)}
+            style={{
+              width: '52px', height: '28px', borderRadius: '100px', border: 'none', cursor: 'pointer',
+              background: discountActive ? '#16a34a' : '#d4d4d8',
+              position: 'relative', transition: 'background 0.2s', flexShrink: 0
+            }}
+          >
+            <span style={{
+              position: 'absolute', top: '3px',
+              left: discountActive ? '27px' : '3px',
+              width: '22px', height: '22px', borderRadius: '50%', background: '#fff',
+              transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
+            }} />
+          </button>
+        </div>
+
+        {/* Pengaturan angka — hanya tampil kalau aktif */}
+        {discountActive && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>
+                Minimum Jumlah Sewa (kali)
+              </label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type="number" min={1} max={100}
+                  value={discountMinBooking}
+                  onChange={e => setDiscountMinBooking(Number(e.target.value))}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '6px', border: '1px solid #d4d4d8', fontSize: '14px', fontWeight: 600 }}
+                />
+                <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: '#71717a' }}>× sewa</span>
+              </div>
+              <p style={{ fontSize: '11px', color: '#a1a1aa', marginTop: '4px' }}>Pelanggan yang sudah sewa {discountMinBooking}x atau lebih akan mendapat diskon.</p>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>
+                Persentase Diskon (%)
+              </label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type="number" min={1} max={100}
+                  value={discountPct}
+                  onChange={e => setDiscountPct(Number(e.target.value))}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '6px', border: '1px solid #d4d4d8', fontSize: '14px', fontWeight: 600 }}
+                />
+                <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '12px', color: '#71717a' }}>%</span>
+              </div>
+              <p style={{ fontSize: '11px', color: '#a1a1aa', marginTop: '4px' }}>Diskon yang didapat: {discountPct}% dari harga sesi normal.</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
