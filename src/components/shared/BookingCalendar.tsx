@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { ChevronLeft, ChevronRight, CheckCircle2, XCircle, AlertCircle, Info } from 'lucide-react'
 
 export type CalendarBooking = {
   tanggal: string
@@ -139,37 +140,43 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
   }
 
   return (
-    <div style={{ position: 'relative' }}>
-      <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', padding: '24px' }}>
+    <div className="relative">
+      <div className="bg-white border border-zinc-200 rounded-2xl p-4 sm:p-6 shadow-sm">
         
         {/* Header Kalender */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: '#09090b' }}>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+          <h3 className="text-xl font-bold text-zinc-900 tracking-tight" style={{ fontFamily: 'var(--font-bricolage), system-ui, sans-serif' }}>
             {monthNames[month]} {year}
           </h3>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <button onClick={handlePrevMonth} style={{ padding: '6px 12px', background: '#f4f4f5', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>
-              ← Prev
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={handlePrevMonth} 
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 rounded-lg text-sm font-medium transition-colors"
+            >
+              <ChevronLeft size={16} /> Prev
             </button>
-            <button onClick={handleNextMonth} style={{ padding: '6px 12px', background: '#09090b', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>
-              Next →
+            <button 
+              onClick={handleNextMonth} 
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg text-sm font-medium transition-colors shadow-sm"
+            >
+              Next <ChevronRight size={16} />
             </button>
           </div>
         </div>
 
         {/* Grid Kalender */}
-        <div style={{ overflowX: 'auto', paddingBottom: '8px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '8px', minWidth: '600px' }}>
+        <div className="overflow-x-auto pb-2">
+          <div className="grid grid-cols-7 gap-3 min-w-[700px]">
           {/* Nama Hari */}
           {dayNames.map(d => (
-            <div key={d} style={{ textAlign: 'center', fontSize: '12px', fontWeight: 600, color: '#71717a', paddingBottom: '8px', borderBottom: '1px solid #e4e4e7' }}>
+            <div key={d} className="text-center text-xs font-bold text-zinc-500 uppercase tracking-wider pb-2 border-b border-zinc-200">
               {d}
             </div>
           ))}
 
           {/* Tanggal Kosong di awal bulan */}
           {Array.from({ length: firstDayOfMonth }).map((_, i) => (
-            <div key={`empty-${i}`} style={{ minHeight: '80px', padding: '8px', background: '#fafafa', borderRadius: '8px' }} />
+            <div key={`empty-${i}`} className="min-h-[140px] p-2 bg-zinc-50/50 rounded-xl border border-dashed border-zinc-200/60" />
           ))}
 
           {/* Tanggal */}
@@ -184,14 +191,11 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
                   return (
                     <div 
                       key={sesiTypeObj.id}
-                      style={{
-                        fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
-                        background: '#f4f4f5', color: '#a1a1aa', border: '1px solid #e4e4e7',
-                        cursor: 'not-allowed'
-                      }}
+                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-zinc-100 text-zinc-400 border border-zinc-200 cursor-not-allowed w-full justify-center"
                       title="Sesi sudah berlalu"
                     >
-                      {sesiTypeObj.nama.replace('Sesi ', '')} (Berlalu)
+                      <Info size={12} />
+                      <span className="truncate">{sesiTypeObj.nama.replace('Sesi ', '')}</span>
                     </div>
                   )
                 }
@@ -207,33 +211,30 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
                         router.push(`/user/booking?tanggal=${dateStr}&sesi=${sesiTypeObj.id}`)
                       }
                     }}
-                    style={{
-                      fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
-                      background: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0',
-                      cursor: 'pointer'
-                    }}
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 hover:border-emerald-300 cursor-pointer transition-colors w-full justify-center shadow-sm"
                     title={isAdmin ? `Klik untuk input jadwal ${sesiTypeObj.nama}` : `Klik untuk booking ${sesiTypeObj.nama}`}
                   >
-                    {sesiTypeObj.nama.replace('Sesi ', '')} (Kosong)
+                    <CheckCircle2 size={12} className="shrink-0" />
+                    <span className="truncate">{sesiTypeObj.nama.replace('Sesi ', '')}</span>
                   </div>
                 )
               }
 
               const isMaintenance = sesiInfo.status === 'maintenance'
-              const bgColor = isMaintenance ? '#fef08a' : '#fee2e2'
-              const textColor = isMaintenance ? '#854d0e' : '#b91c1c'
-              const borderColor = isMaintenance ? '#fde047' : '#fecaca'
-
               const detailText = isMaintenance ? `Lainnya: ${sesiInfo.catatan || 'Ditutup'}` : `Booking: ${sesiInfo.catatan || sesiInfo.penyewa || 'Penuh'}`
 
               return (
-                <div key={sesiTypeObj.id} style={{
-                  fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
-                  background: bgColor, color: textColor, border: `1px solid ${borderColor}`,
-                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-                  cursor: 'default'
-                }} title={isAdmin ? `${sesiTypeObj.nama} - ${detailText}` : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}>
-                  {isAdmin ? detailText : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}
+                <div key={sesiTypeObj.id} 
+                  className={`flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full justify-center shadow-sm border cursor-default
+                    ${isMaintenance 
+                      ? 'bg-amber-50 text-amber-700 border-amber-200' 
+                      : 'bg-red-50 text-red-700 border-red-200'
+                    }
+                  `}
+                  title={isAdmin ? `${sesiTypeObj.nama} - ${detailText}` : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}
+                >
+                  {isMaintenance ? <AlertCircle size={12} className="shrink-0" /> : <XCircle size={12} className="shrink-0" />}
+                  <span className="truncate">{isAdmin ? detailText : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}</span>
                 </div>
               )
             }
@@ -242,23 +243,22 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
             const orphanBookings = getOrphanBookings(day)
 
             return (
-              <div key={day} style={{ 
-                minHeight: '80px', padding: '8px', border: '1px solid #e4e4e7', borderRadius: '8px',
-                display: 'flex', flexDirection: 'column', gap: '4px'
-              }}>
-                <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginBottom: '4px' }}>{day}</div>
-                {activeSesiList.map(sesi => renderSesi(getBooking(day, sesi.id), sesi))}
-                {/* Tampilkan booking sesi yang sudah dihapus (orphan) */}
-                {orphanBookings.map(b => (
-                  <div key={`orphan-${b.sesi}-${b.tanggal}`} style={{
-                    fontSize: '11px', padding: '4px 6px', borderRadius: '4px', textAlign: 'center', fontWeight: 500,
-                    background: '#fee2e2', color: '#b91c1c', border: '1px solid #fecaca',
-                    whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-                    cursor: 'default'
-                  }} title={isAdmin ? `Sesi dihapus (${b.sesi}): ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}>
-                    {isAdmin ? `[${b.sesi}] ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}
-                  </div>
-                ))}
+              <div key={day} className="flex flex-col gap-1.5 min-h-[140px] p-2.5 border border-zinc-200 bg-white rounded-xl shadow-sm hover:shadow-md hover:border-zinc-300 transition-all">
+                <div className="text-sm font-bold text-zinc-800 mb-1" style={{ fontFamily: 'var(--font-bricolage), system-ui, sans-serif' }}>{day}</div>
+                
+                <div className="flex flex-col gap-1.5 flex-1 justify-start">
+                  {activeSesiList.map(sesi => renderSesi(getBooking(day, sesi.id), sesi))}
+                  {/* Tampilkan booking sesi yang sudah dihapus (orphan) */}
+                  {orphanBookings.map(b => (
+                    <div key={`orphan-${b.sesi}-${b.tanggal}`} 
+                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full justify-center shadow-sm border cursor-default bg-red-50 text-red-700 border-red-200"
+                      title={isAdmin ? `Sesi dihapus (${b.sesi}): ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}
+                    >
+                      <XCircle size={12} className="shrink-0" />
+                      <span className="truncate">{isAdmin ? `[${b.sesi}] ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )
           })}
@@ -266,19 +266,19 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
         </div>
 
         {/* Legenda */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '20px', fontSize: '12px', color: '#71717a' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <div style={{ width: '12px', height: '12px', background: '#dcfce7', border: '1px solid #bbf7d0', borderRadius: '3px' }} /> Tersedia
+        <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-zinc-500">
+          <div className="flex items-center gap-1.5">
+            <CheckCircle2 size={14} className="text-emerald-600" /> Tersedia
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <div style={{ width: '12px', height: '12px', background: '#fee2e2', border: '1px solid #fecaca', borderRadius: '3px' }} /> Terbooking
+          <div className="flex items-center gap-1.5">
+            <XCircle size={14} className="text-red-600" /> Terbooking
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <div style={{ width: '12px', height: '12px', background: '#f4f4f5', border: '1px solid #e4e4e7', borderRadius: '3px' }} /> Berlalu
+          <div className="flex items-center gap-1.5">
+            <Info size={14} className="text-zinc-400" /> Berlalu
           </div>
           {isAdmin && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <div style={{ width: '12px', height: '12px', background: '#fef08a', border: '1px solid #fde047', borderRadius: '3px' }} /> Perawatan/Libur
+            <div className="flex items-center gap-1.5">
+              <AlertCircle size={14} className="text-amber-600" /> Perawatan/Libur
             </div>
           )}
         </div>

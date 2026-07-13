@@ -73,11 +73,7 @@ export default async function AdminDashboard() {
         {/* Top Navbar Bar */}
         <div className="flex items-center pl-20 pr-6 py-4 bg-zinc-900 text-white">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shrink-0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /><path d="M2 12h20" />
-              </svg>
-            </div>
+            <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-full object-cover bg-white shrink-0 shadow-sm" />
             <span className="text-lg font-bold tracking-wide">Gelora Bumi Mintarsih</span>
           </div>
         </div>

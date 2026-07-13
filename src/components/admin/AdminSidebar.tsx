@@ -70,11 +70,7 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-200 min-h-[64px]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center shrink-0 shadow-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /><path d="M2 12h20" />
-              </svg>
-            </div>
+            <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-full object-cover bg-white shrink-0 shadow-sm" />
             <span className="text-sm font-bold text-zinc-900 tracking-tight">BumiMintarsih</span>
           </div>
           <button
