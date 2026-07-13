@@ -241,7 +241,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
               // USER VIEW: future own booking → show name in vivid blue
               if (!isAdmin && isOwnBooking) {
-                const label = sesiInfo.catatan || sesiInfo.penyewa || 'Booking Saya'
+                const label = sesiInfo.penyewa || sesiInfo.catatan || 'Saya'
                 return (
                   <div key={sesiTypeObj.id}
                     className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-blue-600 text-white border-blue-700"

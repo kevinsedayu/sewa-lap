@@ -9,7 +9,7 @@ export default async function UserKalenderPage() {
 
   const { data: allBookings } = await supabase
     .from('sewa')
-    .select('tanggal, sesi, status, catatan, user_id')
+    .select('tanggal, sesi, status, catatan, user_id, profiles(full_name)')
 
   return (
     <div className="page-content" style={{ maxWidth: '1000px' }}>
@@ -30,7 +30,8 @@ export default async function UserKalenderPage() {
           sesi: b.sesi,
           status: b.status,
           catatan: b.catatan,
-          user_id: b.user_id
+          user_id: b.user_id,
+          penyewa: (b.profiles as any)?.full_name || ''
         }))}
       />
     </div>
