@@ -166,7 +166,7 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
 
         {/* Grid Kalender */}
         <div className="overflow-x-auto pb-2">
-          <div className="grid grid-cols-7 gap-3 min-w-[700px]">
+          <div className="grid grid-cols-7 gap-3 min-w-[900px]">
           {/* Nama Hari */}
           {dayNames.map(d => (
             <div key={d} className="text-center text-xs font-bold text-zinc-500 uppercase tracking-wider pb-2 border-b border-zinc-200">
@@ -221,11 +221,11 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
               }
 
               const isMaintenance = sesiInfo.status === 'maintenance'
-              const detailText = isMaintenance ? `Lainnya: ${sesiInfo.catatan || 'Ditutup'}` : `Booking: ${sesiInfo.catatan || sesiInfo.penyewa || 'Penuh'}`
+              const detailText = isMaintenance ? (sesiInfo.catatan || 'Ditutup') : (sesiInfo.catatan || sesiInfo.penyewa || 'Penuh')
 
               return (
                 <div key={sesiTypeObj.id} 
-                  className={`flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full justify-center shadow-sm border cursor-default
+                  className={`flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default
                     ${isMaintenance 
                       ? 'bg-amber-50 text-amber-700 border-amber-200' 
                       : 'bg-red-50 text-red-700 border-red-200'
@@ -251,11 +251,11 @@ export default function BookingCalendar({ bookings, isAdmin = false }: { booking
                   {/* Tampilkan booking sesi yang sudah dihapus (orphan) */}
                   {orphanBookings.map(b => (
                     <div key={`orphan-${b.sesi}-${b.tanggal}`} 
-                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full justify-center shadow-sm border cursor-default bg-red-50 text-red-700 border-red-200"
+                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-red-50 text-red-700 border-red-200"
                       title={isAdmin ? `Sesi dihapus (${b.sesi}): ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}
                     >
                       <XCircle size={12} className="shrink-0" />
-                      <span className="truncate">{isAdmin ? `[${b.sesi}] ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}</span>
+                      <span className="truncate">{isAdmin ? (b.catatan || b.penyewa || 'Booking') : 'Penuh'}</span>
                     </div>
                   ))}
                 </div>
