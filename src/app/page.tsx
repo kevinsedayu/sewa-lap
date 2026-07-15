@@ -83,17 +83,13 @@ export default async function Home() {
             background: 'radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, rgba(9,9,11,0) 60%)'
           }}></div>
           
-          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 pt-24 pb-12 sm:pt-32 sm:pb-16">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-500 mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Pusat Sewa Lapangan
-            </p>
-            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-8 font-bricolage">
-              BERMAIN LEBIH BEBAS,<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">BOOKING LEBIH CEPAT</span>
+          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 pt-12 pb-8 sm:pt-16 sm:pb-10">
+            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-6 font-bricolage">
+              SEWA LAPANGAN<br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">GELORA BUMI MINTARSIH</span>
             </h1>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10">
-              Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih. Jadwal real-time, bebas ribet, main kapan saja.
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-8">
+              Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
             </p>
             
             <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-xl text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-1">
