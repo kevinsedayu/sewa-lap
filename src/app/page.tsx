@@ -78,12 +78,12 @@ export default async function Home() {
         </header>
 
         {/* Hero Section - Dirty Klab Style (Dark, Bold, Glowing) */}
-        <div className="w-full relative overflow-hidden bg-[#09090b] px-6 py-24 sm:py-32 text-center text-white">
+        <div className="w-full relative overflow-hidden bg-[#09090b] text-center text-white">
           <div className="absolute inset-0 pointer-events-none" style={{
             background: 'radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, rgba(9,9,11,0) 60%)'
           }}></div>
           
-          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 pt-24 pb-12 sm:pt-32 sm:pb-16">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-500 mb-6 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Pusat Sewa Lapangan
@@ -99,6 +99,13 @@ export default async function Home() {
             <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-xl text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-1">
               Cek Ketersediaan
             </a>
+          </div>
+
+          <div className="relative z-10 max-w-6xl mx-auto px-6 pb-20">
+            <div className="rounded-3xl overflow-hidden border border-zinc-800 shadow-[0_20px_60px_rgba(16,185,129,0.15)] relative">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent z-10"></div>
+              <img src="/lapangan.jpeg" alt="Hero Lapangan" className="w-full h-auto object-cover max-h-[500px]" />
+            </div>
           </div>
         </div>
 
@@ -157,38 +164,36 @@ export default async function Home() {
         </div>
 
         {/* Info Lapangan & Harga */}
-        <div className="mb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
+        <div className="mb-20 max-w-4xl mx-auto">
+          <div className="text-center mb-8">
             <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Informasi</p>
-            <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage mb-6">
+            <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
               Detail Sewa
             </h2>
-            <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-              
-              <h3 className="text-2xl font-bold mb-4 font-bricolage relative z-10">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
-              <p className="text-zinc-400 mb-8 leading-relaxed relative z-10 text-sm">
+          </div>
+          <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            
+            <div className="text-center mb-8 relative z-10">
+              <h3 className="text-2xl font-bold mb-3 font-bricolage">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
+              <p className="text-zinc-400 leading-relaxed text-sm max-w-2xl mx-auto">
                 {lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap untuk pengalaman bermain terbaik.'}
               </p>
-              
-              <div className="space-y-4 relative z-10">
-                {sesiList.map((s: any) => (
-                  <div key={s.id} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
-                    <div>
-                      <div className="font-bold text-white mb-1">{s.nama}</div>
-                      <div className="text-xs text-zinc-400">{s.jam}</div>
-                    </div>
-                    <div className="text-lg font-bold text-emerald-400 font-bricolage">
-                      Rp {s.harga.toLocaleString('id-ID')}
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
-          </div>
-          
-          <div className="flex flex-col justify-center">
-            <img src="/lapangan.jpeg" alt="Sewa Lapangan" className="rounded-3xl shadow-2xl object-cover h-full min-h-[300px]" />
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+              {sesiList.map((s: any) => (
+                <div key={s.id} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                  <div>
+                    <div className="font-bold text-white mb-1">{s.nama}</div>
+                    <div className="text-xs text-zinc-400">{s.jam}</div>
+                  </div>
+                  <div className="text-lg font-bold text-emerald-400 font-bricolage">
+                    Rp {s.harga.toLocaleString('id-ID')}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
