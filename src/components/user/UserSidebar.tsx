@@ -14,6 +14,7 @@ import {
   Wallet,
   Menu,
   X,
+  Headset,
 } from 'lucide-react'
 
 interface UserSidebarProps {
@@ -28,6 +29,7 @@ const navItems = [
   { href: '/user/riwayat', label: 'Riwayat', icon: History },
   { href: '/user/keuangan', label: 'Keuangan', icon: Wallet },
   { href: '/user/profil', label: 'Profil', icon: User },
+  { href: '/user/bantuan', label: 'Bantuan', icon: Headset },
 ]
 
 export default function UserSidebar({ user }: UserSidebarProps) {
