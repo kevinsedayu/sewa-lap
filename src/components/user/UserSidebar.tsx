@@ -63,7 +63,7 @@ export default function UserSidebar({ user }: UserSidebarProps) {
 
       {/* Drawer Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full z-50 w-[260px] bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full z-50 w-[260px] bg-white shadow-[10px_0_40px_-10px_rgba(16,185,129,0.15)] flex flex-col transition-transform duration-300 ease-in-out ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -90,9 +90,9 @@ export default function UserSidebar({ user }: UserSidebarProps) {
                 key={href}
                 href={href}
                 onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors whitespace-nowrap ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all whitespace-nowrap ${
                   active
-                    ? 'bg-emerald-50 text-emerald-700 font-bold'
+                    ? 'bg-zinc-900 text-white font-bold shadow-md shadow-zinc-900/20'
                     : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
                 }`}
               >

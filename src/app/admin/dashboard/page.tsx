@@ -145,18 +145,19 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Greeting */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl border border-zinc-200/80 shadow-sm">
-        <div>
-          <p className="text-sm text-zinc-500 font-medium mb-1">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#09090b] p-8 rounded-3xl border border-zinc-800 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+        <div className="relative z-10">
+          <p className="text-sm text-emerald-500 font-bold tracking-widest uppercase mb-2">
             {new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
-          <h2 className="text-xl font-bold text-zinc-900 tracking-tight">
+          <h2 className="text-2xl font-extrabold text-white tracking-tight font-bricolage">
             Selamat datang, {profile?.full_name || 'Admin'} 👋
           </h2>
         </div>
         <Link 
           href="/admin/booking" 
-          className="inline-flex items-center justify-center bg-zinc-900 hover:bg-zinc-800 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-sm"
+          className="relative z-10 inline-flex items-center justify-center bg-emerald-500 hover:bg-emerald-400 text-black px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:-translate-y-1"
         >
           Kelola Booking
         </Link>
@@ -165,22 +166,25 @@ export default async function AdminDashboard() {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
-          { ...stats[0], color: 'text-indigo-600', bg: 'bg-indigo-50' },
-          { ...stats[1], color: 'text-amber-600', bg: 'bg-amber-50' },
-          { ...stats[2], color: 'text-emerald-600', bg: 'bg-emerald-50' },
-          { ...stats[3], color: 'text-blue-600', bg: 'bg-blue-50' }
+          { ...stats[0], color: 'text-indigo-400', bg: 'bg-indigo-500/10', border: 'border-zinc-800' },
+          { ...stats[1], color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-zinc-800' },
+          { ...stats[2], color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-zinc-800' },
+          { ...stats[3], color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-zinc-800' }
         ].map((stat) => (
-          <div key={stat.label} className="bg-white border border-zinc-200/80 rounded-2xl p-5 shadow-sm">
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">{stat.label}</span>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${stat.bg} ${stat.color} font-bold`}>
-                {stat.value}
+          <div key={stat.label} className={`bg-[#09090b] border ${stat.border} rounded-3xl p-6 shadow-sm relative overflow-hidden group hover:border-zinc-700 transition-colors`}>
+            <div className="flex justify-between items-center mb-4 relative z-10">
+              <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{stat.label}</span>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${stat.bg} ${stat.color} font-bold`}>
+                {stat.icon}
               </div>
             </div>
-            <div className="text-3xl font-extrabold text-zinc-900 tracking-tight mb-1">
+            <div className="text-4xl font-extrabold text-white tracking-tight mb-2 font-bricolage relative z-10">
               {stat.value}
             </div>
-            <div className="text-xs text-zinc-500 font-medium">{stat.desc}</div>
+            <div className="text-xs text-zinc-500 font-medium relative z-10">{stat.desc}</div>
+            
+            {/* Subtle glow on hover */}
+            <div className={`absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${stat.bg}`}></div>
           </div>
         ))}
       </div>

@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+﻿import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import BookingCalendar from '@/components/shared/BookingCalendar'
 
@@ -24,7 +24,7 @@ export default async function Home() {
     .select('*')
     .limit(1)
     .single()
-  // Parse fasilitas JSON for sessions
+
   let sesiList: any[] = [
     { id: 'pagi', nama: 'Sesi Pagi', jam: '07:00-12:00', harga: 200000 },
     { id: 'sore', nama: 'Sesi Sore', jam: '15:00-18:00', harga: 250000 }
@@ -44,31 +44,31 @@ export default async function Home() {
   } catch(e) {}
 
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans pb-12">
-      {/* Top Navbar Bar */}
+    <div className="min-h-screen bg-transparent font-sans pb-12">
+      {/* Top Navbar Bar - Dark & Luxurious */}
       <div className="w-full">
-        <header className="flex items-center justify-between px-6 py-4 bg-zinc-900 text-white shadow-sm z-50">
+        <header className="flex items-center justify-between px-6 py-4 bg-[#09090b] text-white z-50 border-b border-zinc-800">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-md transition-transform hover:scale-105" />
-            <span className="text-lg font-bold tracking-wide">Gelora Bumi Mintarsih</span>
+            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-transform hover:scale-105" />
+            <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>
           </div>
 
           <div>
             {user ? (
               <Link 
                 href={dashboardPath} 
-                className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm"
+                className="bg-white hover:bg-zinc-200 text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
               >
                 Ke Dashboard
               </Link>
             ) : (
               <div className="flex items-center gap-4">
                 <span className="hidden sm:inline-block text-sm text-zinc-400 font-medium">
-                  Ingin mau booking?
+                  Belum punya akun?
                 </span>
                 <Link 
                   href="/login" 
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-[0_4px_12px_rgba(5,150,105,0.2)] hover:-translate-y-0.5"
+                  className="bg-white hover:bg-zinc-200 text-black px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:-translate-y-0.5"
                 >
                   Login
                 </Link>
@@ -77,88 +77,130 @@ export default async function Home() {
           </div>
         </header>
 
-        {/* Hero Image — full width, clean, NO text overlay */}
-        <div className="w-full h-[220px] sm:h-[360px] relative overflow-hidden">
-          <img
-            src="/lapangan.jpeg"
-            alt="Gelora Bumi Mintarsih"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
+        {/* Hero Section - Dirty Klab Style (Dark, Bold, Glowing) */}
+        <div className="w-full relative overflow-hidden bg-[#09090b] px-6 py-24 sm:py-32 text-center text-white">
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: 'radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, rgba(9,9,11,0) 60%)'
+          }}></div>
+          
+          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-500 mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Pusat Sewa Lapangan
+            </p>
+            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-8 font-bricolage">
+              BERMAIN LEBIH BEBAS,<br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">BOOKING LEBIH CEPAT</span>
+            </h1>
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10">
+              Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih. Jadwal real-time, bebas ribet, main kapan saja.
+            </p>
+            
+            <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-xl text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-1">
+              Cek Ketersediaan
+            </a>
+          </div>
         </div>
 
-        {/* Marquee Ticker — scrolling text below hero */}
-        <div className="marquee-wrapper bg-emerald-700 py-1.5 border-y border-emerald-600">
+        {/* Marquee Ticker */}
+        <div className="marquee-wrapper bg-black py-2 border-y border-zinc-800">
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
-              <span key={i} className="flex items-center gap-6 px-6 font-bold text-sm uppercase" style={{ color: '#ffffff', letterSpacing: '0.05em' }}>
-                Gelora Bumi Mintarsih Kalisegoro
-                <span style={{ color: '#a7f3d0', fontSize: '10px' }}>✦</span>
+              <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase text-zinc-400 tracking-widest">
+                Gelora Bumi Mintarsih
+                <span className="text-emerald-500 text-[10px]">✦</span>
+                Kalisegoro Semarang
+                <span className="text-emerald-500 text-[10px]">✦</span>
               </span>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14">
+      {/* Main Content (White Base with emerald glow from globals.css) */}
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
         
-        {/* Intro Text */}
-        <div className="mb-14 text-center">
-          <p className="text-base text-zinc-600 max-w-2xl mx-auto leading-relaxed">
-            Sistem penyewaan lapangan sepakbola online. Silakan cek jadwal yang masih kosong pada kalender di bawah ini, dan lakukan login untuk mulai booking!
-          </p>
-        </div>
-
-        {/* Kalender Jadwal Kosong */}
-        <div>
-          <h2 className="text-2xl font-bold text-emerald-800 mb-6 tracking-tight uppercase text-center">
-            Fasilitas Kami
-          </h2>
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
+        {/* Fasilitas Section (Luxurious Cards) */}
+        <div className="mb-20">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Fasilitas</p>
+              <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
+                Fasilitas Premium
+              </h2>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { src: '/lapangan2.jpeg', label: 'Lapangan Standart Nasional' },
+              { src: '/lapangan2.jpeg', label: 'Lapangan Standart' },
               { src: '/toilet.jpeg', label: 'Toilet Bersih' },
               { src: '/mushola.jpeg', label: 'Mushola' },
               { src: '/bench.jpeg', label: 'Bench Pemain' }
             ].map((img, i) => (
-              <div key={i} className="snap-center shrink-0 w-[260px] h-[180px] rounded-xl overflow-hidden relative shadow-md group">
+              <div key={i} className="group relative h-[280px] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-zinc-200">
                 <img 
                   src={img.src} 
                   alt={img.label} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white p-4 pt-12 text-center text-sm font-semibold">
-                  {img.label}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <div className="w-8 h-1 bg-emerald-500 mb-3 rounded-full"></div>
+                  <h3 className="text-white text-lg font-bold font-bricolage leading-tight">
+                    {img.label}
+                  </h3>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Info Lapangan */}
-        <div className="mb-12">
-          <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Informasi Lapangan</h2>
-          <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
-            <h3 className="text-xl font-bold text-zinc-900 mb-2">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
-            <p className="text-zinc-600 mb-6 leading-relaxed">{lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap.'}</p>
-            
-            <div className="flex flex-wrap gap-3">
-              {sesiList.map((s: any, idx: number) => (
-                <div key={s.id} className="bg-emerald-50 border border-emerald-100 rounded-lg px-4 py-2.5 flex items-center gap-2">
-                  <span className="text-sm font-semibold text-emerald-800">{s.nama}</span>
-                  <span className="text-emerald-300">|</span>
-                  <span className="text-sm font-bold text-emerald-600">Rp {s.harga.toLocaleString('id-ID')}</span>
-                </div>
-              ))}
+        {/* Info Lapangan & Harga */}
+        <div className="mb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Informasi</p>
+            <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage mb-6">
+              Detail Sewa
+            </h2>
+            <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              
+              <h3 className="text-2xl font-bold mb-4 font-bricolage relative z-10">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
+              <p className="text-zinc-400 mb-8 leading-relaxed relative z-10 text-sm">
+                {lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap untuk pengalaman bermain terbaik.'}
+              </p>
+              
+              <div className="space-y-4 relative z-10">
+                {sesiList.map((s: any) => (
+                  <div key={s.id} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+                    <div>
+                      <div className="font-bold text-white mb-1">{s.nama}</div>
+                      <div className="text-xs text-zinc-400">{s.jam}</div>
+                    </div>
+                    <div className="text-lg font-bold text-emerald-400 font-bricolage">
+                      Rp {s.harga.toLocaleString('id-ID')}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+          </div>
+          
+          <div className="flex flex-col justify-center">
+            <img src="/lapangan.jpeg" alt="Sewa Lapangan" className="rounded-3xl shadow-2xl object-cover h-full min-h-[300px]" />
           </div>
         </div>
 
         {/* Calendar Section */}
-        <div className="mb-8">
-          <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Jadwal Ketersediaan</h2>
-          <div className="bg-white rounded-2xl border border-zinc-200/80 overflow-hidden shadow-sm">
+        <div id="jadwal" className="mb-20 scroll-mt-24">
+          <div className="text-center mb-10">
+            <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Jadwal</p>
+            <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
+              Cek Ketersediaan
+            </h2>
+          </div>
+          <div className="bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.05)] p-4 sm:p-6">
             <BookingCalendar 
               isAdmin={false} 
               bookings={(allBookings || []).map(b => ({
@@ -171,6 +213,11 @@ export default async function Home() {
           </div>
         </div>
       </main>
+      
+      {/* Footer */}
+      <footer className="bg-[#09090b] text-zinc-400 py-8 border-t border-zinc-800 text-center text-sm">
+        <p>© {new Date().getFullYear()} Gelora Bumi Mintarsih. Hak Cipta Dilindungi.</p>
+      </footer>
     </div>
   )
 }
