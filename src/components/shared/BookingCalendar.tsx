@@ -142,23 +142,24 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
   return (
     <div className="relative">
-      <div className="bg-white border border-zinc-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+      <div className="bg-[#09090b] border border-zinc-800 rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
         
         {/* Header Kalender */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-          <h3 className="text-xl font-bold text-zinc-900 tracking-tight" style={{ fontFamily: 'var(--font-bricolage), system-ui, sans-serif' }}>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 relative z-10">
+          <h3 className="text-xl font-bold text-white tracking-tight font-sans">
             {monthNames[month]} {year}
           </h3>
           <div className="flex items-center gap-2">
             <button 
               onClick={handlePrevMonth} 
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 rounded-lg text-sm font-medium transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white rounded-lg text-sm font-medium transition-colors border border-zinc-800"
             >
               <ChevronLeft size={16} /> Prev
             </button>
             <button 
               onClick={handleNextMonth} 
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg text-sm font-medium transition-colors shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-medium transition-colors shadow-sm border border-emerald-500/20"
             >
               Next <ChevronRight size={16} />
             </button>
@@ -166,18 +167,18 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
         </div>
 
         {/* Grid Kalender */}
-        <div className="overflow-x-auto pb-2">
+        <div className="overflow-x-auto pb-2 relative z-10">
           <div className="grid grid-cols-7 gap-3 min-w-[900px]">
           {/* Nama Hari */}
           {dayNames.map(d => (
-            <div key={d} className="text-center text-xs font-bold text-zinc-500 uppercase tracking-wider pb-2 border-b border-zinc-200">
+            <div key={d} className="text-center text-xs font-bold text-zinc-500 uppercase tracking-wider pb-2 border-b border-zinc-800">
               {d}
             </div>
           ))}
 
           {/* Tanggal Kosong di awal bulan */}
           {Array.from({ length: firstDayOfMonth }).map((_, i) => (
-            <div key={`empty-${i}`} className="min-h-[140px] p-2 bg-zinc-50/50 rounded-xl border border-dashed border-zinc-200/60" />
+            <div key={`empty-${i}`} className="min-h-[140px] p-2 bg-white/5 rounded-xl border border-dashed border-zinc-800/60" />
           ))}
 
           {/* Tanggal */}
@@ -193,7 +194,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                   return (
                     <div 
                       key={sesiTypeObj.id}
-                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-zinc-100 text-zinc-400 border border-zinc-200 cursor-not-allowed w-full justify-center"
+                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-white/5 text-zinc-600 border border-zinc-800/80 cursor-not-allowed w-full justify-center"
                       title="Sesi sudah berlalu"
                     >
                       <Info size={12} />
@@ -213,7 +214,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                         router.push(`/user/booking?tanggal=${dateStr}&sesi=${sesiTypeObj.id}`)
                       }
                     }}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 hover:border-emerald-300 cursor-pointer transition-colors w-full justify-center shadow-sm"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 hover:border-emerald-500/40 cursor-pointer transition-colors w-full justify-center shadow-sm"
                     title={isAdmin ? `Klik untuk input jadwal ${sesiTypeObj.nama}` : `Klik untuk booking ${sesiTypeObj.nama}`}
                   >
                     <CheckCircle2 size={12} className="shrink-0" />
@@ -230,7 +231,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                 return (
                   <div
                     key={sesiTypeObj.id}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-zinc-100 text-zinc-400 border border-zinc-200 cursor-not-allowed w-full justify-center"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-white/5 text-zinc-600 border border-zinc-800/80 cursor-not-allowed w-full justify-center"
                     title="Sesi sudah berlalu"
                   >
                     <Info size={12} />
@@ -244,7 +245,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                 const label = sesiInfo.penyewa || sesiInfo.catatan || 'Saya'
                 return (
                   <div key={sesiTypeObj.id}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-blue-600 text-white border-blue-700"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-blue-500/20 text-blue-400 border-blue-500/30"
                     title={`Booking Anda: ${label}`}
                   >
                     <CheckCircle2 size={12} className="shrink-0" />
@@ -259,8 +260,8 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                 <div key={sesiTypeObj.id} 
                   className={`flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default
                     ${isMaintenance 
-                      ? 'bg-amber-50 text-amber-700 border-amber-200' 
-                      : 'bg-red-50 text-red-700 border-red-200'
+                      ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' 
+                      : 'bg-red-500/10 text-red-400 border-red-500/20'
                     }
                   `}
                   title={isAdmin ? `${sesiTypeObj.nama} - ${detailText}` : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}
@@ -275,15 +276,15 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
             const orphanBookings = getOrphanBookings(day)
 
             return (
-              <div key={day} className="flex flex-col gap-1.5 min-h-[140px] p-2.5 border border-zinc-200 bg-white rounded-xl shadow-sm hover:shadow-md hover:border-zinc-300 transition-all">
-                <div className="text-sm font-bold text-zinc-800 mb-1" style={{ fontFamily: 'var(--font-bricolage), system-ui, sans-serif' }}>{day}</div>
+              <div key={day} className="flex flex-col gap-1.5 min-h-[140px] p-2.5 border border-zinc-800 bg-transparent rounded-xl shadow-sm hover:shadow-md hover:border-zinc-600 transition-all">
+                <div className="text-sm font-bold text-white mb-1 font-sans">{day}</div>
                 
                 <div className="flex flex-col gap-1.5 flex-1 justify-start">
                   {activeSesiList.map(sesi => renderSesi(getBooking(day, sesi.id), sesi))}
                   {/* Tampilkan booking sesi yang sudah dihapus (orphan) */}
                   {orphanBookings.map(b => (
                     <div key={`orphan-${b.sesi}-${b.tanggal}`} 
-                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-red-50 text-red-700 border-red-200"
+                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-red-500/10 text-red-400 border-red-500/20"
                       title={isAdmin ? `Sesi dihapus (${b.sesi}): ${b.catatan || b.penyewa || 'Booking'}` : 'Penuh'}
                     >
                       <XCircle size={12} className="shrink-0" />
@@ -298,12 +299,12 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
         </div>
 
           {/* Legenda */}
-          <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-zinc-500">
+          <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-zinc-500 relative z-10">
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 size={14} className="text-emerald-600" /> Tersedia
+              <CheckCircle2 size={14} className="text-emerald-500" /> Tersedia
             </div>
             <div className="flex items-center gap-1.5">
-              <XCircle size={14} className="text-red-600" /> {isAdmin ? 'Terbooking' : 'Penuh'}
+              <XCircle size={14} className="text-red-500" /> {isAdmin ? 'Terbooking' : 'Penuh'}
             </div>
             {!isAdmin && (
               <div className="flex items-center gap-1.5">
@@ -311,11 +312,11 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
               </div>
             )}
             <div className="flex items-center gap-1.5">
-              <Info size={14} className="text-zinc-400" /> Berlalu
+              <Info size={14} className="text-zinc-600" /> Berlalu
             </div>
             {isAdmin && (
               <div className="flex items-center gap-1.5">
-                <AlertCircle size={14} className="text-amber-600" /> Perawatan/Libur
+                <AlertCircle size={14} className="text-amber-500" /> Perawatan/Libur
               </div>
             )}
           </div>
@@ -323,17 +324,17 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
       {/* Modal Input Admin */}
       {showModal && isAdmin && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <div style={{ background: '#fff', padding: '24px', borderRadius: '12px', width: '100%', maxWidth: '400px' }}>
-            <h3 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 600 }}>Input Jadwal: {modalDate} ({modalSesi})</h3>
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
+          <div style={{ background: '#09090b', border: '1px solid #27272a', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}>
+            <h3 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 700 }}>Input Jadwal: {modalDate} ({modalSesi})</h3>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>Tipe Input</label>
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: '#a1a1aa' }}>Tipe Input</label>
                 <select 
                   value={tipeInput} 
                   onChange={(e) => setTipeInput(e.target.value as 'booking' | 'lainnya')}
-                  style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #e4e4e7', fontSize: '14px' }}
+                  style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #27272a', background: '#18181b', color: 'white', fontSize: '14px' }}
                 >
                   <option value="booking">Booking Offline</option>
                   <option value="lainnya">Lainnya (Perawatan / Libur)</option>
@@ -342,36 +343,36 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
               {tipeInput === 'booking' ? (
                 <div>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>Nama Penyewa</label>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: '#a1a1aa' }}>Nama Penyewa</label>
                   <input 
                     type="text" 
                     required 
                     placeholder="Contoh: Budi (Bayar Tunai)"
                     value={namaPenyewa}
                     onChange={e => setNamaPenyewa(e.target.value)}
-                    style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #e4e4e7', fontSize: '14px' }}
+                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #27272a', background: '#18181b', color: 'white', fontSize: '14px' }}
                   />
                   <p style={{ fontSize: '11px', color: '#71717a', margin: '6px 0 0' }}>Booking ini akan otomatis masuk ke Laporan Keuangan.</p>
                 </div>
               ) : (
                 <div>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>Keterangan / Alasan</label>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '6px', color: '#a1a1aa' }}>Keterangan / Alasan</label>
                   <input 
                     type="text" 
                     required 
                     placeholder="Contoh: Perbaikan Rumput"
                     value={catatanLainnya}
                     onChange={e => setCatatanLainnya(e.target.value)}
-                    style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #e4e4e7', fontSize: '14px' }}
+                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #27272a', background: '#18181b', color: 'white', fontSize: '14px' }}
                   />
                 </div>
               )}
 
               <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
-                <button type="button" onClick={() => setShowModal(false)} style={{ flex: 1, padding: '10px', background: '#f4f4f5', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer' }}>
+                <button type="button" onClick={() => setShowModal(false)} style={{ flex: 1, padding: '12px', background: 'transparent', color: '#a1a1aa', border: '1px solid #27272a', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>
                   Batal
                 </button>
-                <button type="submit" disabled={isSubmitting} style={{ flex: 1, padding: '10px', background: '#09090b', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 600, cursor: 'pointer', opacity: isSubmitting ? 0.7 : 1 }}>
+                <button type="submit" disabled={isSubmitting} style={{ flex: 1, padding: '12px', background: '#10b981', color: '#09090b', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', opacity: isSubmitting ? 0.7 : 1 }}>
                   {isSubmitting ? 'Menyimpan...' : 'Simpan'}
                 </button>
               </div>

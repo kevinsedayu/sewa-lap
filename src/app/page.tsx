@@ -1,4 +1,4 @@
-﻿import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import BookingCalendar from '@/components/shared/BookingCalendar'
 
@@ -200,7 +200,7 @@ export default async function Home() {
               Cek Ketersediaan
             </h2>
           </div>
-          <div className="bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.05)] p-4 sm:p-6">
+          <div className="relative">
             <BookingCalendar 
               isAdmin={false} 
               bookings={(allBookings || []).map(b => ({

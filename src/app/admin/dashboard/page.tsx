@@ -127,17 +127,19 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Info Lapangan */}
-      <div className="mb-6">
+      <div className="mb-6 relative">
         <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Informasi Lapangan</h2>
-        <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 shadow-sm">
-          <h3 className="text-lg font-bold text-zinc-900 mb-2">{lapangan?.nama || 'Nama Lapangan'}</h3>
-          <p className="text-sm text-zinc-600 mb-6 leading-relaxed">{lapangan?.deskripsi || 'Deskripsi belum ditambahkan.'}</p>
-          <div className="flex flex-wrap gap-3">
+        <div className="bg-[#09090b] border border-zinc-800 rounded-2xl p-6 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          
+          <h3 className="text-lg font-bold text-white mb-2 relative z-10">{lapangan?.nama || 'Nama Lapangan'}</h3>
+          <p className="text-sm text-zinc-400 mb-6 leading-relaxed relative z-10">{lapangan?.deskripsi || 'Deskripsi belum ditambahkan.'}</p>
+          <div className="flex flex-wrap gap-3 relative z-10">
             {sesiList.map((s: any, idx: number) => (
-              <div key={s.id} className="bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 flex items-center gap-2">
-                <span className="text-xs font-semibold text-emerald-800">{s.nama} ({s.jam || 'Jam belum diatur'})</span>
-                <span className="text-emerald-300">|</span>
-                <span className="text-xs font-bold text-emerald-600">Rp {s.harga.toLocaleString('id-ID')}</span>
+              <div key={s.id} className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-2 flex items-center gap-2 backdrop-blur-sm">
+                <span className="text-xs font-semibold text-emerald-400">{s.nama} ({s.jam || 'Jam belum diatur'})</span>
+                <span className="text-emerald-500/40">|</span>
+                <span className="text-xs font-bold text-emerald-400">Rp {s.harga.toLocaleString('id-ID')}</span>
               </div>
             ))}
           </div>
@@ -151,7 +153,7 @@ export default async function AdminDashboard() {
           <p className="text-sm text-emerald-500 font-bold tracking-widest uppercase mb-2">
             {new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight font-bricolage">
+          <h2 className="text-2xl font-extrabold text-white tracking-tight">
             Selamat datang, {profile?.full_name || 'Admin'} 👋
           </h2>
         </div>
@@ -199,36 +201,37 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Desktop Table */}
-        <div className="hidden sm:block bg-white border border-zinc-200/80 rounded-2xl overflow-hidden shadow-sm">
+        <div className="hidden sm:block bg-[#09090b] border border-zinc-800 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative">
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
           {recentBookings && recentBookings.length > 0 ? (
-            <table className="w-full text-left border-collapse">
+            <table className="w-full text-left border-collapse relative z-10">
               <thead>
-                <tr className="bg-zinc-50/50 border-b border-zinc-200/80">
+                <tr className="bg-white/5 border-b border-zinc-800">
                   {['Nama Penyewa', 'Tanggal', 'Jam', 'Total', 'Status'].map(h => (
-                    <th key={h} className="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+                    <th key={h} className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200/80">
+              <tbody className="divide-y divide-zinc-800">
                 {recentBookings.map((b: any) => (
-                  <tr key={b.id} className="hover:bg-zinc-50/50 transition-colors">
+                  <tr key={b.id} className="hover:bg-white/5 transition-colors">
                     <td className="px-6 py-4">
-                      <div className="text-sm font-medium text-zinc-900">{b.profiles?.full_name || '-'}</div>
+                      <div className="text-sm font-medium text-white">{b.profiles?.full_name || '-'}</div>
                       <div className="text-xs text-zinc-500 mt-0.5">{b.profiles?.phone || '-'}</div>
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium text-zinc-900">
+                    <td className="px-6 py-4 text-sm font-medium text-white">
                       {new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </td>
-                    <td className="px-6 py-4 text-sm text-zinc-600 font-medium">
+                    <td className="px-6 py-4 text-sm text-zinc-400 font-medium">
                       {b.jam_mulai?.slice(0, 5)} – {b.jam_selesai?.slice(0, 5)}
                     </td>
-                    <td className="px-6 py-4 text-sm font-bold text-zinc-900">
+                    <td className="px-6 py-4 text-sm font-bold text-white">
                       Rp {Number(b.total_harga).toLocaleString('id-ID')}
                     </td>
                     <td className="px-6 py-4 text-sm">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold" style={{ background: statusColor[b.status] + '15', color: statusColor[b.status] }}>
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm" style={{ background: statusColor[b.status] + '20', color: statusColor[b.status], border: `1px solid ${statusColor[b.status]}40` }}>
                         {statusLabel[b.status] || b.status}
                       </span>
                     </td>
@@ -237,8 +240,8 @@ export default async function AdminDashboard() {
               </tbody>
             </table>
           ) : (
-            <div className="py-16 text-center">
-              <div className="text-4xl mb-3 opacity-50">📭</div>
+            <div className="py-16 text-center relative z-10">
+              <div className="text-4xl mb-3 opacity-30">📭</div>
               <p className="text-sm font-medium text-zinc-500">Belum ada booking masuk</p>
             </div>
           )}
@@ -248,31 +251,32 @@ export default async function AdminDashboard() {
         <div className="block sm:hidden space-y-3">
           {recentBookings && recentBookings.length > 0 ? (
             recentBookings.map((b: any) => (
-              <div key={b.id} className="bg-white border border-zinc-200/80 rounded-xl p-4 shadow-sm">
-                <div className="flex justify-between items-start mb-3">
+              <div key={b.id} className="bg-[#09090b] border border-zinc-800 rounded-xl p-4 shadow-sm relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                <div className="flex justify-between items-start mb-3 relative z-10">
                   <div>
-                    <div className="font-bold text-sm text-zinc-900 capitalize">{b.profiles?.full_name || '-'}</div>
-                    <div className="text-xs text-zinc-500 mt-1 font-medium">
+                    <div className="font-bold text-sm text-white capitalize">{b.profiles?.full_name || '-'}</div>
+                    <div className="text-xs text-zinc-400 mt-1 font-medium">
                       {b.profiles?.phone || '-'}
                     </div>
-                    <div className="text-xs text-zinc-500 mt-1 font-medium">
+                    <div className="text-xs text-zinc-400 mt-1 font-medium">
                       {new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                      <span className="mx-1">&middot;</span>
+                      <span className="mx-1 text-zinc-600">&middot;</span>
                       {b.jam_mulai?.slice(0, 5)} – {b.jam_selesai?.slice(0, 5)}
                     </div>
                   </div>
-                  <span className="inline-flex shrink-0 ml-2 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider" style={{ background: statusColor[b.status] + '15', color: statusColor[b.status] }}>
+                  <span className="inline-flex shrink-0 ml-2 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider" style={{ background: statusColor[b.status] + '20', color: statusColor[b.status], border: `1px solid ${statusColor[b.status]}40` }}>
                     {statusLabel[b.status] || b.status}
                   </span>
                 </div>
-                <div className="text-sm font-extrabold text-zinc-900">
+                <div className="text-sm font-extrabold text-white relative z-10">
                   Rp {Number(b.total_harga).toLocaleString('id-ID')}
                 </div>
               </div>
             ))
           ) : (
-            <div className="bg-white border border-zinc-200/80 rounded-xl py-12 text-center shadow-sm">
-              <div className="text-3xl mb-2 opacity-50">📭</div>
+            <div className="bg-[#09090b] border border-zinc-800 rounded-xl py-12 text-center shadow-sm">
+              <div className="text-3xl mb-2 opacity-30">📭</div>
               <p className="text-sm font-medium text-zinc-500">Belum ada booking masuk</p>
             </div>
           )}
