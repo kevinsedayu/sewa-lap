@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { MessageCircle, Bell, Instagram, MapPin, ExternalLink, HelpCircle, CheckCircle2 } from 'lucide-react'
 
@@ -77,62 +77,74 @@ export default function BantuanPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
           {/* WA Admin */}
           <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" style={{
+            position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '16px',
-            textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.02)'
+            background: '#09090b', border: '1px solid #27272a', borderRadius: '16px',
+            textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#22c55e'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e4e4e7'; e.currentTarget.style.transform = 'translateY(0)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#10b981'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(16,185,129,0.2)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#27272a'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)' }}
           >
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#dcfce7', color: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            {/* Glow */}
+            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(16,185,129,0.2) 0%, rgba(9,9,11,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            
+            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(16,185,129,0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <MessageCircle size={24} />
             </div>
-            <div style={{ flex: 1 }}>
-              <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#09090b', margin: '0 0 2px' }}>WhatsApp Admin</h3>
-              <p style={{ fontSize: '12px', color: '#71717a', margin: 0 }}>Respon cepat</p>
+            <div style={{ position: 'relative', zIndex: 1, flex: 1 }}>
+              <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 2px' }}>WhatsApp Admin</h3>
+              <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>Respon cepat</p>
             </div>
-            <ExternalLink size={16} color="#a1a1aa" />
+            <ExternalLink size={16} color="#71717a" style={{ position: 'relative', zIndex: 1 }} />
           </a>
 
           {/* Instagram */}
           <a href="https://www.instagram.com/gelorabumimintarsih" target="_blank" rel="noopener noreferrer" style={{
+            position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '16px',
-            textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.02)'
+            background: '#09090b', border: '1px solid #27272a', borderRadius: '16px',
+            textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#db2777'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e4e4e7'; e.currentTarget.style.transform = 'translateY(0)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#db2777'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(219,39,119,0.2)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#27272a'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)' }}
           >
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#fce7f3', color: '#db2777', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            {/* Glow */}
+            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(219,39,119,0.2) 0%, rgba(9,9,11,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            
+            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(219,39,119,0.1)', color: '#db2777', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Instagram size={24} />
             </div>
-            <div style={{ flex: 1 }}>
-              <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#09090b', margin: '0 0 2px' }}>Instagram</h3>
-              <p style={{ fontSize: '12px', color: '#71717a', margin: 0 }}>@gelorabumimintarsih</p>
+            <div style={{ position: 'relative', zIndex: 1, flex: 1 }}>
+              <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 2px' }}>Instagram</h3>
+              <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>@gelorabumimintarsih</p>
             </div>
-            <ExternalLink size={16} color="#a1a1aa" />
+            <ExternalLink size={16} color="#71717a" style={{ position: 'relative', zIndex: 1 }} />
           </a>
 
           {/* Maps */}
           <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" style={{
+            position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '16px',
-            textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.02)'
+            background: '#09090b', border: '1px solid #27272a', borderRadius: '16px',
+            textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e4e4e7'; e.currentTarget.style.transform = 'translateY(0)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(59,130,246,0.2)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#27272a'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)' }}
           >
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#dbeafe', color: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            {/* Glow */}
+            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(9,9,11,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            
+            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <MapPin size={24} />
             </div>
-            <div style={{ flex: 1 }}>
-              <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#09090b', margin: '0 0 2px' }}>Lokasi Maps</h3>
-              <p style={{ fontSize: '12px', color: '#71717a', margin: 0 }}>Petunjuk arah</p>
+            <div style={{ position: 'relative', zIndex: 1, flex: 1 }}>
+              <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 2px' }}>Lokasi Maps</h3>
+              <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>Petunjuk arah</p>
             </div>
-            <ExternalLink size={16} color="#a1a1aa" />
+            <ExternalLink size={16} color="#71717a" style={{ position: 'relative', zIndex: 1 }} />
           </a>
         </div>
       </section>
