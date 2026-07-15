@@ -63,7 +63,7 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
 
       {/* Drawer Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full z-50 w-[260px] bg-white shadow-[10px_0_40px_-10px_rgba(16,185,129,0.15)] flex flex-col transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full z-50 w-[260px] bg-gradient-to-br from-emerald-50 via-white to-emerald-50/30 shadow-[10px_0_40px_-10px_rgba(16,185,129,0.2)] flex flex-col transition-transform duration-300 ease-in-out ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

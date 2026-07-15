@@ -26,7 +26,7 @@ export default async function UserLayout({
   if (role !== 'user') redirect('/admin/dashboard')
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen">
       <UserSidebar user={{ email: user.email!, name: profile?.full_name || 'User' }} />
       <main className="w-full">
         {children}
