@@ -142,8 +142,8 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
   return (
     <div className="relative">
-      <div className="bg-[#09090b] border border-zinc-800 rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(10,122,104,0.2)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 50%, #0A7A68 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         
         {/* Header Kalender */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 relative z-10">
@@ -153,13 +153,13 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
           <div className="flex items-center gap-2">
             <button 
               onClick={handlePrevMonth} 
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white rounded-lg text-sm font-medium transition-colors border border-zinc-800"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-lg text-sm font-medium transition-colors border border-white/20"
             >
               <ChevronLeft size={16} /> Prev
             </button>
             <button 
               onClick={handleNextMonth} 
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-medium transition-colors shadow-sm border border-emerald-500/20"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white rounded-lg text-sm font-medium transition-colors shadow-sm border border-white/30"
             >
               Next <ChevronRight size={16} />
             </button>
@@ -171,14 +171,14 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
           <div className="grid grid-cols-7 gap-3 min-w-[900px]">
           {/* Nama Hari */}
           {dayNames.map(d => (
-            <div key={d} className="text-center text-xs font-bold text-zinc-500 uppercase tracking-wider pb-2 border-b border-zinc-800">
+            <div key={d} className="text-center text-xs font-bold text-white/60 uppercase tracking-wider pb-2 border-b border-white/20">
               {d}
             </div>
           ))}
 
           {/* Tanggal Kosong di awal bulan */}
           {Array.from({ length: firstDayOfMonth }).map((_, i) => (
-            <div key={`empty-${i}`} className="min-h-[140px] p-2 bg-white/5 rounded-xl border border-dashed border-zinc-800/60" />
+            <div key={`empty-${i}`} className="min-h-[140px] p-2 bg-black/10 rounded-xl border border-dashed border-white/10" />
           ))}
 
           {/* Tanggal */}
@@ -194,7 +194,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                   return (
                     <div 
                       key={sesiTypeObj.id}
-                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-white/5 text-zinc-600 border border-zinc-800/80 cursor-not-allowed w-full justify-center"
+                      className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-black/20 text-white/30 border border-white/10 cursor-not-allowed w-full justify-center"
                       title="Sesi sudah berlalu"
                     >
                       <Info size={12} />
@@ -231,7 +231,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                 return (
                   <div
                     key={sesiTypeObj.id}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-white/5 text-zinc-600 border border-zinc-800/80 cursor-not-allowed w-full justify-center"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-medium bg-black/20 text-white/30 border border-white/10 cursor-not-allowed w-full justify-center"
                     title="Sesi sudah berlalu"
                   >
                     <Info size={12} />
@@ -276,7 +276,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
             const orphanBookings = getOrphanBookings(day)
 
             return (
-              <div key={day} className="flex flex-col gap-1.5 min-h-[140px] p-2.5 border border-zinc-800 bg-transparent rounded-xl shadow-sm hover:shadow-md hover:border-zinc-600 transition-all">
+              <div key={day} className="flex flex-col gap-1.5 min-h-[140px] p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all" style={{ background: 'rgba(0,0,0,0.12)', border: '1px solid rgba(255,255,255,0.12)' }} onMouseOver={e => (e.currentTarget.style.borderColor='rgba(255,255,255,0.25)')} onMouseOut={e => (e.currentTarget.style.borderColor='rgba(255,255,255,0.12)')}>
                 <div className="text-sm font-bold text-white mb-1 font-sans">{day}</div>
                 
                 <div className="flex flex-col gap-1.5 flex-1 justify-start">
@@ -299,24 +299,24 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
         </div>
 
           {/* Legenda */}
-          <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-zinc-500 relative z-10">
+          <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-white/60 relative z-10">
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 size={14} className="text-emerald-500" /> Tersedia
+              <CheckCircle2 size={14} className="text-[#6CC9B4]" /> Tersedia
             </div>
             <div className="flex items-center gap-1.5">
-              <XCircle size={14} className="text-red-500" /> {isAdmin ? 'Terbooking' : 'Penuh'}
+              <XCircle size={14} className="text-red-400" /> {isAdmin ? 'Terbooking' : 'Penuh'}
             </div>
             {!isAdmin && (
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-blue-500" /> Booking Saya
+                <CheckCircle2 size={14} className="text-blue-400" /> Booking Saya
               </div>
             )}
             <div className="flex items-center gap-1.5">
-              <Info size={14} className="text-zinc-600" /> Berlalu
+              <Info size={14} className="text-white/30" /> Berlalu
             </div>
             {isAdmin && (
               <div className="flex items-center gap-1.5">
-                <AlertCircle size={14} className="text-amber-500" /> Perawatan/Libur
+                <AlertCircle size={14} className="text-amber-400" /> Perawatan/Libur
               </div>
             )}
           </div>
@@ -325,7 +325,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
       {/* Modal Input Admin */}
       {showModal && isAdmin && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <div style={{ background: '#09090b', border: '1px solid #27272a', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}>
+          <div style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.4)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 60px rgba(10,122,104,0.4)' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 700 }}>Input Jadwal: {modalDate} ({modalSesi})</h3>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -334,7 +334,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                 <select 
                   value={tipeInput} 
                   onChange={(e) => setTipeInput(e.target.value as 'booking' | 'lainnya')}
-                  style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #27272a', background: '#18181b', color: 'white', fontSize: '14px' }}
+                  style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.2)', color: 'white', fontSize: '14px' }}
                 >
                   <option value="booking">Booking Offline</option>
                   <option value="lainnya">Lainnya (Perawatan / Libur)</option>
@@ -350,7 +350,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                     placeholder="Contoh: Budi (Bayar Tunai)"
                     value={namaPenyewa}
                     onChange={e => setNamaPenyewa(e.target.value)}
-                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #27272a', background: '#18181b', color: 'white', fontSize: '14px' }}
+                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.2)', color: 'white', fontSize: '14px' }}
                   />
                   <p style={{ fontSize: '11px', color: '#71717a', margin: '6px 0 0' }}>Booking ini akan otomatis masuk ke Laporan Keuangan.</p>
                 </div>
@@ -363,13 +363,13 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                     placeholder="Contoh: Perbaikan Rumput"
                     value={catatanLainnya}
                     onChange={e => setCatatanLainnya(e.target.value)}
-                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #27272a', background: '#18181b', color: 'white', fontSize: '14px' }}
+                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.2)', color: 'white', fontSize: '14px' }}
                   />
                 </div>
               )}
 
               <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
-                <button type="button" onClick={() => setShowModal(false)} style={{ flex: 1, padding: '12px', background: 'transparent', color: '#a1a1aa', border: '1px solid #27272a', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>
+                <button type="button" onClick={() => setShowModal(false)} style={{ flex: 1, padding: '12px', background: 'rgba(0,0,0,0.2)', color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>
                   Batal
                 </button>
                 <button type="submit" disabled={isSubmitting} style={{ flex: 1, padding: '12px', background: '#10b981', color: '#09090b', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', opacity: isSubmitting ? 0.7 : 1 }}>

@@ -142,7 +142,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
             { key: 'cancelled', label: 'Dibatalkan' },
           ].map(f => (
             <button key={f.key} onClick={() => setFilter(f.key)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${filter === f.key ? 'bg-emerald-500 border-emerald-500 text-black shadow-sm' : 'bg-[#09090b] border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}`}>
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${filter === f.key ? 'text-[#0A7A68] font-bold shadow-sm' : 'border-teal-700/40 text-teal-700 hover:border-teal-600 hover:text-teal-900'}`} style={filter === f.key ? { background: 'linear-gradient(135deg, #3DB8A0, #6CC9B4)', border: '1px solid rgba(61,184,160,0.5)' } : {}}>
               {f.label}
               {f.key !== 'all' && <span className={`ml-1.5 ${filter === f.key ? 'opacity-70' : 'opacity-50'}`}>({bookings.filter(b => b.status === f.key).length})</span>}
             </button>
@@ -162,31 +162,31 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       </div>
 
       {/* Table */}
-      <div className="bg-[#09090b] border border-zinc-800 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative">
-        <div className="absolute top-0 right-1/4 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(10,122,104,0.15)] relative" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+        <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         {filtered.length > 0 ? (
           <div className="overflow-x-auto relative z-10">
             <table className="w-full min-w-[900px] text-left border-collapse">
               <thead>
-                <tr className="bg-white/5 border-b border-zinc-800">
+                <tr className="bg-black/20 border-b border-white/10">
                   {['Penyewa','Tanggal','Sesi','Total','Bukti','Catatan','Status','Aksi'].map(h => (
-                    <th key={h} className="px-5 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-wider">{h}</th>
+                    <th key={h} className="px-5 py-4 text-xs font-semibold text-white/60 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800">
+              <tbody className="divide-y divide-white/10">
                 {filtered.map(b => (
                   <tr key={b.id} className="hover:bg-white/5 transition-colors">
                     <td className="px-5 py-4">
                       <div className="text-sm font-semibold text-white">{b.profiles?.full_name || 'Tidak diketahui'}</div>
-                      <div className="text-xs text-zinc-400 mt-0.5">{b.profiles?.phone || '-'}</div>
+                      <div className="text-xs text-white/50 mt-0.5">{b.profiles?.phone || '-'}</div>
                     </td>
                     <td className="px-5 py-4 text-sm font-medium text-white whitespace-nowrap">
                       {new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </td>
                     <td className="px-5 py-4 whitespace-nowrap">
-                      <div className="text-sm font-semibold capitalize text-zinc-200">{b.sesi}</div>
-                      <div className="text-xs text-zinc-400">{b.jam_mulai?.slice(0,5)} - {b.jam_selesai?.slice(0,5)}</div>
+                      <div className="text-sm font-semibold capitalize text-white">{b.sesi}</div>
+                      <div className="text-xs text-white/50">{b.jam_mulai?.slice(0,5)} - {b.jam_selesai?.slice(0,5)}</div>
                     </td>
                     <td className="px-5 py-4 text-sm font-bold text-white whitespace-nowrap">
                       Rp {Number(b.total_harga).toLocaleString('id-ID')}
@@ -194,12 +194,12 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                     <td className="px-5 py-4">
                       {b.bukti_pembayaran ? (
                         <a href={b.bukti_pembayaran} target="_blank" rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-medium text-xs underline underline-offset-2">
+                          className="inline-flex items-center gap-1 text-[#6CC9B4] hover:text-[#3DB8A0] font-medium text-xs underline underline-offset-2">
                           <FileText size={12} /> Lihat
                         </a>
-                      ) : <span className="text-zinc-600">-</span>}
+                      ) : <span className="text-white/20">-</span>}
                     </td>
-                    <td className="px-5 py-4 text-xs text-zinc-400 max-w-[130px]">
+                    <td className="px-5 py-4 text-xs text-white/50 max-w-[130px]">
                       <span title={b.catatan || ''} className="line-clamp-2">{b.catatan || '-'}</span>
                     </td>
                     <td className="px-5 py-4">
@@ -271,31 +271,31 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       {/* Modal Tolak / Batalkan */}
       {showModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-[#09090b] border border-zinc-800 rounded-2xl shadow-2xl w-full max-w-md p-6">
+          <div className="rounded-2xl shadow-2xl w-full max-w-md p-6" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.4)' }}>
             <div className="flex items-center gap-3 mb-4">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${modalType === 'reject' ? 'bg-red-500/10' : 'bg-orange-500/10'}`}>
-                {modalType === 'reject' ? <XCircle size={20} className="text-red-500" /> : <Ban size={20} className="text-orange-500" />}
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${modalType === 'reject' ? 'bg-red-500/20' : 'bg-orange-500/20'}`}>
+                {modalType === 'reject' ? <XCircle size={20} className="text-red-300" /> : <Ban size={20} className="text-orange-300" />}
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">
                   {modalType === 'reject' ? 'Tolak Persewaan' : 'Batalkan Persewaan'}
                 </h3>
-                <p className="text-xs text-zinc-400 mt-0.5">
+                <p className="text-xs text-white/60 mt-0.5">
                   {modalType === 'reject' ? 'Alasan penolakan akan dikirim via WhatsApp.' : 'Alasan pembatalan akan dikirim via WhatsApp.'}
                 </p>
               </div>
             </div>
             <div className="mb-5">
-              <label className="block text-xs font-semibold text-zinc-400 mb-2">
-                Alasan {modalType === 'reject' ? 'Penolakan' : 'Pembatalan'} <span className="text-zinc-600 font-normal">(opsional)</span>
+              <label className="block text-xs font-semibold text-white/70 mb-2">
+                Alasan {modalType === 'reject' ? 'Penolakan' : 'Pembatalan'} <span className="text-white/30 font-normal">(opsional)</span>
               </label>
               <textarea rows={3} value={alasan} onChange={e => setAlasan(e.target.value)}
                 placeholder={modalType === 'reject' ? 'Contoh: Bukti pembayaran tidak sesuai...' : 'Contoh: Lapangan tidak tersedia pada tanggal tersebut...'}
-                className="w-full px-3 py-2.5 text-sm border border-zinc-800 bg-[#18181b] text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-700 focus:border-zinc-500 transition-all resize-none" />
+                className="w-full px-3 py-2.5 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-white/30 transition-all resize-none" style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: 'white' }} />
             </div>
             <div className="flex gap-3">
               <button onClick={() => setShowModal(false)}
-                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold bg-transparent border border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors" style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.8)' }}>
                 Batal
               </button>
               <button onClick={handleModalSubmit}

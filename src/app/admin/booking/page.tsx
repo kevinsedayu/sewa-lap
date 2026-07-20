@@ -40,21 +40,21 @@ export default async function AdminBookingPage() {
           { label: 'Dibatalkan', value: cancelled, color: '#ef4444' },
         ].map(s => (
           <div key={s.label} className="relative overflow-hidden" style={{
-            background: '#09090b',
-            border: '1px solid #27272a',
+            background: `linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)`,
+            border: '1px solid rgba(61,184,160,0.3)',
             borderRadius: '16px',
             padding: '20px',
             borderTop: `3px solid ${s.color}`,
-            boxShadow: '0 10px 40px rgba(0,0,0,0.1)'
+            boxShadow: '0 10px_40px rgba(10,122,104,0.2)'
           }}>
             <div style={{
               position: 'absolute', top: 0, right: 0, width: '100px', height: '100px',
-              background: s.color, opacity: 0.05, filter: 'blur(30px)', pointerEvents: 'none', transform: 'translate(30%, -30%)'
+              background: 'rgba(255,255,255,0.08)', filter: 'blur(30px)', pointerEvents: 'none', transform: 'translate(30%, -30%)'
             }}></div>
             <div style={{ fontSize: '26px', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.03em', position: 'relative', zIndex: 10 }}>
               {s.value}
             </div>
-            <div style={{ fontSize: '13px', color: '#a1a1aa', marginTop: '4px', fontWeight: 600, position: 'relative', zIndex: 10 }}>
+            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', marginTop: '4px', fontWeight: 600, position: 'relative', zIndex: 10 }}>
               {s.label}
             </div>
           </div>

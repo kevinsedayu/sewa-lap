@@ -129,17 +129,17 @@ export default async function AdminDashboard() {
       {/* Info Lapangan */}
       <div className="mb-6 relative">
         <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Informasi Lapangan</h2>
-        <div className="bg-[#09090b] border border-zinc-800 rounded-2xl p-6 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+        <div className="rounded-2xl p-6 shadow-[0_10px_40px_rgba(10,122,104,0.15)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+          <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           
           <h3 className="text-lg font-bold text-white mb-2 relative z-10">{lapangan?.nama || 'Nama Lapangan'}</h3>
-          <p className="text-sm text-zinc-400 mb-6 leading-relaxed relative z-10">{lapangan?.deskripsi || 'Deskripsi belum ditambahkan.'}</p>
+          <p className="text-sm text-white/60 mb-6 leading-relaxed relative z-10">{lapangan?.deskripsi || 'Deskripsi belum ditambahkan.'}</p>
           <div className="flex flex-wrap gap-3 relative z-10">
             {sesiList.map((s: any, idx: number) => (
-              <div key={s.id} className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-2 flex items-center gap-2 backdrop-blur-sm">
-                <span className="text-xs font-semibold text-emerald-400">{s.nama} ({s.jam || 'Jam belum diatur'})</span>
-                <span className="text-emerald-500/40">|</span>
-                <span className="text-xs font-bold text-emerald-400">Rp {s.harga.toLocaleString('id-ID')}</span>
+              <div key={s.id} className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 flex items-center gap-2 backdrop-blur-sm">
+                <span className="text-xs font-semibold text-white">{s.nama} ({s.jam || 'Jam belum diatur'})</span>
+                <span className="text-white/30">|</span>
+                <span className="text-xs font-bold text-[#6CC9B4]" >Rp {s.harga.toLocaleString('id-ID')}</span>
               </div>
             ))}
           </div>
@@ -147,10 +147,10 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Greeting */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#09090b] p-8 rounded-3xl border border-zinc-800 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-8 rounded-3xl shadow-[0_10px_40px_rgba(10,122,104,0.2)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 60%, #3DB8A0 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
         <div className="relative z-10">
-          <p className="text-sm text-emerald-500 font-bold tracking-widest uppercase mb-2">
+          <p className="text-sm text-white/70 font-bold tracking-widest uppercase mb-2">
             {new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
           <h2 className="text-2xl font-extrabold text-white tracking-tight">
@@ -168,14 +168,14 @@ export default async function AdminDashboard() {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
-          { ...stats[0], color: 'text-indigo-400', bg: 'bg-indigo-500/10', border: 'border-zinc-800' },
-          { ...stats[1], color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-zinc-800' },
-          { ...stats[2], color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-zinc-800' },
-          { ...stats[3], color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-zinc-800' }
+          { ...stats[0], color: 'text-white', bg: 'bg-white/10', border: 'border-teal-600/30', gFrom: '#0A7A68', gTo: '#1A9E88' },
+          { ...stats[1], color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20', gFrom: '#0A7A68', gTo: '#1A9E88' },
+          { ...stats[2], color: 'text-[#6CC9B4]', bg: 'bg-white/10', border: 'border-teal-600/30', gFrom: '#0A7A68', gTo: '#1A9E88' },
+          { ...stats[3], color: 'text-blue-200', bg: 'bg-blue-500/20', border: 'border-blue-500/20', gFrom: '#0A7A68', gTo: '#1A9E88' }
         ].map((stat) => (
-          <div key={stat.label} className={`bg-[#09090b] border ${stat.border} rounded-3xl p-6 shadow-sm relative overflow-hidden group hover:border-zinc-700 transition-colors`}>
+          <div key={stat.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(10,122,104,0.3)]`} style={{ background: `linear-gradient(135deg, ${stat.gFrom} 0%, ${stat.gTo} 100%)`, border: `1px solid rgba(61,184,160,0.25)` }}>
             <div className="flex justify-between items-center mb-4 relative z-10">
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{stat.label}</span>
+              <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{stat.label}</span>
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${stat.bg} ${stat.color} font-bold`}>
                 {stat.icon}
               </div>
@@ -183,10 +183,10 @@ export default async function AdminDashboard() {
             <div className="text-4xl font-extrabold text-white tracking-tight mb-2 font-bricolage relative z-10">
               {stat.value}
             </div>
-            <div className="text-xs text-zinc-500 font-medium relative z-10">{stat.desc}</div>
+            <div className="text-xs text-white/40 font-medium relative z-10">{stat.desc}</div>
             
             {/* Subtle glow on hover */}
-            <div className={`absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${stat.bg}`}></div>
+            <div className={`absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-white/5`}></div>
           </div>
         ))}
       </div>
@@ -201,30 +201,30 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Desktop Table */}
-        <div className="hidden sm:block bg-[#09090b] border border-zinc-800 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative">
-          <div className="absolute top-0 right-1/4 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="hidden sm:block rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(10,122,104,0.15)] relative" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
           {recentBookings && recentBookings.length > 0 ? (
             <table className="w-full text-left border-collapse relative z-10">
               <thead>
-                <tr className="bg-white/5 border-b border-zinc-800">
+                <tr className="bg-black/20 border-b border-white/10">
                   {['Nama Penyewa', 'Tanggal', 'Jam', 'Total', 'Status'].map(h => (
-                    <th key={h} className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+                    <th key={h} className="px-6 py-4 text-xs font-semibold text-white/60 uppercase tracking-wider">
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800">
+              <tbody className="divide-y divide-white/10">
                 {recentBookings.map((b: any) => (
                   <tr key={b.id} className="hover:bg-white/5 transition-colors">
                     <td className="px-6 py-4">
                       <div className="text-sm font-medium text-white">{b.profiles?.full_name || '-'}</div>
-                      <div className="text-xs text-zinc-500 mt-0.5">{b.profiles?.phone || '-'}</div>
+                      <div className="text-xs text-white/40 mt-0.5">{b.profiles?.phone || '-'}</div>
                     </td>
                     <td className="px-6 py-4 text-sm font-medium text-white">
                       {new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </td>
-                    <td className="px-6 py-4 text-sm text-zinc-400 font-medium">
+                    <td className="px-6 py-4 text-sm text-white/60 font-medium">
                       {b.jam_mulai?.slice(0, 5)} – {b.jam_selesai?.slice(0, 5)}
                     </td>
                     <td className="px-6 py-4 text-sm font-bold text-white">
@@ -251,17 +251,17 @@ export default async function AdminDashboard() {
         <div className="block sm:hidden space-y-3">
           {recentBookings && recentBookings.length > 0 ? (
             recentBookings.map((b: any) => (
-              <div key={b.id} className="bg-[#09090b] border border-zinc-800 rounded-xl p-4 shadow-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+              <div key={b.id} className="rounded-xl p-4 shadow-sm relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+                <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
                 <div className="flex justify-between items-start mb-3 relative z-10">
                   <div>
                     <div className="font-bold text-sm text-white capitalize">{b.profiles?.full_name || '-'}</div>
-                    <div className="text-xs text-zinc-400 mt-1 font-medium">
+                    <div className="text-xs text-white/50 mt-1 font-medium">
                       {b.profiles?.phone || '-'}
                     </div>
-                    <div className="text-xs text-zinc-400 mt-1 font-medium">
+                    <div className="text-xs text-white/50 mt-1 font-medium">
                       {new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                      <span className="mx-1 text-zinc-600">&middot;</span>
+                      <span className="mx-1 text-white/20">·</span>
                       {b.jam_mulai?.slice(0, 5)} – {b.jam_selesai?.slice(0, 5)}
                     </div>
                   </div>
@@ -275,7 +275,7 @@ export default async function AdminDashboard() {
               </div>
             ))
           ) : (
-            <div className="bg-[#09090b] border border-zinc-800 rounded-xl py-12 text-center shadow-sm">
+            <div className="rounded-xl py-12 text-center shadow-sm" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
               <div className="text-3xl mb-2 opacity-30">📭</div>
               <p className="text-sm font-medium text-zinc-500">Belum ada booking masuk</p>
             </div>
