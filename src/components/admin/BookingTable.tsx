@@ -162,7 +162,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       </div>
 
       {/* Table */}
-      <div className="rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(10,122,104,0.15)] relative" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+      <div className="rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(15,23,42,0.4)] relative" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
         <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         {filtered.length > 0 ? (
           <div className="overflow-x-auto relative z-10">
@@ -194,7 +194,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                     <td className="px-5 py-4">
                       {b.bukti_pembayaran ? (
                         <a href={b.bukti_pembayaran} target="_blank" rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[#6CC9B4] hover:text-[#3DB8A0] font-medium text-xs underline underline-offset-2">
+                          className="inline-flex items-center gap-1 text-blue-300 hover:text-blue-200 font-medium text-xs underline underline-offset-2">
                           <FileText size={12} /> Lihat
                         </a>
                       ) : <span className="text-white/20">-</span>}
@@ -271,7 +271,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       {/* Modal Tolak / Batalkan */}
       {showModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="rounded-2xl shadow-2xl w-full max-w-md p-6" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.4)' }}>
+          <div className="rounded-2xl shadow-2xl w-full max-w-md p-6" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.3)' }}>
             <div className="flex items-center gap-3 mb-4">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${modalType === 'reject' ? 'bg-red-500/20' : 'bg-orange-500/20'}`}>
                 {modalType === 'reject' ? <XCircle size={20} className="text-red-300" /> : <Ban size={20} className="text-orange-300" />}

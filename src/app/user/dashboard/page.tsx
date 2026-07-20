@@ -121,7 +121,7 @@ export default async function UserDashboard() {
       {/* Info Lapangan */}
       <div className="mb-6 relative">
         <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Informasi Lapangan</h2>
-        <div className="rounded-2xl p-6 shadow-[0_10px_40px_rgba(10,122,104,0.15)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+        <div className="rounded-2xl p-6 shadow-[0_10px_40px_rgba(15,23,42,0.4)] relative overflow-hidden" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
           <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           
           <h3 className="text-lg font-bold text-white mb-2 relative z-10">{lapangan?.nama || 'Nama Lapangan'}</h3>
@@ -131,7 +131,7 @@ export default async function UserDashboard() {
               <div key={s.id} className="bg-white/10 border border-white/20 rounded-lg px-3 py-2 flex items-center gap-2 backdrop-blur-sm">
                 <span className="text-xs font-semibold text-white">{s.nama} ({s.jam || 'Jam belum diatur'})</span>
                 <span className="text-white/30">|</span>
-                <span className="text-xs font-bold text-[#6CC9B4]">Rp {s.harga.toLocaleString('id-ID')}</span>
+                <span className="text-xs font-bold text-blue-300">Rp {s.harga.toLocaleString('id-ID')}</span>
               </div>
             ))}
           </div>
@@ -139,7 +139,7 @@ export default async function UserDashboard() {
       </div>
 
       {/* Greeting & Quick Action */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-8 rounded-3xl shadow-[0_10px_40px_rgba(10,122,104,0.2)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 60%, #3DB8A0 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-8 rounded-3xl shadow-[0_10px_40px_rgba(15,23,42,0.5)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #1e2d5a 100%)', border: '1px solid rgba(99,119,180,0.25)' }}>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
         <div className="relative z-10">
           <p className="text-sm text-white/70 font-bold tracking-widest uppercase mb-2">
@@ -160,11 +160,11 @@ export default async function UserDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         {[
-          { label: 'Booking Aktif', value: String(bookingAktif), desc: 'Sudah dikonfirmasi', color: 'text-[#6CC9B4]', bg: 'bg-white/10', border: 'border-teal-600/30' },
+          { label: 'Booking Aktif', value: String(bookingAktif), desc: 'Sudah dikonfirmasi', color: 'text-blue-300', bg: 'bg-white/10', border: 'border-teal-600/30' },
           { label: 'Menunggu', value: String(bookingPending), desc: 'Sedang diproses', color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20' },
           { label: 'Total Booking', value: String(totalBooking), desc: 'Semua riwayat', color: 'text-blue-200', bg: 'bg-blue-500/20', border: 'border-blue-500/20' },
         ].map((card) => (
-          <div key={card.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(10,122,104,0.3)]`} style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.25)' }}>
+          <div key={card.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(30,45,90,0.6)]`} style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.2)' }}>
             <div className="flex justify-between items-center mb-4 relative z-10">
               <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{card.label}</span>
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${card.bg} ${card.color} font-bold`}>
@@ -211,7 +211,7 @@ export default async function UserDashboard() {
         </div>
 
         {/* Desktop Table View */}
-        <div className="hidden sm:block rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(10,122,104,0.15)] relative" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+        <div className="hidden sm:block rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(15,23,42,0.4)] relative" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
           <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
           {userBookings && userBookings.length > 0 ? (
             <table className="w-full text-left border-collapse relative z-10">
@@ -258,7 +258,7 @@ export default async function UserDashboard() {
         <div className="block sm:hidden space-y-3">
           {userBookings && userBookings.length > 0 ? (
             userBookings.slice(0, 5).map((b: any) => (
-              <div key={b.id} className="rounded-xl p-4 shadow-sm relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+              <div key={b.id} className="rounded-xl p-4 shadow-sm relative overflow-hidden" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
                 <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
                 <div className="flex justify-between items-start mb-3 relative z-10">
                   <div>
@@ -279,7 +279,7 @@ export default async function UserDashboard() {
               </div>
             ))
           ) : (
-              <div className="rounded-xl py-12 text-center shadow-sm" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+              <div className="rounded-xl py-12 text-center shadow-sm" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
               <div className="text-3xl mb-2 opacity-30">📭</div>
               <p className="text-sm font-medium text-zinc-500">Belum ada riwayat booking</p>
             </div>

@@ -142,7 +142,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
   return (
     <div className="relative">
-      <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(10,122,104,0.2)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 50%, #0A7A68 100%)', border: '1px solid rgba(61,184,160,0.3)' }}>
+      <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(15,23,42,0.5)] relative overflow-hidden" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         
         {/* Header Kalender */}
@@ -301,7 +301,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
           {/* Legenda */}
           <div className="flex flex-wrap gap-4 mt-6 text-xs font-medium text-white/60 relative z-10">
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 size={14} className="text-[#6CC9B4]" /> Tersedia
+              <CheckCircle2 size={14} className="text-blue-300" /> Tersedia
             </div>
             <div className="flex items-center gap-1.5">
               <XCircle size={14} className="text-red-400" /> {isAdmin ? 'Terbooking' : 'Penuh'}
@@ -325,7 +325,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
       {/* Modal Input Admin */}
       {showModal && isAdmin && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <div style={{ background: 'linear-gradient(135deg, #0A7A68 0%, #1A9E88 100%)', border: '1px solid rgba(61,184,160,0.4)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 60px rgba(10,122,104,0.4)' }}>
+          <div style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.3)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 60px rgba(15,23,42,0.5)' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 700 }}>Input Jadwal: {modalDate} ({modalSesi})</h3>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
