@@ -1,6 +1,6 @@
 'use client'
 
-import { MessageCircle, Bell, Instagram, MapPin, ExternalLink, HelpCircle, CheckCircle2 } from 'lucide-react'
+import { MessageCircle, Bell, Instagram, ExternalLink, HelpCircle, CheckCircle2 } from 'lucide-react'
 
 export default function BantuanPage() {
   return (
@@ -8,14 +8,15 @@ export default function BantuanPage() {
       
       {/* Hero Section */}
       <section style={{ 
-        background: '#09090b', 
+        background: '#0F172A', 
         borderRadius: '16px', 
         padding: '40px 32px',
         color: 'white',
         marginBottom: '32px',
         position: 'relative',
         overflow: 'hidden',
-        boxShadow: '0 10px 40px -10px rgba(0,0,0,0.3)'
+        boxShadow: '0 10px 40px rgba(15,23,42,0.4)',
+        border: '1px solid rgba(99,119,180,0.25)'
       }}>
         <div style={{
           position: 'absolute',
@@ -23,7 +24,7 @@ export default function BantuanPage() {
           right: '-20%',
           width: '400px',
           height: '400px',
-          background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(9,9,11,0) 70%)',
+          background: 'radial-gradient(circle, rgba(99,119,180,0.2) 0%, rgba(15,23,42,0) 70%)',
           borderRadius: '50%',
           pointerEvents: 'none'
         }}></div>
@@ -35,7 +36,7 @@ export default function BantuanPage() {
               fontWeight: 700, 
               letterSpacing: '0.1em', 
               textTransform: 'uppercase', 
-              color: '#10b981', 
+              color: '#93c5fd', 
               marginBottom: '12px',
               display: 'inline-flex',
               alignItems: 'center',
@@ -53,11 +54,11 @@ export default function BantuanPage() {
             }}>
               Ada kendala dengan<br/>jadwal Anda?
             </h1>
-            <p style={{ fontSize: '15px', color: '#a1a1aa', margin: 0, lineHeight: 1.6, maxWidth: '400px' }}>
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', margin: 0, lineHeight: 1.6, maxWidth: '400px' }}>
               Hubungi saluran resmi kami untuk bantuan pemesanan, informasi fasilitas, dan perubahan jadwal sewa.
             </p>
           </div>
-          <div style={{ flexShrink: 0, background: 'rgba(255,255,255,0.1)', padding: '16px', borderRadius: '20px', backdropFilter: 'blur(10px)' }}>
+          <div style={{ flexShrink: 0, background: 'rgba(255,255,255,0.08)', padding: '16px', borderRadius: '20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)' }}>
             <img src="/logo.png" alt="Gelora Bumi Mintarsih" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
           </div>
         </div>
@@ -76,115 +77,82 @@ export default function BantuanPage() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
           {/* WA Admin */}
-          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" style={{
+          <a href="https://wa.me/6281328215620" target="_blank" rel="noopener noreferrer" style={{
             position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#09090b', border: '1px solid #27272a', borderRadius: '16px',
+            background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)', borderRadius: '16px',
             textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            boxShadow: '0 4px 20px rgba(15,23,42,0.3)'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#10b981'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(16,185,129,0.2)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#27272a'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#25d366'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(37,211,102,0.25)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(99,119,180,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(15,23,42,0.3)' }}
           >
             {/* Glow */}
-            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(16,185,129,0.2) 0%, rgba(9,9,11,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(37,211,102,0.15) 0%, rgba(15,23,42,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
             
-            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(16,185,129,0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(37,211,102,0.15)', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <MessageCircle size={24} />
             </div>
             <div style={{ position: 'relative', zIndex: 1, flex: 1 }}>
               <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 2px' }}>WhatsApp Admin</h3>
-              <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>Respon cepat</p>
+              <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', margin: 0 }}>081328215620 · Respon cepat</p>
             </div>
-            <ExternalLink size={16} color="#71717a" style={{ position: 'relative', zIndex: 1 }} />
+            <ExternalLink size={16} color="rgba(255,255,255,0.3)" style={{ position: 'relative', zIndex: 1 }} />
           </a>
 
           {/* Instagram */}
-          <a href="https://www.instagram.com/gelorabumimintarsih" target="_blank" rel="noopener noreferrer" style={{
+          <a href="https://www.instagram.com/putrapermadafc?igsh=dmV3czcwN2dqOWZn" target="_blank" rel="noopener noreferrer" style={{
             position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#09090b', border: '1px solid #27272a', borderRadius: '16px',
+            background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)', borderRadius: '16px',
             textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            boxShadow: '0 4px 20px rgba(15,23,42,0.3)'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#db2777'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(219,39,119,0.2)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#27272a'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#e1306c'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(225,48,108,0.25)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(99,119,180,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(15,23,42,0.3)' }}
           >
             {/* Glow */}
-            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(219,39,119,0.2) 0%, rgba(9,9,11,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(225,48,108,0.15) 0%, rgba(15,23,42,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
             
-            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(219,39,119,0.1)', color: '#db2777', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(225,48,108,0.15)', color: '#e1306c', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Instagram size={24} />
             </div>
             <div style={{ position: 'relative', zIndex: 1, flex: 1 }}>
               <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 2px' }}>Instagram</h3>
-              <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>@gelorabumimintarsih</p>
+              <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', margin: 0 }}>@putrapermadafc</p>
             </div>
-            <ExternalLink size={16} color="#71717a" style={{ position: 'relative', zIndex: 1 }} />
-          </a>
-
-          {/* Maps */}
-          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" style={{
-            position: 'relative', overflow: 'hidden',
-            display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#09090b', border: '1px solid #27272a', borderRadius: '16px',
-            textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(59,130,246,0.2)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#27272a'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)' }}
-          >
-            {/* Glow */}
-            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(9,9,11,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
-            
-            <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <MapPin size={24} />
-            </div>
-            <div style={{ position: 'relative', zIndex: 1, flex: 1 }}>
-              <h3 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 2px' }}>Lokasi Maps</h3>
-              <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>Petunjuk arah</p>
-            </div>
-            <ExternalLink size={16} color="#71717a" style={{ position: 'relative', zIndex: 1 }} />
+            <ExternalLink size={16} color="rgba(255,255,255,0.3)" style={{ position: 'relative', zIndex: 1 }} />
           </a>
         </div>
       </section>
 
       {/* Values Grid Section */}
       <section style={{ 
-        background: '#fafafa', 
-        border: '1px solid #e4e4e7', 
+        background: '#0F172A', 
+        border: '1px solid rgba(99,119,180,0.25)', 
         borderRadius: '24px', 
-        padding: '32px' 
+        padding: '32px',
+        boxShadow: '0 10px 40px rgba(15,23,42,0.3)'
       }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
           
           <div>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#09090b', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(37,211,102,0.15)', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
               <CheckCircle2 size={20} />
             </div>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#09090b', marginBottom: '8px' }}>Dukungan Booking</h3>
-            <p style={{ fontSize: '13px', color: '#71717a', lineHeight: 1.6, margin: 0 }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'white', marginBottom: '8px' }}>Dukungan Booking</h3>
+            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, margin: 0 }}>
               Butuh bantuan dengan pembayaran, konfirmasi, atau pengajuan pembatalan sewa? Silakan chat admin via WhatsApp.
             </p>
           </div>
 
           <div>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#09090b', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(225,48,108,0.15)', color: '#e1306c', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
               <Bell size={20} />
             </div>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#09090b', marginBottom: '8px' }}>Info Lapangan</h3>
-            <p style={{ fontSize: '13px', color: '#71717a', lineHeight: 1.6, margin: 0 }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'white', marginBottom: '8px' }}>Info Lapangan</h3>
+            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, margin: 0 }}>
               Ikuti Instagram resmi kami untuk update ketersediaan lapangan, cuaca terkini, dan info perbaikan rutin.
-            </p>
-          </div>
-
-          <div>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#09090b', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-              <MapPin size={20} />
-            </div>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#09090b', marginBottom: '8px' }}>Panduan Lokasi</h3>
-            <p style={{ fontSize: '13px', color: '#71717a', lineHeight: 1.6, margin: 0 }}>
-              Pastikan Anda sudah mengetahui lokasi pasti Gelora Bumi Mintarsih sebelum jadwal sewa Anda dimulai.
             </p>
           </div>
 

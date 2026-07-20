@@ -81,12 +81,12 @@ export default async function UserDashboard() {
         </div>
 
         {/* Marquee Ticker — scrolling text below hero */}
-        <div className="marquee-wrapper bg-emerald-700 py-1.5 border-y border-emerald-600">
+        <div className="marquee-wrapper py-1.5 border-y" style={{ background: '#0F172A', borderColor: '#1e2d5a' }}>
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
-              <span key={i} className="flex items-center gap-6 px-6 font-bold text-sm uppercase" style={{ color: '#ffffff', letterSpacing: '0.05em' }}>
+              <span key={i} className="flex items-center gap-6 px-6 font-bold text-sm uppercase" style={{ color: '#93c5fd', letterSpacing: '0.05em' }}>
                 Gelora Bumi Mintarsih Kalisegoro
-                <span style={{ color: '#a7f3d0', fontSize: '10px' }}>✦</span>
+                <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
               </span>
             ))}
           </div>
@@ -151,7 +151,8 @@ export default async function UserDashboard() {
         </div>
         <Link 
           href="/user/booking" 
-          className="relative z-10 inline-flex items-center justify-center bg-emerald-500 hover:bg-emerald-400 text-black px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:-translate-y-1"
+          className="relative z-10 inline-flex items-center justify-center text-white px-6 py-3 rounded-xl text-sm font-bold transition-all hover:-translate-y-1"
+          style={{ background: '#0F172A', boxShadow: '0 0 20px rgba(15,23,42,0.5)', border: '1px solid rgba(99,119,180,0.4)' }}
         >
           Booking Sekarang
         </Link>
