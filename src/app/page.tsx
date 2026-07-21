@@ -96,24 +96,23 @@ export default async function Home() {
               Cek Ketersediaan
             </a>
           </div>
-
-          <div className="relative z-10 max-w-6xl mx-auto px-6 pb-20">
-            <div className="rounded-3xl overflow-hidden border border-zinc-800 shadow-[0_20px_60px_rgba(16,185,129,0.15)] relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent z-10"></div>
-              <img src="/lapangan.jpeg" alt="Hero Lapangan" className="w-full h-auto object-cover max-h-[500px]" />
-            </div>
-          </div>
         </div>
 
-        {/* Marquee Ticker */}
-        <div className="marquee-wrapper bg-black py-2 border-y border-zinc-800">
+        {/* Hero Image — full width, no padding, no border-radius, flush to edges */}
+        <div className="w-full h-[220px] sm:h-[380px] relative overflow-hidden">
+          <img src="/lapangan.jpeg" alt="Gelora Bumi Mintarsih" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+        </div>
+
+        {/* Marquee Ticker — directly below image, no gap */}
+        <div className="marquee-wrapper py-2 border-y" style={{ background: '#0F172A', borderColor: '#1e2d5a' }}>
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
-              <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase text-zinc-400 tracking-widest">
+              <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase tracking-widest" style={{ color: '#93c5fd' }}>
                 Gelora Bumi Mintarsih
-                <span className="text-emerald-500 text-[10px]">✦</span>
+                <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
                 Kalisegoro Semarang
-                <span className="text-emerald-500 text-[10px]">✦</span>
+                <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
               </span>
             ))}
           </div>
