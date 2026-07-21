@@ -77,34 +77,48 @@ export default async function Home() {
           </div>
         </header>
 
-        {/* Hero Section - Dirty Klab Style (Dark, Bold, Glowing) */}
-        <div className="w-full relative overflow-hidden bg-[#09090b] text-center text-white">
+        {/* Hero Section — Video Background */}
+        <div className="w-full relative overflow-hidden text-center text-white" style={{ minHeight: '520px' }}>
+          
+          {/* Background Video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: 'grayscale(15%)' }}
+          >
+            <source src="/vidlap.mp4" type="video/mp4" />
+          </video>
+
+          {/* Dark overlay agar teks terbaca */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            background: 'radial-gradient(circle at center, rgba(16,185,129,0.15) 0%, rgba(9,9,11,0) 60%)'
+            background: 'linear-gradient(to bottom, rgba(9,9,11,0.55) 0%, rgba(9,9,11,0.45) 60%, rgba(9,9,11,0.75) 100%)'
+          }}></div>
+
+          {/* Subtle green glow overlay */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: 'radial-gradient(circle at center, rgba(16,185,129,0.08) 0%, rgba(9,9,11,0) 70%)'
           }}></div>
           
-          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 pt-12 pb-8 sm:pt-16 sm:pb-10">
-            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-6 font-bricolage">
+          {/* Content */}
+          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 pt-16 pb-16 sm:pt-24 sm:pb-20">
+            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
               SEWA LAPANGAN<br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">GELORA BUMI MINTARSIH</span>
             </h1>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-8">
+            <p className="text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed mb-8 drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
               Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
             </p>
             
-            <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-xl text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-1">
+            <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-xl text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:-translate-y-1">
               Cek Ketersediaan
             </a>
           </div>
         </div>
 
-        {/* Hero Image — full width, no padding, no border-radius, flush to edges */}
-        <div className="w-full h-[220px] sm:h-[380px] relative overflow-hidden">
-          <img src="/lapangan.jpeg" alt="Gelora Bumi Mintarsih" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
-        </div>
-
-        {/* Marquee Ticker — directly below image, no gap */}
+        {/* Marquee Ticker — directly below video, no gap */}
         <div className="marquee-wrapper py-2 border-y" style={{ background: '#0F172A', borderColor: '#1e2d5a' }}>
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
