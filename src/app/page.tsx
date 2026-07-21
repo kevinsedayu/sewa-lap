@@ -92,9 +92,9 @@ export default async function Home() {
             <source src="/vidlap.mp4" type="video/mp4" />
           </video>
 
-          {/* Dark overlay agar teks terbaca */}
+          {/* Dark overlay agar teks terbaca - tipis agar video tetap jelas */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            background: 'linear-gradient(to bottom, rgba(9,9,11,0.55) 0%, rgba(9,9,11,0.45) 60%, rgba(9,9,11,0.75) 100%)'
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%)'
           }}></div>
 
           {/* Subtle green glow overlay */}
