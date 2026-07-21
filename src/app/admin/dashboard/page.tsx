@@ -85,7 +85,7 @@ export default async function AdminDashboard() {
             loop
             muted
             playsInline
-            style={{ width: '100%', height: 'auto', display: 'block' }}
+            style={{ width: '100%', height: 'auto', display: 'block', filter: 'grayscale(10%)' }}
           >
             <source src="/vidlap3.mp4" type="video/mp4" />
           </video>
