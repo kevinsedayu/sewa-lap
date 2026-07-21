@@ -170,51 +170,32 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
           <span className="text-sm font-bold text-white/80">Filter Bulan:</span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          {/* Quick buttons */}
-          {(() => {
-            const cur = new Date()
-            const months = [
-              { label: 'Bulan Lalu', offset: -1 },
-              { label: 'Bulan Ini', offset: 0 },
-              { label: 'Bulan Depan', offset: 1 },
-            ]
-            return months.map(({ label, offset }) => {
-              const d = new Date(cur.getFullYear(), cur.getMonth() + offset, 1)
-              const val = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
-              const isActive = !showAllMonths && selectedMonth === val
-              return (
-                <button key={label} onClick={() => { setSelectedMonth(val); setShowAllMonths(false) }}
-                  className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
-                  style={isActive
-                    ? { background: 'linear-gradient(135deg, #1e3a8a, #1e40af)', border: '1px solid rgba(99,119,180,0.6)', color: '#bfdbfe' }
-                    : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }
-                  }>
-                  {label}
-                </button>
-              )
-            })
-          })()}
-          {/* Semua bulan */}
+          {/* Semua Persewaan */}
           <button onClick={() => setShowAllMonths(true)}
             className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
             style={showAllMonths
               ? { background: 'linear-gradient(135deg, #1e3a8a, #1e40af)', border: '1px solid rgba(99,119,180,0.6)', color: '#bfdbfe' }
               : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }
             }>
-            Semua Bulan
+            Semua Persewaan
           </button>
           {/* Manual month nav */}
-          {!showAllMonths && (
-            <div className="flex items-center gap-1 ml-1">
-              <button onClick={prevMonth} className="w-7 h-7 flex items-center justify-center rounded-lg transition-all" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}>
-                <ChevronLeft size={14} />
-              </button>
-              <span className="text-xs font-bold text-blue-300 min-w-[110px] text-center">{monthLabel}</span>
-              <button onClick={nextMonth} className="w-7 h-7 flex items-center justify-center rounded-lg transition-all" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}>
-                <ChevronRight size={14} />
-              </button>
-            </div>
-          )}
+          <div className="flex items-center gap-1">
+            <button onClick={() => { prevMonth(); setShowAllMonths(false) }} className="w-7 h-7 flex items-center justify-center rounded-lg transition-all" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}>
+              <ChevronLeft size={14} />
+            </button>
+            <button onClick={() => setShowAllMonths(false)}
+              className="px-3 py-1.5 rounded-full text-xs font-bold transition-all"
+              style={!showAllMonths
+                ? { background: 'linear-gradient(135deg, #1e3a8a, #1e40af)', border: '1px solid rgba(99,119,180,0.6)', color: '#bfdbfe', minWidth: '110px', textAlign: 'center' }
+                : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', minWidth: '110px', textAlign: 'center' }
+              }>
+              {monthLabel}
+            </button>
+            <button onClick={() => { nextMonth(); setShowAllMonths(false) }} className="w-7 h-7 flex items-center justify-center rounded-lg transition-all" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}>
+              <ChevronRight size={14} />
+            </button>
+          </div>
         </div>
       </div>
 
