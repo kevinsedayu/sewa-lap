@@ -78,19 +78,18 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* Hero Video — full width, video background */}
-        <div className="w-full h-[220px] sm:h-[320px] relative overflow-hidden">
+        {/* Hero Video — full width, natural height, no crop */}
+        <div className="w-full relative overflow-hidden">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: 'grayscale(15%)' }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
           >
             <source src="/vidlap3.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/25 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
         </div>
 
         {/* Marquee Ticker — scrolling text below hero */}

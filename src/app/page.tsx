@@ -78,41 +78,30 @@ export default async function Home() {
           </div>
         </header>
 
-        {/* Hero Section — Video Background */}
-        <div className="w-full relative overflow-hidden text-center text-white" style={{ minHeight: '520px' }}>
+        {/* Hero Section — Video Background, full uncropped */}
+        <div className="w-full relative overflow-hidden text-center text-white">
           
-          {/* Background Video */}
+          {/* Video — natural aspect ratio, no crop */}
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: 'grayscale(15%)' }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
           >
             <source src="/vidlap3.mp4" type="video/mp4" />
           </video>
 
-          {/* Dark overlay agar teks terbaca - tipis agar video tetap jelas */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%)'
-          }}></div>
-
-          {/* Subtle green glow overlay */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            background: 'radial-gradient(circle at center, rgba(16,185,129,0.08) 0%, rgba(9,9,11,0) 70%)'
-          }}></div>
-          
-          {/* Content */}
-          <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 pt-16 pb-16 sm:pt-24 sm:pb-20">
+          {/* Dark overlay + text */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-6"
+            style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%)' }}>
             <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
               SEWA LAPANGAN<br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">GELORA BUMI MINTARSIH</span>
             </h1>
-            <p className="text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed mb-8 drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
+            <p className="text-lg text-zinc-200 max-w-2xl mx-auto leading-relaxed mb-8 drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">
               Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
             </p>
-            
             <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-8 py-4 rounded-xl text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:-translate-y-1">
               Cek Ketersediaan
             </a>
