@@ -132,7 +132,7 @@ export default async function Home() {
             <div>
               <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Fasilitas</p>
               <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
-                Fasilitas Premium
+                Fasilitas Lengkap
               </h2>
             </div>
           </div>
