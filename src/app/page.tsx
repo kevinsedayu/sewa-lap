@@ -93,16 +93,16 @@ export default async function Home() {
           </video>
 
           {/* Dark overlay + text */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6"
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-6 sm:pt-0"
             style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%)' }}>
-            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-3 sm:mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-2 sm:mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
               SEWA LAPANGAN<br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">GELORA BUMI MINTARSIH</span>
             </h1>
-            <p className="text-sm sm:text-lg text-zinc-200 max-w-2xl mx-auto leading-relaxed mb-5 sm:mb-8 drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)] px-2">
+            <p className="text-xs sm:text-lg text-zinc-200 max-w-2xl mx-auto leading-relaxed mb-4 sm:mb-8 drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)] px-2 mt-3 sm:mt-0">
               Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
             </p>
-            <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:-translate-y-1">
+            <a href="#jadwal" className="bg-emerald-500 hover:bg-emerald-400 text-black px-4 sm:px-8 py-2 sm:py-4 rounded-lg sm:rounded-xl text-xs sm:text-base font-bold transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:-translate-y-1">
               Cek Ketersediaan
             </a>
           </div>
