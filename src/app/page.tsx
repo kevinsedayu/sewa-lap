@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import BookingCalendar from '@/components/shared/BookingCalendar'
+import FasilitasGallery from '@/components/landing/FasilitasGallery'
 
 export default async function Home() {
   const supabase = await createClient()
@@ -89,7 +90,7 @@ export default async function Home() {
             className="absolute inset-0 w-full h-full object-cover"
             style={{ filter: 'grayscale(15%)' }}
           >
-            <source src="/vidlap.mp4" type="video/mp4" />
+            <source src="/vidlap1.mp4" type="video/mp4" />
           </video>
 
           {/* Dark overlay agar teks terbaca - tipis agar video tetap jelas */}
@@ -147,29 +148,7 @@ export default async function Home() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { src: '/lapangan2.jpeg', label: 'Lapangan Standart' },
-              { src: '/toilet.jpeg', label: 'Toilet Bersih' },
-              { src: '/mushola.jpeg', label: 'Mushola' },
-              { src: '/bench.jpeg', label: 'Bench Pemain' }
-            ].map((img, i) => (
-              <div key={i} className="group relative h-[280px] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-zinc-200">
-                <img 
-                  src={img.src} 
-                  alt={img.label} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-                <div className="absolute inset-x-0 bottom-0 p-6">
-                  <div className="w-8 h-1 bg-emerald-500 mb-3 rounded-full"></div>
-                  <h3 className="text-white text-lg font-bold font-bricolage leading-tight">
-                    {img.label}
-                  </h3>
-                </div>
-              </div>
-            ))}
-          </div>
+          <FasilitasGallery />
         </div>
 
         {/* Info Lapangan & Harga */}
