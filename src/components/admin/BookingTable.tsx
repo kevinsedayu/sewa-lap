@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Search, Printer, XCircle, CheckCircle2, Ban, FileText } from 'lucide-react'
+import { Search, Printer, XCircle, CheckCircle2, Ban, FileText, ChevronLeft, ChevronRight, Calendar } from 'lucide-react'
 
 type Booking = {
   id: string
@@ -39,6 +39,29 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState('')
   const [loadingId, setLoadingId] = useState<string | null>(null)
+
+  // Month filter: store as 'YYYY-MM' string, default = current month
+  const now = new Date()
+  const [selectedMonth, setSelectedMonth] = useState<string>(
+    `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+  )
+  const [showAllMonths, setShowAllMonths] = useState(false)
+
+  const monthLabel = useMemo(() => {
+    const [y, m] = selectedMonth.split('-').map(Number)
+    return new Date(y, m - 1, 1).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })
+  }, [selectedMonth])
+
+  const prevMonth = () => {
+    const [y, m] = selectedMonth.split('-').map(Number)
+    const d = new Date(y, m - 2, 1)
+    setSelectedMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`)
+  }
+  const nextMonth = () => {
+    const [y, m] = selectedMonth.split('-').map(Number)
+    const d = new Date(y, m, 1)
+    setSelectedMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`)
+  }
 
   // Modal state
   const [showModal, setShowModal] = useState(false)
@@ -100,18 +123,19 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
         <td>${b.catatan || '-'}</td>
       </tr>`).join('')
     const filterLabel = filter === 'all' ? 'Semua' : (statusLabel[filter] || filter)
+    const bulanLabel = showAllMonths ? 'Semua Bulan' : monthLabel
     const now = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
     const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Laporan Persewaan</title>
 <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;color:#09090b;padding:32px;font-size:13px}
 .header{margin-bottom:24px;border-bottom:2px solid #09090b;padding-bottom:16px}.header h1{font-size:20px;font-weight:700}
-.header p{font-size:12px;color:#71717a;margin-top:4px}.meta{display:flex;gap:24px;margin-bottom:20px;font-size:12px}
+.header p{font-size:12px;color:#71717a;margin-top:4px}.meta{display:flex;gap:24px;margin-bottom:20px;font-size:12px;flex-wrap:wrap}
 .meta span{color:#71717a}.meta b{color:#09090b}table{width:100%;border-collapse:collapse}
 th{background:#f4f4f5;padding:10px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#52525b;border-bottom:2px solid #e4e4e7}
 td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-child td{border-bottom:none}
 .footer{margin-top:32px;font-size:11px;color:#a1a1aa;text-align:center;border-top:1px solid #e4e4e7;padding-top:16px}
 </style></head><body>
 <div class="header"><h1>Gelora Bumi Mintarsih</h1><p>Laporan Data Persewaan Lapangan</p></div>
-<div class="meta"><div><span>Filter: </span><b>${filterLabel}</b></div><div><span>Jumlah: </span><b>${filtered.length} data</b></div><div><span>Dicetak: </span><b>${now}</b></div></div>
+<div class="meta"><div><span>Bulan: </span><b>${bulanLabel}</b></div><div><span>Filter Status: </span><b>${filterLabel}</b></div><div><span>Jumlah: </span><b>${filtered.length} data</b></div><div><span>Dicetak: </span><b>${now}</b></div></div>
 <table><thead><tr><th>Penyewa</th><th>No. Telepon</th><th>Tanggal</th><th>Sesi</th><th>Total</th><th>Status</th><th>Catatan</th></tr></thead>
 <tbody>${rows}</tbody></table>
 <div class="footer">Dokumen dicetak otomatis dari Sistem Persewaan Lapangan Gelora Bumi Mintarsih &bull; ${now}</div>
@@ -121,6 +145,14 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
   }
 
   const filtered = bookings
+    .filter(b => {
+      // Month filter
+      if (!showAllMonths) {
+        const bookingMonth = b.tanggal?.slice(0, 7) // 'YYYY-MM'
+        if (bookingMonth !== selectedMonth) return false
+      }
+      return true
+    })
     .filter(b => filter === 'all' || b.status === filter)
     .filter(b => {
       if (!search.trim()) return true
@@ -130,7 +162,63 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
 
   return (
     <div className="space-y-4">
-      {/* Toolbar */}
+
+      {/* Month Filter Row */}
+      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between p-4 rounded-2xl" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
+        <div className="flex items-center gap-2">
+          <Calendar size={16} className="text-blue-300 shrink-0" />
+          <span className="text-sm font-bold text-white/80">Filter Bulan:</span>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Quick buttons */}
+          {(() => {
+            const cur = new Date()
+            const months = [
+              { label: 'Bulan Lalu', offset: -1 },
+              { label: 'Bulan Ini', offset: 0 },
+              { label: 'Bulan Depan', offset: 1 },
+            ]
+            return months.map(({ label, offset }) => {
+              const d = new Date(cur.getFullYear(), cur.getMonth() + offset, 1)
+              const val = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+              const isActive = !showAllMonths && selectedMonth === val
+              return (
+                <button key={label} onClick={() => { setSelectedMonth(val); setShowAllMonths(false) }}
+                  className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
+                  style={isActive
+                    ? { background: 'linear-gradient(135deg, #1e3a8a, #1e40af)', border: '1px solid rgba(99,119,180,0.6)', color: '#bfdbfe' }
+                    : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }
+                  }>
+                  {label}
+                </button>
+              )
+            })
+          })()}
+          {/* Semua bulan */}
+          <button onClick={() => setShowAllMonths(true)}
+            className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
+            style={showAllMonths
+              ? { background: 'linear-gradient(135deg, #1e3a8a, #1e40af)', border: '1px solid rgba(99,119,180,0.6)', color: '#bfdbfe' }
+              : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }
+            }>
+            Semua Bulan
+          </button>
+          {/* Manual month nav */}
+          {!showAllMonths && (
+            <div className="flex items-center gap-1 ml-1">
+              <button onClick={prevMonth} className="w-7 h-7 flex items-center justify-center rounded-lg transition-all" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}>
+                <ChevronLeft size={14} />
+              </button>
+              <span className="text-xs font-bold text-blue-300 min-w-[110px] text-center">{monthLabel}</span>
+              <button onClick={nextMonth} className="w-7 h-7 flex items-center justify-center rounded-lg transition-all" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}>
+                <ChevronRight size={14} />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Status Filter + Search + Print Toolbar */}
       <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
         <div className="flex flex-wrap gap-2">
           {[
