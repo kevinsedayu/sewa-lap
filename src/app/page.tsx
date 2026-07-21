@@ -90,7 +90,7 @@ export default async function Home() {
             className="absolute inset-0 w-full h-full object-cover"
             style={{ filter: 'grayscale(15%)' }}
           >
-            <source src="/vidlap1.mp4" type="video/mp4" />
+            <source src="/vidlap3.mp4" type="video/mp4" />
           </video>
 
           {/* Dark overlay agar teks terbaca - tipis agar video tetap jelas */}

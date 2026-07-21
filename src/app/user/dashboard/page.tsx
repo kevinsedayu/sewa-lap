@@ -70,14 +70,19 @@ export default async function UserDashboard() {
           </div>
         </div>
 
-        {/* Hero Image — full width, clean, NO text overlay */}
+        {/* Hero Video — full width, video background */}
         <div className="w-full h-[220px] sm:h-[320px] relative overflow-hidden">
-          <img
-            src="/lapangan.jpeg"
-            alt="Gelora Bumi Mintarsih"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: 'grayscale(15%)' }}
+          >
+            <source src="/vidlap3.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/25 pointer-events-none"></div>
         </div>
 
         {/* Marquee Ticker — scrolling text below hero */}
