@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import BookingCalendar from '@/components/shared/BookingCalendar'
 import FasilitasGallery from '@/components/landing/FasilitasGallery'
+import BackgroundVideo from '@/components/landing/BackgroundVideo'
 
 export default async function Home() {
   const supabase = await createClient()
@@ -81,22 +82,8 @@ export default async function Home() {
         {/* Hero Section — Video Background, full uncropped */}
         <div className="w-full relative overflow-hidden text-center text-white">
           
-          {/* Video — natural aspect ratio, no crop - Using dangerouslySetInnerHTML to fix React hydration/autoplay bugs */}
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  style="width: 100%; height: auto; display: block; filter: grayscale(10%);"
-                >
-                  <source src="/vidlap3.mp4" type="video/mp4" />
-                </video>
-              `
-            }}
-          />
+          {/* Robust Background Video with Client Component forcing playback */}
+          <BackgroundVideo />
 
           {/* Dark overlay + text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-6 sm:pt-0"
