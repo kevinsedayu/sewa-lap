@@ -5,7 +5,7 @@ export default function Footer() {
     <footer style={{
       background: 'linear-gradient(135deg, #0F172A 0%, #1e2d5a 100%)',
       borderTop: '1px solid rgba(99,119,180,0.2)',
-      padding: '20px 24px',
+      padding: '40px 24px',
       textAlign: 'center',
       position: 'relative',
       overflow: 'hidden',
@@ -31,9 +31,9 @@ export default function Footer() {
           gap: '6px',
           marginBottom: '6px',
         }}>
-          <Copyright size={12} style={{ color: '#60a5fa', flexShrink: 0 }} />
+          <Copyright size={14} style={{ color: '#60a5fa', flexShrink: 0 }} />
           <span style={{
-            fontSize: '12px',
+            fontSize: '14px',
             fontWeight: 600,
             background: 'linear-gradient(90deg, #93c5fd, #60a5fa)',
             WebkitBackgroundClip: 'text',
@@ -51,7 +51,7 @@ export default function Footer() {
           justifyContent: 'center',
         }}>
           <span style={{
-            fontSize: '11px',
+            fontSize: '13px',
             background: 'linear-gradient(90deg, #6ea8fe, #93c5fd)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',

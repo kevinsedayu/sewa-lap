@@ -195,11 +195,6 @@ export default async function Home() {
           </div>
         </div>
       </main>
-      
-      {/* Footer */}
-      <footer className="bg-[#09090b] text-zinc-400 py-8 border-t border-zinc-800 text-center text-sm">
-        <p>© {new Date().getFullYear()} Gelora Bumi Mintarsih. Hak Cipta Dilindungi.</p>
-      </footer>
     </div>
   )
 }
