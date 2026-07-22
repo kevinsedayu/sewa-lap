@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 const WA_API_URL = process.env.WA_API_URL || 'https://silent-asleep-supermom.ngrok-free.dev/api/message/send'
 const WA_API_KEY = process.env.WA_API_KEY || 'wakey_26a585fed2fd468992fb56f9b640f470'
-const WA_SESSION = process.env.WA_SESSION || 'kp'
+const WA_SESSION = process.env.WA_SESSION || 'kvn'
 
 export async function POST(request: Request) {
   try {
