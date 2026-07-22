@@ -86,9 +86,10 @@ export default async function AdminDashboard() {
             loop
             muted
             playsInline
+            poster="/lapangan.jpeg"
             style={{ width: '100%', height: 'auto', display: 'block', filter: 'grayscale(10%)' }}
           >
-            <source src="/vidlap3.mp4" type="video/mp4" />
+            <source src="/vidlap3.webm" type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
         </div>
