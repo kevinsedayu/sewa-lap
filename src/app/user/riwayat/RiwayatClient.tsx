@@ -35,7 +35,8 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
       const tanggalFormat = new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
       const text = `Halo admin, saya ingin meminta pembatalan sewa lapangan pada tanggal *${tanggalFormat}* sesi *${b.sesi}*. Mohon bantuannya.`
       const waUrl = `https://wa.me/6281328215620?text=${encodeURIComponent(text)}`
-      window.open(waUrl, '_blank')
+      // Menggunakan location.href agar di HP langsung pindah ke aplikasi WA (tidak diblokir popup blocker)
+      window.location.href = waUrl
     } else {
       alert('Gagal mengirim permintaan: ' + error.message)
     }
