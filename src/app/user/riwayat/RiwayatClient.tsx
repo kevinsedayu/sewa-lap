@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
@@ -21,38 +21,22 @@ const statusLabel: Record<string, string> = {
 
 export default function RiwayatClient({ initialBookings }: { initialBookings: any[] }) {
   const [bookings, setBookings] = useState(initialBookings)
-  const [showModal, setShowModal] = useState(false)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [alasan, setAlasan] = useState('')
-  const [loading, setLoading] = useState(false)
-  const supabase = createClient()
-
-  const openCancelModal = (id: string) => {
-    setSelectedId(id)
-    setAlasan('')
-    setShowModal(true)
-  }
-
-  const handleRequestCancel = async () => {
-    if (!selectedId) return
+  const handleRequestCancel = async (b: any) => {
+    if (!confirm('Anda akan diarahkan ke WhatsApp untuk meminta pembatalan ke admin. Lanjutkan?')) return
+    
     setLoading(true)
-    setShowModal(false)
-
-    const updatePayload: any = { status: 'cancel_request' }
-    if (alasan.trim()) updatePayload.catatan = alasan.trim()
-
-    const { error } = await supabase.from('sewa').update(updatePayload).eq('id', selectedId)
-
+    const { error } = await supabase.from('sewa').update({ status: 'cancel_request' }).eq('id', b.id)
+    
     if (!error) {
-      setBookings(prev => prev.map(b =>
-        b.id === selectedId ? { ...b, status: 'cancel_request', catatan: alasan.trim() || b.catatan } : b
-      ))
-      alert('Permintaan pembatalan berhasil dikirim. Tunggu konfirmasi dari admin.')
+      setBookings(prev => prev.map(item => item.id === b.id ? { ...item, status: 'cancel_request' } : item))
+      const tanggalFormat = new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+      const text = `Halo admin, saya ingin meminta pembatalan sewa lapangan pada tanggal *${tanggalFormat}* sesi *${b.sesi}*. Mohon bantuannya.`
+      const waUrl = `https://wa.me/6281328215620?text=${encodeURIComponent(text)}`
+      window.open(waUrl, '_blank')
     } else {
       alert('Gagal mengirim permintaan: ' + error.message)
     }
     setLoading(false)
-    setSelectedId(null)
   }
 
   return (
@@ -100,7 +84,7 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
                   <td style={{ padding: '14px 16px' }}>
                     {b.status === 'confirmed' && (
                       <button
-                        onClick={() => openCancelModal(b.id)}
+                        onClick={() => handleRequestCancel(b)}
                         disabled={loading}
                         style={{
                           display: 'inline-flex', alignItems: 'center', gap: '5px',
@@ -174,7 +158,7 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
             </div>
             {b.status === 'confirmed' && (
               <button
-                onClick={() => openCancelModal(b.id)}
+                onClick={() => handleRequestCancel(b)}
                 disabled={loading}
                 style={{
                   marginTop: '10px', width: '100%', padding: '8px',
@@ -200,48 +184,7 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
         )}
       </div>
 
-      {/* Modal Konfirmasi Pembatalan */}
-      {showModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '16px' }}>
-          <div style={{ background: '#fff', borderRadius: '16px', boxShadow: '0 25px 50px rgba(0,0,0,0.25)', width: '100%', maxWidth: '420px', padding: '24px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#fef2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <span style={{ fontSize: '20px' }}>⚠️</span>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#09090b', margin: 0 }}>Minta Pembatalan Sewa</h3>
-                <p style={{ fontSize: '12px', color: '#71717a', margin: '2px 0 0' }}>
-                  Permintaan akan dikirim ke admin untuk ditinjau.
-                </p>
-              </div>
-            </div>
-
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#3f3f46', marginBottom: '8px' }}>
-                Alasan Pembatalan <span style={{ color: '#a1a1aa', fontWeight: 400 }}>(opsional)</span>
-              </label>
-              <textarea
-                rows={3}
-                value={alasan}
-                onChange={e => setAlasan(e.target.value)}
-                placeholder="Contoh: Ada keperluan mendadak, jadwal bentrok, dll."
-                style={{ width: '100%', padding: '10px 12px', fontSize: '13px', border: '1px solid #e4e4e7', borderRadius: '10px', resize: 'none', outline: 'none', boxSizing: 'border-box', fontFamily: 'inherit' }}
-              />
-            </div>
-
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button onClick={() => setShowModal(false)}
-                style={{ flex: 1, padding: '10px', borderRadius: '10px', fontSize: '13px', fontWeight: 600, background: '#f4f4f5', border: 'none', color: '#52525b', cursor: 'pointer' }}>
-                Kembali
-              </button>
-              <button onClick={handleRequestCancel}
-                style={{ flex: 1, padding: '10px', borderRadius: '10px', fontSize: '13px', fontWeight: 700, background: '#ef4444', border: 'none', color: '#fff', cursor: 'pointer' }}>
-                Kirim Permintaan
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Removed Modal Konfirmasi Pembatalan since it goes straight to WA */}
     </>
   )
 }

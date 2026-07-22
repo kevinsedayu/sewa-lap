@@ -86,9 +86,20 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
         if (phone) {
           const nama = booking.profiles?.full_name || 'Penyewa'
           const tanggalFormat = new Date(booking.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
-          const message = status === 'confirmed'
-            ? `Halo ${nama},\n\nPeminjaman lapangan sepak bola Anda telah disetujui oleh admin.\n\nTanggal:\n${tanggalFormat}\n\nSilakan datang sesuai jadwal yang telah ditentukan.\n\nTerima kasih.`
-            : `Halo ${nama},\n\nMohon maaf, peminjaman lapangan sepak bola Anda belum dapat kami setujui.\n\n${catatan ? 'Alasan: ' + catatan + '\n\n' : ''}Silakan kirimkan nomor rekening Anda agar proses pengembalian dana dapat dilakukan.\n\nTerima kasih.`
+          let message = ''
+          if (booking.status === 'cancel_request') {
+            // Admin memproses permintaan pembatalan dari user
+            if (status === 'cancelled') {
+              message = `Halo ${nama},\n\nPermintaan pembatalan sewa lapangan Anda pada ${tanggalFormat} telah DISETUJUI oleh admin.\n\n${catatan ? 'Catatan: ' + catatan + '\n\n' : ''}Silakan hubungi admin untuk proses pengembalian dana (jika ada).\n\nTerima kasih.`
+            } else if (status === 'confirmed') {
+              message = `Halo ${nama},\n\nPermintaan pembatalan sewa lapangan Anda pada ${tanggalFormat} DITOLAK (tidak jadi batal) oleh admin.\n\nJadwal Anda tetap aktif, silakan datang sesuai jadwal.\n\nTerima kasih.`
+            }
+          } else {
+            // Proses normal (pesanan baru / batal sepihak admin)
+            message = status === 'confirmed'
+              ? `Halo ${nama},\n\nPeminjaman lapangan sepak bola Anda telah disetujui oleh admin.\n\nTanggal:\n${tanggalFormat}\n\nSilakan datang sesuai jadwal yang telah ditentukan.\n\nTerima kasih.`
+              : `Halo ${nama},\n\nMohon maaf, peminjaman lapangan sepak bola Anda belum dapat kami setujui.\n\n${catatan ? 'Alasan: ' + catatan + '\n\n' : ''}Silakan kirimkan nomor rekening Anda agar proses pengembalian dana dapat dilakukan.\n\nTerima kasih.`
+          }
           try {
             const res = await fetch('/api/whatsapp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, message }) })
             const result = await res.json()
