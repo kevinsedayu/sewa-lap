@@ -12,6 +12,31 @@ const images = [
 
 export default function FasilitasGallery() {
   const [active, setActive] = useState<number | null>(null)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+    
+    if (isLeftSwipe && active !== null) {
+      setActive((active + 1) % images.length)
+    }
+    if (isRightSwipe && active !== null) {
+      setActive((active - 1 + images.length) % images.length)
+    }
+  }
 
   return (
     <>
@@ -65,8 +90,11 @@ export default function FasilitasGallery() {
 
           {/* Image */}
           <div
-            className="relative max-w-4xl w-full max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl"
+            className="relative max-w-4xl w-full max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl touch-pan-y"
             onClick={e => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <img
               src={images[active].src}

@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import FasilitasGallery from '@/components/landing/FasilitasGallery'
 
 export default async function UserDashboard() {
   const supabase = await createClient()
@@ -100,26 +101,12 @@ export default async function UserDashboard() {
       {/* Content below hero */}
       <div className="p-6 sm:p-8 max-w-5xl mx-auto space-y-8">
 
-      {/* Fasilitas Slider */}
+      {/* Fasilitas Gallery */}
       <div className="mb-8">
-        <h2 className="text-xl font-bold text-emerald-800 mb-4 tracking-tight uppercase text-center">
+        <h2 className="text-xl font-bold text-emerald-800 mb-4 tracking-tight uppercase text-center sm:text-left">
           Fasilitas Kami
         </h2>
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
-          {[
-            { src: '/lapangan2.jpeg', label: 'Lapangan Standart Nasional' },
-            { src: '/toilet.jpeg', label: 'Toilet Bersih' },
-            { src: '/mushola.jpeg', label: 'Mushola' },
-            { src: '/bench.jpeg', label: 'Bench Pemain' }
-          ].map((img, i) => (
-            <div key={i} className="snap-center shrink-0 w-[240px] h-[160px] rounded-xl overflow-hidden relative shadow-sm group">
-              <img src={img.src} alt={img.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white p-3 pt-8 text-center text-sm font-semibold">
-                {img.label}
-              </div>
-            </div>
-          ))}
-        </div>
+        <FasilitasGallery />
       </div>
 
       {/* Info Lapangan */}
