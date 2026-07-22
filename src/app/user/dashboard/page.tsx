@@ -72,7 +72,7 @@ export default async function UserDashboard() {
         </div>
 
         {/* Hero Banner Video */}
-        <div className="w-full relative overflow-hidden h-[50vh] md:h-[60vh] max-h-[600px]">
+        <div className="w-full relative overflow-hidden h-[55vh] md:h-[75vh] max-h-[800px]">
           <video
             autoPlay
             loop
