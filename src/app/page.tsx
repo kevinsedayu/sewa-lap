@@ -79,10 +79,8 @@ export default async function Home() {
           </div>
         </header>
 
-        {/* Hero Section Wrapper with dark background so sides blend on huge screens */}
-        <div className="w-full bg-[#09090b]">
-          {/* Hero Section — Video Background, full uncropped on mobile, constrained on desktop */}
-          <div className="w-full md:max-w-4xl lg:max-w-6xl mx-auto relative overflow-hidden text-center text-white">
+        {/* Hero Section — Video Background, full width, constrained height on desktop */}
+        <div className="w-full relative overflow-hidden text-center text-white h-[60vh] md:h-[75vh] max-h-[800px]">
           
           {/* Robust Background Video with Client Component forcing playback */}
           <BackgroundVideo />
@@ -101,7 +99,6 @@ export default async function Home() {
               Cek Ketersediaan
             </a>
           </div>
-        </div>
         </div>
 
         {/* Marquee Ticker — directly below video, no gap */}

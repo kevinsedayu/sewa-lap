@@ -71,15 +71,15 @@ export default async function UserDashboard() {
           </div>
         </div>
 
-        {/* Hero Video — full width, natural height, no crop */}
-        <div className="w-full relative overflow-hidden">
+        {/* Hero Banner Video */}
+        <div className="w-full relative overflow-hidden h-[50vh] md:h-[60vh] max-h-[600px]">
           <video
             autoPlay
             loop
             muted
             playsInline
             poster="/lapangan.jpeg"
-            style={{ width: '100%', height: 'auto', display: 'block', filter: 'grayscale(10%)' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: 'grayscale(10%)' }}
           >
             <source src="/vidlap3.webm" type="video/webm" />
           </video>
