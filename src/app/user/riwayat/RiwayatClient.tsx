@@ -21,6 +21,9 @@ const statusLabel: Record<string, string> = {
 
 export default function RiwayatClient({ initialBookings }: { initialBookings: any[] }) {
   const [bookings, setBookings] = useState(initialBookings)
+  const [loading, setLoading] = useState(false)
+  const supabase = createClient()
+
   const handleRequestCancel = async (b: any) => {
     if (!confirm('Anda akan diarahkan ke WhatsApp untuk meminta pembatalan ke admin. Lanjutkan?')) return
     
