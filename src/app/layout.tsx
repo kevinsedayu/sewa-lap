@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 import NextTopLoader from 'nextjs-toploader';
+import Footer from '@/components/shared/Footer';
 
 export default function RootLayout({
   children,
@@ -50,6 +51,7 @@ export default function RootLayout({
           shadow="0 0 10px #16a34a,0 0 5px #16a34a"
         />
         {children}
+        <Footer />
       </body>
     </html>
   );
