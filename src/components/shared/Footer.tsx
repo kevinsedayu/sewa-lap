@@ -1,4 +1,4 @@
-import { MapPin, Copyright } from 'lucide-react'
+import { Copyright } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -49,9 +49,7 @@ export default function Footer() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '5px',
         }}>
-          <MapPin size={11} style={{ color: '#3b82f6', flexShrink: 0 }} />
           <span style={{
             fontSize: '11px',
             background: 'linear-gradient(90deg, #6ea8fe, #93c5fd)',
