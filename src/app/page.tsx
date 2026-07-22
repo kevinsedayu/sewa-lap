@@ -80,7 +80,7 @@ export default async function Home() {
         </header>
 
         {/* Hero Section — Video Background, full width, constrained height on desktop */}
-        <div className="w-full relative overflow-hidden text-center text-white h-[65vh] md:h-[85vh] max-h-[900px]">
+        <div className="w-full relative overflow-hidden text-center text-white h-[70vh] md:h-[90vh] max-h-[1000px]">
           
           {/* Robust Background Video with Client Component forcing playback */}
           <BackgroundVideo />
