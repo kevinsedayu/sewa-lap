@@ -81,16 +81,22 @@ export default async function Home() {
         {/* Hero Section — Video Background, full uncropped */}
         <div className="w-full relative overflow-hidden text-center text-white">
           
-          {/* Video — natural aspect ratio, no crop */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{ width: '100%', height: 'auto', display: 'block', filter: 'grayscale(10%)' }}
-          >
-            <source src="/vidlap3.mp4" type="video/mp4" />
-          </video>
+          {/* Video — natural aspect ratio, no crop - Using dangerouslySetInnerHTML to fix React hydration/autoplay bugs */}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `
+                <video
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  style="width: 100%; height: auto; display: block; filter: grayscale(10%);"
+                >
+                  <source src="/vidlap3.mp4" type="video/mp4" />
+                </video>
+              `
+            }}
+          />
 
           {/* Dark overlay + text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-6 sm:pt-0"
