@@ -90,7 +90,7 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
           if (booking.status === 'cancel_request') {
             // Admin memproses permintaan pembatalan dari user
             if (status === 'cancelled') {
-              message = `Halo ${nama},\n\nPermintaan pembatalan sewa lapangan Anda pada ${tanggalFormat} telah DISETUJUI oleh admin.\n\n${catatan ? 'Catatan: ' + catatan + '\n\n' : ''}Silakan hubungi admin untuk proses pengembalian dana (jika ada).\n\nTerima kasih.`
+              message = `Halo ${nama},\n\nPermintaan pembatalan sewa lapangan Anda pada ${tanggalFormat} *TELAH DISETUJUI* oleh admin.\n\nMohon pastikan dana pengembalian (refund) sewa Anda sudah masuk ke rekening Anda (jika ada transaksi pengembalian).\n\nTerima kasih.`
             } else if (status === 'confirmed') {
               message = `Halo ${nama},\n\nPermintaan pembatalan sewa lapangan Anda pada ${tanggalFormat} DITOLAK (tidak jadi batal) oleh admin.\n\nJadwal Anda tetap aktif, silakan datang sesuai jadwal.\n\nTerima kasih.`
             }
