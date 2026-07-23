@@ -81,7 +81,7 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
     if (!error) {
       setBookings(prev => prev.map(b => b.id === id ? { ...b, status, catatan: catatan ?? b.catatan } : b))
       const booking = bookings.find(b => b.id === id)
-      if (booking && (status === 'confirmed' || status === 'cancelled')) {
+      if (booking && (status === 'confirmed' || status === 'cancelled' || status === 'completed')) {
         const phone = booking.profiles?.phone
         if (phone) {
           const nama = booking.profiles?.full_name || 'Penyewa'
@@ -95,10 +95,14 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
               message = `Halo ${nama},\n\nPermintaan pembatalan sewa lapangan Anda pada ${tanggalFormat} DITOLAK (tidak jadi batal) oleh admin.\n\nJadwal Anda tetap aktif, silakan datang sesuai jadwal.\n\nTerima kasih.`
             }
           } else {
-            // Proses normal (pesanan baru / batal sepihak admin)
-            message = status === 'confirmed'
-              ? `Halo ${nama},\n\nPeminjaman lapangan sepak bola Anda telah disetujui oleh admin.\n\nTanggal:\n${tanggalFormat}\n\nSilakan datang sesuai jadwal yang telah ditentukan.\n\nTerima kasih.`
-              : `Halo ${nama},\n\nMohon maaf, peminjaman lapangan sepak bola Anda belum dapat kami setujui.\n\n${catatan ? 'Alasan: ' + catatan + '\n\n' : ''}Silakan kirimkan nomor rekening Anda agar proses pengembalian dana dapat dilakukan.\n\nTerima kasih.`
+            // Proses normal (pesanan baru / batal sepihak admin / selesai)
+            if (status === 'completed') {
+              message = `Halo ${nama},\n\nTerima kasih sudah menyewa lapangan Gelora Bumi Mintarsih pada tanggal ${tanggalFormat}.\n\nJika ada kekurangan, mohon berikan masukan kepada kami. Namun jika Anda merasa nyaman, kami tunggu kedatangan Anda kembali!\n\nSalam Olahraga.`
+            } else if (status === 'confirmed') {
+              message = `Halo ${nama},\n\nPeminjaman lapangan sepak bola Anda telah disetujui oleh admin.\n\nTanggal:\n${tanggalFormat}\n\nSilakan datang sesuai jadwal yang telah ditentukan.\n\nTerima kasih.`
+            } else if (status === 'cancelled') {
+              message = `Halo ${nama},\n\nMohon maaf, peminjaman lapangan Anda pada tanggal ${tanggalFormat} terpaksa KAMI BATALKAN.\n\n${catatan ? 'Alasan Pembatalan:\n' + catatan + '\n\n' : ''}Silakan hubungi admin untuk info lebih lanjut atau proses pengembalian dana.\n\nTerima kasih.`
+            }
           }
           try {
             const res = await fetch('/api/whatsapp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, message }) })
@@ -107,7 +111,7 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
             else { alert('Status diupdate dan notifikasi WhatsApp terkirim!') }
           } catch (err: any) { alert('Status diupdate, error WA: ' + err.message) }
         } else { alert('Status diupdate. Nomor telepon kosong, WA tidak terkirim.') }
-      } else if (!['confirmed','cancelled'].includes(status)) { alert('Status berhasil diupdate!') }
+      } else if (!['confirmed','cancelled','completed'].includes(status)) { alert('Status berhasil diupdate!') }
     } else { alert('Gagal: ' + error.message) }
     setLoadingId(null)
   }
