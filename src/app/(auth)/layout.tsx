@@ -53,15 +53,8 @@ export default async function AuthLayout({
           </div>
 
           {/* Fasilitas Kami */}
-          <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-            <h2 style={{ 
-              fontSize: '24px', 
-              color: '#166534', 
-              marginBottom: '20px', 
-              letterSpacing: '-0.02em',
-              textTransform: 'uppercase',
-              fontWeight: 800
-            }}>
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl font-bold text-emerald-800 mb-4 tracking-tight uppercase">
               Fasilitas Kami
             </h2>
             <div style={{ 

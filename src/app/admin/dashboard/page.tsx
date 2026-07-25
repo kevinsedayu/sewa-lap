@@ -111,8 +111,8 @@ export default async function AdminDashboard() {
       <div className="p-6 sm:p-8 max-w-6xl mx-auto space-y-8">
 
       {/* Fasilitas Gallery */}
-      <div className="mb-8">
-        <h2 className="text-xl font-bold text-emerald-800 mb-4 tracking-tight uppercase text-center sm:text-left">
+      <div className="mb-8 text-center">
+        <h2 className="text-2xl font-bold text-emerald-800 mb-4 tracking-tight uppercase">
           Fasilitas Kami
         </h2>
         <FasilitasGallery />

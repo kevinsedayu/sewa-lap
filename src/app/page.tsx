@@ -121,11 +121,11 @@ export default async function Home() {
         
         {/* Fasilitas Section (Luxurious Cards) */}
         <div className="mb-20">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col items-center justify-center text-center mb-8">
             <div>
               <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Fasilitas</p>
-              <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
-                Fasilitas Lengkap
+              <h2 className="text-4xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
+                Fasilitas Kami
               </h2>
             </div>
           </div>
