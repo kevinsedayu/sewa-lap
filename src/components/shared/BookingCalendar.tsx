@@ -140,6 +140,21 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
     }
   }
 
+  const handleCancelOffline = async (booking: any) => {
+    const isMaintenance = booking.status === 'maintenance'
+    const msg = isMaintenance ? 'Hapus perawatan lapangan ini?' : 'Batalkan booking offline ini?'
+    if (!window.confirm(msg)) return
+
+    try {
+      // Kita langsung delete agar bersih dari kalender (karena tidak perlu riwayat untuk inputan salah)
+      const { error } = await supabase.from('sewa').delete().eq('id', booking.id)
+      if (error) throw error
+      router.refresh()
+    } catch (err: any) {
+      alert("Gagal menghapus: " + err.message)
+    }
+  }
+
   return (
     <div className="relative">
       <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(15,23,42,0.5)] relative overflow-hidden" style={{ background: '#0F172A', border: '1px solid rgba(99,119,180,0.25)' }}>
@@ -255,16 +270,21 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
               }
 
               const detailText = isMaintenance ? (sesiInfo.catatan || 'Ditutup') : (sesiInfo.catatan || sesiInfo.penyewa || 'Penuh')
+              const isOfflineOrMaintenance = isAdmin && currentUserId && sesiInfo.user_id === currentUserId
 
               return (
                 <div key={sesiTypeObj.id} 
-                  className={`flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default
+                  onClick={() => {
+                    if (isOfflineOrMaintenance) handleCancelOffline(sesiInfo)
+                  }}
+                  className={`flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border 
+                    ${isOfflineOrMaintenance ? 'cursor-pointer hover:opacity-80 hover:scale-[0.98] transition-transform' : 'cursor-default'}
                     ${isMaintenance 
                       ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' 
                       : 'bg-red-500/10 text-red-400 border-red-500/20'
                     }
                   `}
-                  title={isAdmin ? `${sesiTypeObj.nama} - ${detailText}` : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}
+                  title={isAdmin ? `${sesiTypeObj.nama} - ${detailText} ${isOfflineOrMaintenance ? '(Klik untuk Hapus)' : ''}` : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}
                 >
                   {isMaintenance ? <AlertCircle size={12} className="shrink-0" /> : <XCircle size={12} className="shrink-0" />}
                   <span className="truncate">{isAdmin ? detailText : (isMaintenance ? (sesiInfo.catatan || 'Ditutup') : 'Penuh')}</span>
