@@ -165,7 +165,6 @@ export default async function Home() {
         {/* Calendar Section */}
         <div id="jadwal" className="mb-20 scroll-mt-24">
           <div className="text-center mb-10">
-            <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Jadwal</p>
             <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
               Cek Ketersediaan
             </h2>
