@@ -68,7 +68,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
   // Cek apakah sesi dibooking
   const getBooking = (day: number, sesi: string) => {
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
-    return bookings.find(b => b.tanggal === dateStr && b.sesi === sesi && (b.status === 'confirmed' || b.status === 'pending' || b.status === 'completed' || b.status === 'maintenance'))
+    return bookings.find(b => b.tanggal === dateStr && b.sesi === sesi && (b.status === 'confirmed' || b.status === 'pending' || b.status === 'completed' || b.status === 'maintenance' || b.status === 'cancel_request'))
   }
 
   // Cari booking user yg sesinya sudah dihapus dari daftar aktif (orphan bookings)
@@ -80,7 +80,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
       b.tanggal === dateStr &&
       !activeSesiIds.has(b.sesi) &&
       b.status !== 'maintenance' &&
-      (b.status === 'confirmed' || b.status === 'pending' || b.status === 'completed')
+      (b.status === 'confirmed' || b.status === 'pending' || b.status === 'completed' || b.status === 'cancel_request')
     )
   }
 
