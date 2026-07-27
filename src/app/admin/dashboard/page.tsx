@@ -59,12 +59,16 @@ export default async function AdminDashboard() {
     confirmed: '#22c55e',
     cancelled: '#ef4444',
     completed: '#6366f1',
+    maintenance: '#eab308',
+    cancel_request: '#f97316',
   }
   const statusLabel: Record<string, string> = {
     pending: 'Menunggu',
     confirmed: 'Dikonfirmasi',
     cancelled: 'Dibatalkan',
     completed: 'Selesai',
+    maintenance: 'Maintenance',
+    cancel_request: 'Minta Batal',
   }
 
   return (
