@@ -1,6 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import BookingCalendar from '@/components/shared/BookingCalendar'
-import BackgroundVideo from '@/components/landing/BackgroundVideo'
 
 export default async function AuthLayout({
   children,
@@ -9,139 +7,16 @@ export default async function AuthLayout({
 }) {
   const supabase = await createClient()
 
-  // Fetch data untuk public landing page
-  const { data: lapangan } = await supabase.from('lapangan').select('*').limit(1).single()
-  const { data: allBookings } = await supabase.from('sewa').select('tanggal, sesi, status, catatan')
-
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'system-ui, sans-serif' }}>
-      {/* Left Panel: Public Landing Page (75%) */}
-      <div style={{ 
-        flex: 3, 
-        background: '#fafafa', 
-        padding: '40px', 
-        overflowY: 'auto', 
-        height: '100vh',
-        display: 'none', // Sembunyikan di mobile
-      }} className="auth-left-panel">
-        
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          {/* Header BUMI MINTARSIH */}
-          {/* Header BUMI MINTARSIH */}
-          <div className="w-full relative overflow-hidden text-center text-white h-[40vh] md:h-[50vh] max-h-[600px] mb-8 rounded-2xl shadow-xl">
-            <BackgroundVideo />
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-6 sm:pt-0"
-              style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%)' }}>
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tighter leading-[1.1] mb-2 sm:mb-4 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)] text-[rgba(255,255,255,0.85)]">
-                SEWA LAPANGAN<br/>
-                <span className="text-[rgba(255,255,255,0.85)]">GELORA BUMI MINTARSIH</span>
-              </h1>
-              <p className="text-xs sm:text-sm text-[rgba(255,255,255,0.85)] max-w-xl mx-auto leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)] px-2 mt-2 sm:mt-0">
-                Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
-              </p>
-            </div>
-          </div>
-
-          {/* Fasilitas Kami */}
-          <div className="mb-8 text-center">
-            <h2 className="text-2xl font-bold text-emerald-800 mb-4 tracking-tight uppercase">
-              Fasilitas Kami
-            </h2>
-            <div style={{ 
-              display: 'flex', 
-              overflowX: 'auto', 
-              scrollSnapType: 'x mandatory', 
-              gap: '16px', 
-              paddingBottom: '16px',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-            }}>
-              {[
-                { src: '/lapangan2.jpeg', label: 'Lapangan Standart Nasional' },
-                { src: '/toilet.jpeg', label: 'Toilet Bersih' },
-                { src: '/mushola.jpeg', label: 'Mushola' },
-                { src: '/bench.jpeg', label: 'Bench Pemain' }
-              ].map((img, i) => (
-                <div key={i} style={{ 
-                  scrollSnapAlign: 'center', 
-                  flex: '0 0 calc(50% - 8px)', 
-                  height: '300px',
-                  borderRadius: '16px', 
-                  overflow: 'hidden', 
-                  position: 'relative',
-                  boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
-                }}>
-                  <img src={img.src} alt={img.label} style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#e4e4e7' }} />
-                  <div style={{ 
-                    position: 'absolute', bottom: 0, left: 0, right: 0, 
-                    background: 'linear-gradient(transparent, rgba(0,0,0,0.8))', 
-                    color: 'white', padding: '24px 16px 16px', textAlign: 'center', 
-                    fontSize: '18px', fontWeight: 600, letterSpacing: '0.02em',
-                    textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
-                  }}>
-                    {img.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Informasi Lapangan */}
-          <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '15px', fontWeight: 600, color: '#09090b', marginBottom: '16px', letterSpacing: '-0.01em' }}>
-              Informasi Lapangan
-            </h2>
-            <div style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', padding: '24px', display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-              <div style={{ flex: 1, minWidth: '250px' }}>
-                <h3 style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 8px', color: '#09090b' }}>{lapangan?.nama || 'Nama Lapangan'}</h3>
-                <p style={{ fontSize: '13px', color: '#52525b', margin: '0 0 16px', lineHeight: '1.5' }}>{lapangan?.deskripsi || 'Deskripsi belum ditambahkan.'}</p>
-                
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }}>
-                  <div>
-                    <div style={{ fontSize: '11px', fontWeight: 600, color: '#a1a1aa', textTransform: 'uppercase', marginBottom: '4px' }}>Harga per Sesi</div>
-                    <div style={{ fontSize: '14px', fontWeight: 600, color: '#16a34a' }}>Sesi Pagi: Rp 200.000 <br/> Sesi Sore: Rp 250.000</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Kalender Booking Publik */}
-          <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontSize: '15px', fontWeight: 600, color: '#09090b', marginBottom: '16px', letterSpacing: '-0.01em' }}>
-              Jadwal Lapangan
-            </h2>
-            <p style={{ fontSize: '13px', color: '#71717a', marginBottom: '16px' }}>
-              Silakan periksa jadwal yang kosong sebelum melakukan booking. Untuk melakukan booking, Anda harus masuk (login) terlebih dahulu menggunakan form di sebelah kanan.
-            </p>
-            <BookingCalendar bookings={allBookings || []} isAdmin={false} />
-          </div>
-        </div>
-
-      </div>
-
-      {/* Right Panel: Auth Forms (25%) */}
-      <div style={{ 
-        flex: 1, 
-        minWidth: '350px', 
-        maxWidth: '100%',
-        background: '#09090b', 
-        borderLeft: '1px solid #27272a', 
-        display: 'flex', 
-        flexDirection: 'column',
-        position: 'relative',
-        zIndex: 10
-      }}>
+    <div className="min-h-screen flex items-center justify-center bg-[#09090b] p-4 font-sans relative overflow-hidden">
+      {/* Background glow effects for aesthetics */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      
+      {/* Center container for Auth Form */}
+      <div className="w-full max-w-md bg-[#0F172A]/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden relative z-10 flex flex-col">
         {children}
       </div>
-
-      <style>{`
-        @media (min-width: 1024px) {
-          .auth-left-panel {
-            display: block !important;
-          }
-        }
-      `}</style>
     </div>
   )
 }
