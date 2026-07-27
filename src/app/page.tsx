@@ -88,9 +88,9 @@ export default async function Home() {
           {/* Dark overlay + text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-6 sm:pt-0"
             style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%)' }}>
-            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-2 sm:mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)] text-emerald-500">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-2 sm:mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)] text-emerald-400">
               SEWA LAPANGAN<br/>
-              <span className="text-emerald-500">GELORA BUMI MINTARSIH</span>
+              <span>GELORA BUMI MINTARSIH</span>
             </h1>
             <p className="text-xs sm:text-lg text-[rgba(255,255,255,0.85)] max-w-2xl mx-auto leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)] px-2 mt-3 sm:mt-0">
               Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
