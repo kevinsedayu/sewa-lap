@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import BookingCalendar from '@/components/shared/BookingCalendar'
+import BackgroundVideo from '@/components/landing/BackgroundVideo'
 
 export default async function AuthLayout({
   children,
@@ -26,29 +27,18 @@ export default async function AuthLayout({
         
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           {/* Header BUMI MINTARSIH */}
-          <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-            <h1 style={{ 
-              fontSize: '40px', 
-              color: '#166534', 
-              letterSpacing: '-0.02em', 
-              margin: '0 0 16px 0',
-              textTransform: 'uppercase',
-              fontWeight: 800
-            }}>
-              Gelora Bumi Mintarsih
-            </h1>
-            <div style={{ 
-              width: '100%', 
-              height: '180px', 
-              borderRadius: '16px', 
-              overflow: 'hidden',
-              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
-            }}>
-              <img 
-                src="/lapangan.jpeg" 
-                alt="Gelora Bumi Mintarsih" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
+          {/* Header BUMI MINTARSIH */}
+          <div className="w-full relative overflow-hidden text-center text-white h-[40vh] md:h-[50vh] max-h-[600px] mb-8 rounded-2xl shadow-xl">
+            <BackgroundVideo />
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-6 sm:pt-0"
+              style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%)' }}>
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tighter leading-[1.1] mb-2 sm:mb-4 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)] text-[rgba(255,255,255,0.85)]">
+                SEWA LAPANGAN<br/>
+                <span className="text-[rgba(255,255,255,0.85)]">GELORA BUMI MINTARSIH</span>
+              </h1>
+              <p className="text-xs sm:text-sm text-[rgba(255,255,255,0.85)] max-w-xl mx-auto leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)] px-2 mt-2 sm:mt-0">
+                Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
+              </p>
             </div>
           </div>
 
