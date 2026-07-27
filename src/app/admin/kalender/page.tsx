@@ -24,6 +24,7 @@ export default async function AdminKalenderPage() {
         isAdmin={true}
         currentUserId={user?.id}
         bookings={(bookings || []).map(b => ({
+          id: b.id,
           tanggal: b.tanggal,
           sesi: b.sesi,
           status: b.status,

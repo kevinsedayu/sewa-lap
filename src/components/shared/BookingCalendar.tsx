@@ -12,6 +12,7 @@ export type CalendarBooking = {
   penyewa?: string
   catatan?: string
   user_id?: string
+  id?: string
 }
 
 export default function BookingCalendar({ bookings, isAdmin = false, currentUserId }: { bookings: CalendarBooking[], isAdmin?: boolean, currentUserId?: string }) {
