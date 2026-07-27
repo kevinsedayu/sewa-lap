@@ -88,7 +88,7 @@ export default async function Home() {
           {/* Dark overlay + text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-6 sm:pt-0"
             style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%)' }}>
-            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-2 sm:mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)] text-[rgba(4, 189, 102, 0.57)]">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-2 sm:mb-6 font-bricolage drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)] text-emerald-500">
               SEWA LAPANGAN<br/>
               <span className="text-emerald-500">GELORA BUMI MINTARSIH</span>
             </h1>
