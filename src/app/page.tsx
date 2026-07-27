@@ -120,7 +120,6 @@ export default async function Home() {
         <div className="mb-20">
           <div className="flex flex-col items-center justify-center text-center mb-8">
             <div>
-              <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Fasilitas</p>
               <h2 className="text-4xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
                 Fasilitas Kami
               </h2>
@@ -133,9 +132,8 @@ export default async function Home() {
         {/* Info Lapangan & Harga */}
         <div className="mb-20 max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-2">Informasi</p>
             <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
-              Detail Sewa
+              Informasi Detail Sewa
             </h2>
           </div>
           <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
