@@ -3,6 +3,7 @@ import Link from 'next/link'
 import BookingCalendar from '@/components/shared/BookingCalendar'
 import FasilitasGallery from '@/components/landing/FasilitasGallery'
 import BackgroundVideo from '@/components/landing/BackgroundVideo'
+import FadeIn from '@/components/shared/FadeIn'
 
 export default async function Home() {
   const supabase = await createClient()
