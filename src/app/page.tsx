@@ -49,7 +49,7 @@ export default async function Home() {
     <div className="min-h-screen bg-transparent font-sans pb-12">
       {/* Top Navbar Bar - Dark & Luxurious */}
       <div className="w-full">
-        <header className="flex items-center justify-between px-6 py-4 bg-[#09090b] text-white z-50 border-b border-zinc-800">
+        <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#09090b]/90 backdrop-blur-md text-white border-b border-zinc-800 shadow-lg">
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-transform hover:scale-105" />
             <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>

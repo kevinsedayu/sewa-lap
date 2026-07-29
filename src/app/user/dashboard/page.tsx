@@ -64,7 +64,7 @@ export default async function UserDashboard() {
       {/* Top Header & Hero Image — FULL WIDTH */}
       <div className="w-full">
         {/* Top Navbar Bar */}
-        <div className="flex items-center pl-20 pr-6 py-4 bg-zinc-900 text-white">
+        <div className="sticky top-0 z-50 flex items-center pl-20 pr-6 py-4 bg-zinc-900/90 backdrop-blur-md text-white border-b border-zinc-800 shadow-lg">
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-md transition-transform hover:scale-105" />
             <span className="text-lg font-bold tracking-wide">Gelora Bumi Mintarsih</span>
