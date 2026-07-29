@@ -56,7 +56,7 @@ export default async function Home() {
           </div>
           <div>
             {user ? (
-              <Link href={role === 'admin' ? '/admin/dashboard' : '/user/dashboard'} className="bg-emerald-600 hover:bg-emerald-500 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+              <Link href={dashboardPath} className="bg-emerald-600 hover:bg-emerald-500 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">
                 Dashboard
               </Link>
             ) : (
