@@ -117,35 +117,33 @@ export default function LoginPage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 32px 24px;
-          min-height: 100vh;
+          padding: 28px 32px 32px;
         }
         .auth-form-card {
           width: 100%;
           max-width: 400px;
         }
         .auth-form-header {
-          margin-bottom: 28px;
+          margin-bottom: 24px;
         }
         .auth-title {
-          font-size: 22px;
+          font-size: 20px;
           font-weight: 700;
-          color: #fafafa;
+          color: #09090b;
           letter-spacing: -0.03em;
-          margin-bottom: 6px;
+          margin-bottom: 4px;
         }
         .auth-subtitle {
-          font-size: 14px;
-          color: #a1a1aa;
+          font-size: 13px;
+          color: #71717a;
         }
         .auth-link {
-          color: #fafafa;
-          font-weight: 500;
-          text-decoration: none;
-          border-bottom: 1px solid #fafafa;
-          padding-bottom: 1px;
+          color: #18181b;
+          font-weight: 600;
+          text-decoration: underline;
+          text-underline-offset: 3px;
         }
-        .auth-link:hover { opacity: 0.6; }
+        .auth-link:hover { color: #52525b; }
         .alert-error {
           background: #fef2f2;
           border: 1px solid #fecaca;
@@ -167,8 +165,8 @@ export default function LoginPage() {
         }
         .field-label {
           font-size: 13px;
-          font-weight: 500;
-          color: #d4d4d8;
+          font-weight: 600;
+          color: #18181b;
         }
         .field-label-row {
           display: flex;
@@ -177,10 +175,10 @@ export default function LoginPage() {
         }
         .forgot-link {
           font-size: 12px;
-          color: #a1a1aa;
+          color: #71717a;
           text-decoration: none;
         }
-        .forgot-link:hover { color: #fafafa; }
+        .forgot-link:hover { color: #18181b; }
         .field-wrapper {
           position: relative;
           display: flex;
@@ -195,18 +193,18 @@ export default function LoginPage() {
         .field-input {
           width: 100%;
           padding: 10px 13px 10px 38px;
-          border: 1px solid #27272a;
+          border: 1px solid #d4d4d8;
           border-radius: 8px;
           font-size: 14px;
-          color: #fafafa;
-          background: #18181b;
+          color: #09090b;
+          background: #fff;
           outline: none;
           transition: border-color 0.15s, box-shadow 0.15s;
         }
-        .field-input::placeholder { color: #71717a; }
+        .field-input::placeholder { color: #a1a1aa; }
         .field-input:focus {
-          border-color: #fafafa;
-          box-shadow: 0 0 0 3px rgba(250,250,250,0.1);
+          border-color: #09090b;
+          box-shadow: 0 0 0 3px rgba(9,9,11,0.08);
         }
         .field-input-padded { padding-right: 40px; }
         .field-eye {
@@ -220,7 +218,7 @@ export default function LoginPage() {
           padding: 4px;
           cursor: pointer;
         }
-        .field-eye:hover { color: #52525b; }
+        .field-eye:hover { color: #18181b; }
         .btn-primary {
           width: 100%;
           display: flex;
@@ -228,8 +226,8 @@ export default function LoginPage() {
           justify-content: center;
           gap: 8px;
           padding: 11px 20px;
-          background: #fafafa;
-          color: #09090b;
+          background: #09090b;
+          color: #fafafa;
           border: none;
           border-radius: 8px;
           font-size: 14px;
@@ -238,7 +236,7 @@ export default function LoginPage() {
           transition: opacity 0.15s;
           margin-top: 4px;
         }
-        .btn-primary:hover:not(:disabled) { opacity: 0.85; }
+        .btn-primary:hover:not(:disabled) { background: #27272a; }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
         .spin { animation: spin 0.8s linear infinite; }
         @keyframes spin {
