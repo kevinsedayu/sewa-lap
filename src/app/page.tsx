@@ -47,13 +47,10 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-transparent font-sans pb-12">
-      {/* Top Navbar Bar - Dark & Luxurious */}
+      {/* Top Navbar / Header (Sticky) */}
       <div className="w-full">
-        <header className="flex items-center justify-between px-6 py-4 bg-[#09090b] text-white z-50 border-b border-zinc-800">
+        <header className="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 backdrop-blur-md bg-black/60 border-b border-white/10 text-white shadow-md transition-all">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-transform hover:scale-105" />
-            <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>
-          </div>
             <img src="/logo.png" alt="Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain shrink-0 drop-shadow-md transition-transform hover:scale-105" />
             <span className="text-base sm:text-lg font-bold tracking-wide font-bricolage">Gelora Bumi Mintarsih</span>
           </div>
