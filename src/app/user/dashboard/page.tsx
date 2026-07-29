@@ -73,11 +73,16 @@ export default async function UserDashboard() {
 
         {/* Hero Banner Video */}
         <div className="w-full relative overflow-hidden h-[50vh] md:h-[85vh] max-h-[900px]">
-          <img
-            src="/vidlap3.gif"
-            alt="Background Lapangan"
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/lapangan.jpeg"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: 'grayscale(10%)' }}
-          />
+          >
+            <source src="/vidlap3.webm" type="video/webm" />
+          </video>
           <div className="absolute inset-0 bg-black/20 pointer-events-none"></div>
         </div>
 
