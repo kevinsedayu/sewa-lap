@@ -44,10 +44,10 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
 
   return (
     <>
-      {/* Hamburger Button — always visible top-left */}
+      {/* Hamburger Button — always visible top-left, above sticky header */}
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-4 left-4 z-50 w-10 h-10 flex items-center justify-center rounded-lg bg-zinc-900 text-white shadow-md hover:bg-zinc-700 transition-colors"
+        className="fixed top-4 left-4 z-[60] w-10 h-10 flex items-center justify-center rounded-lg bg-zinc-900 text-white shadow-md hover:bg-zinc-700 transition-colors"
         aria-label="Buka menu"
       >
         <Menu size={20} />
