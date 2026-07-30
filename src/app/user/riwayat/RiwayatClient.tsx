@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { XCircle, AlertTriangle } from 'lucide-react'
+import { toast } from 'sonner'
 
 const statusColor: Record<string, string> = {
   pending: '#f59e0b',
@@ -38,7 +39,7 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
       // Menggunakan location.href agar di HP langsung pindah ke aplikasi WA (tidak diblokir popup blocker)
       window.location.href = waUrl
     } else {
-      alert('Gagal mengirim permintaan: ' + error.message)
+      toast.error('Gagal mengirim permintaan: ' + error.message)
     }
     setLoading(false)
   }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { toast } from 'sonner'
 
 export type TransaksiKeuangan = {
   id: string
@@ -68,7 +69,7 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
         setShowForm(false)
         resetForm()
       } else {
-        alert("Gagal mengupdate data: " + (error?.message || 'Unknown error'))
+        toast.error("Gagal mengupdate data: " + (error?.message || 'Unknown error'))
       }
     } else {
       const { data, error } = await supabase
@@ -86,7 +87,7 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
         setShowForm(false)
         resetForm()
       } else {
-        alert("Gagal menyimpan data: " + (error?.message || 'Unknown error'))
+        toast.error("Gagal menyimpan data: " + (error?.message || 'Unknown error'))
       }
     }
     setIsSubmitting(false)
@@ -102,7 +103,7 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
 
   const handleDelete = async (id: string, sumber: string | undefined) => {
     if (sumber === 'Sewa') {
-      alert('Transaksi sewa tidak dapat dihapus dari menu keuangan. Silakan kelola di menu Booking / Kalender.')
+      toast.warning('Transaksi sewa tidak dapat dihapus dari menu keuangan. Silakan kelola di menu Booking / Kalender.')
       return
     }
     if (!confirm('Yakin ingin menghapus catatan keuangan ini?')) return
@@ -111,13 +112,13 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
     if (!error) {
       setTransaksi(transaksi.filter(t => t.id !== id))
     } else {
-      alert('Gagal menghapus: ' + error.message)
+      toast.error('Gagal menghapus: ' + error.message)
     }
   }
 
   const handleEdit = (t: TransaksiKeuangan) => {
     if (t.sumber === 'Sewa') {
-      alert('Transaksi sewa tidak dapat diubah dari menu keuangan. Silakan kelola di menu Booking / Kalender.')
+      toast.warning('Transaksi sewa tidak dapat diubah dari menu keuangan. Silakan kelola di menu Booking / Kalender.')
       return
     }
     setEditingId(t.id)

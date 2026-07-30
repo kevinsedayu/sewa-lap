@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Search, Printer, XCircle, CheckCircle2, Ban, FileText, ChevronLeft, ChevronRight, Calendar } from 'lucide-react'
+import { toast } from 'sonner'
 
 type Booking = {
   id: string
@@ -107,12 +108,12 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
           try {
             const res = await fetch('/api/whatsapp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, message }) })
             const result = await res.json()
-            if (!res.ok) { alert('Status diupdate, gagal kirim WA: ' + (result.error || 'Unknown')) }
-            else { alert('Status diupdate dan notifikasi WhatsApp terkirim!') }
-          } catch (err: any) { alert('Status diupdate, error WA: ' + err.message) }
-        } else { alert('Status diupdate. Nomor telepon kosong, WA tidak terkirim.') }
-      } else if (!['confirmed','cancelled','completed'].includes(status)) { alert('Status berhasil diupdate!') }
-    } else { alert('Gagal: ' + error.message) }
+            if (!res.ok) { toast.warning('Status diupdate, gagal kirim WA: ' + (result.error || 'Unknown')) }
+            else { toast.success('Status diupdate dan notifikasi WhatsApp terkirim!') }
+          } catch (err: any) { toast.warning('Status diupdate, error WA: ' + err.message) }
+        } else { toast.warning('Status diupdate. Nomor telepon kosong, WA tidak terkirim.') }
+      } else if (!['confirmed','cancelled','completed'].includes(status)) { toast.success('Status berhasil diupdate!') }
+    } else { toast.error('Gagal: ' + error.message) }
     setLoadingId(null)
   }
 

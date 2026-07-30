@@ -30,6 +30,7 @@ export const metadata: Metadata = {
 
 import NextTopLoader from 'nextjs-toploader';
 import Footer from '@/components/shared/Footer';
+import { Toaster } from 'sonner';
 
 export default function RootLayout({
   children,
@@ -52,6 +53,15 @@ export default function RootLayout({
         />
         {children}
         <Footer />
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          duration={4000}
+          toastOptions={{
+            style: { fontFamily: 'var(--font-inter)' }
+          }}
+        />
       </body>
     </html>
   );

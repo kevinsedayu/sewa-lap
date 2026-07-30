@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { toast } from 'sonner'
 
 type Profile = {
   id: string
@@ -20,7 +21,7 @@ export default function UsersTable({ initialUsers, currentUserId }: { initialUse
 
   const toggleRole = async (userId: string, currentRole: string) => {
     if (userId === currentUserId) {
-      alert("Anda tidak dapat mengubah peran Anda sendiri.")
+      toast.error("Anda tidak dapat mengubah peran Anda sendiri.")
       return
     }
 
@@ -44,7 +45,7 @@ export default function UsersTable({ initialUsers, currentUserId }: { initialUse
 
   const deleteUser = async (userId: string) => {
     if (userId === currentUserId) {
-      alert("Anda tidak dapat menghapus akun Anda sendiri.")
+      toast.error("Anda tidak dapat menghapus akun Anda sendiri.")
       return
     }
 

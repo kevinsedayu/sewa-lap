@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 import { Tag } from 'lucide-react'
 
 export type Sesi = {
@@ -77,7 +78,7 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
 
       if (error) {
         console.error('Gagal menghapus data maintenance sesi:', error.message)
-        alert('Peringatan: Gagal menghapus entri perawatan sesi ini dari database: ' + error.message)
+        toast.error('Peringatan: Gagal menghapus entri perawatan sesi ini dari database: ' + error.message)
       }
     } catch (err: any) {
       console.error('Error saat menghapus sesi:', err)
@@ -112,10 +113,10 @@ export default function InfoLapanganClient({ initialData }: { initialData: any }
         .eq('id', initialData.id)
 
       if (error) throw error
-      alert('Data lapangan berhasil diperbarui!')
+      toast.success('Data lapangan berhasil diperbarui!')
       router.refresh()
     } catch(err: any) {
-      alert('Gagal menyimpan: ' + err.message)
+      toast.error('Gagal menyimpan: ' + err.message)
     } finally {
       setIsSaving(false)
     }

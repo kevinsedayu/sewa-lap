@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, ChevronRight, CheckCircle2, XCircle, AlertCircle, Info } from 'lucide-react'
+import { toast } from 'sonner'
 
 export type CalendarBooking = {
   tanggal: string
@@ -135,7 +136,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
       setShowModal(false)
       router.refresh() // Refresh page to get updated bookings
     } catch (err: any) {
-      alert("Gagal menyimpan: " + err.message)
+      toast.error("Gagal menyimpan: " + err.message)
     } finally {
       setIsSubmitting(false)
     }
@@ -152,7 +153,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
       if (error) throw error
       router.refresh()
     } catch (err: any) {
-      alert("Gagal menghapus: " + err.message)
+      toast.error("Gagal menghapus: " + err.message)
     }
   }
 
