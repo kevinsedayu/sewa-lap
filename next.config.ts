@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+
+  // Izinkan domain Supabase Storage untuk video
+  async rewrites() {
+    return []
+  },
 };
 
 export default nextConfig;

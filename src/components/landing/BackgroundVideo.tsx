@@ -68,10 +68,8 @@ export default function BackgroundVideo() {
         playsInline
         style={coverStyle}
       >
-        {/* WebM lebih kecil → prioritas utama */}
-        <source src="/vidlap3.webm" type="video/webm" />
-        {/* MP4 sebagai fallback jika WebM tidak support */}
-        <source src="/vidlap3.mp4" type="video/mp4" />
+        {/* Video dari Supabase Storage — tidak ada batas ukuran, streaming aman */}
+        <source src="https://ooqlnunagbxhpbusgkjc.supabase.co/storage/v1/object/public/videos/vidlap3.mp4" type="video/mp4" />
       </video>
 
       {/* Foto fallback jika video belum load — tidak terpotong karena pakai object-fit: cover */}
