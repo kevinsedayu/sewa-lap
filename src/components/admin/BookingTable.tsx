@@ -46,7 +46,7 @@ export default function BookingTable({ initialBookings }: { initialBookings: Boo
   const [selectedMonth, setSelectedMonth] = useState<string>(
     `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
   )
-  const [showAllMonths, setShowAllMonths] = useState(false)
+  const [showAllMonths, setShowAllMonths] = useState(true)
 
   const monthLabel = useMemo(() => {
     const [y, m] = selectedMonth.split('-').map(Number)
