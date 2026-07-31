@@ -164,12 +164,8 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
     const bulanLabel = showAllMonths ? 'Semua Bulan' : monthLabel
     const filterLabel = filter === 'all' ? 'Semua' : (statusLabel[filter] || filter)
     const nowLabel = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+    const fileName = `laporan-persewaan-${showAllMonths ? 'semua' : selectedMonth}.csv`
 
-    const infoRows = [
-      ['Laporan Persewaan Lapangan Gelora Bumi Mintarsih'],
-      [`Bulan: ${bulanLabel}`, `Filter Status: ${filterLabel}`, `Jumlah: ${filtered.length} data`, `Dicetak: ${nowLabel}`],
-      [],
-    ]
     const header = ['No', 'Nama Penyewa', 'No. Telepon', 'Tanggal', 'Sesi', 'Jam Mulai', 'Jam Selesai', 'Total Harga (Rp)', 'Status', 'Catatan']
     const dataRows = filtered.map((b, i) => [
       i + 1,
@@ -183,22 +179,121 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       statusLabel[b.status] || b.status,
       b.catatan || '-',
     ])
-    const allRows = [...infoRows, header, ...dataRows]
-    const csv = allRows.map(row =>
+    
+    const csvRows = [header, ...dataRows]
+    const csv = '\\uFEFF' + csvRows.map(row =>
       row.map(cell => {
         const val = String(cell ?? '')
-        return val.includes(',') || val.includes('"') || val.includes('\n')
+        return val.includes(',') || val.includes('"') || val.includes('\\n')
           ? `"${val.replace(/"/g, '""')}"` : val
       }).join(',')
-    ).join('\n')
-    const bom = '\uFEFF'
-    const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `laporan-persewaan-${showAllMonths ? 'semua' : selectedMonth}.csv`
-    a.click()
-    URL.revokeObjectURL(url)
+    ).join('\\n')
+
+    const tableRows = filtered.map((b, i) => `
+      <tr class="${i % 2 === 0 ? 'even' : 'odd'}">
+        <td class="center">${i + 1}</td>
+        <td><strong>${b.profiles?.full_name || '-'}</strong><br><span class="sub">${b.profiles?.phone || '-'}</span></td>
+        <td>${new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+        <td class="capitalize">${b.sesi || '-'}<br><span class="sub">${b.jam_mulai?.slice(0,5)||''} - ${b.jam_selesai?.slice(0,5)||''}</span></td>
+        <td class="right">Rp ${Number(b.total_harga).toLocaleString('id-ID')}</td>
+        <td class="center"><span class="badge status-${b.status}">${statusLabel[b.status] || b.status}</span></td>
+        <td>${b.catatan || '-'}</td>
+      </tr>`).join('')
+
+    const totalPendapatan = filtered.filter(b=>b.status==='confirmed'||b.status==='completed').reduce((s,b)=>s+Number(b.total_harga),0)
+
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8">
+<title>Preview Export Excel - Laporan Persewaan</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; font-size: 13px; color: #09090b; background: #f4f4f5; }
+  .toolbar { position: sticky; top: 0; z-index: 10; background: #09090b; color: white; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .toolbar h2 { font-size: 15px; font-weight: 700; }
+  .toolbar .subtitle { font-size: 12px; color: #a1a1aa; margin-top: 2px; }
+  .btn-download { background: #16a34a; color: white; border: none; padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .btn-download:hover { background: #15803d; }
+  .wrapper { max-width: 1100px; margin: 28px auto; background: white; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); overflow: hidden; }
+  .report-header { padding: 28px 32px 20px; border-bottom: 2px solid #e4e4e7; }
+  .report-header h1 { font-size: 20px; font-weight: 800; color: #09090b; }
+  .report-header p { font-size: 13px; color: #71717a; margin-top: 4px; }
+  .meta { display: flex; gap: 32px; padding: 16px 32px; background: #fafafa; border-bottom: 1px solid #e4e4e7; flex-wrap: wrap; }
+  .meta-item label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; letter-spacing: .05em; display: block; }
+  .meta-item span { font-size: 13px; font-weight: 600; color: #09090b; }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: #f4f4f5; }
+  th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #52525b; border-bottom: 2px solid #e4e4e7; white-space: nowrap; }
+  td { padding: 12px 16px; border-bottom: 1px solid #f4f4f5; vertical-align: middle; }
+  tr.even td { background: #fff; }
+  tr.odd td { background: #fafafa; }
+  tr:hover td { background: #f0fdf4 !important; }
+  .center { text-align: center; }
+  .right { text-align: right; font-weight: 600; }
+  .capitalize { text-transform: capitalize; }
+  .sub { font-size: 11px; color: #a1a1aa; line-height:1.4; display:inline-block; margin-top:2px; }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .status-confirmed { background: #dcfce7; color: #16a34a; }
+  .status-pending { background: #fef9c3; color: #a16207; }
+  .status-cancelled { background: #fee2e2; color: #dc2626; }
+  .status-completed { background: #ede9fe; color: #7c3aed; }
+  .status-maintenance { background: #f3e8ff; color: #9333ea; }
+  .status-cancel_request { background: #ffedd5; color: #ea580c; }
+  .footer { padding: 20px 32px; text-align: center; font-size: 11px; color: #a1a1aa; border-top: 1px solid #e4e4e7; }
+  .summary { display: flex; gap: 16px; padding: 20px 32px; background: #f4f4f5; border-top: 2px solid #e4e4e7; }
+  .summary-item { flex: 1; background: white; border-radius: 8px; padding: 14px 18px; border: 1px solid #e4e4e7; }
+  .summary-item label { font-size: 11px; color: #71717a; font-weight: 600; display: block; margin-bottom: 4px; text-transform:uppercase; letter-spacing:0.05em; }
+  .summary-item span { font-size: 18px; font-weight: 800; color: #09090b; }
+</style></head><body>
+<div class="toolbar">
+  <div>
+    <h2>📊 Preview Export Excel - Persewaan</h2>
+    <div class="subtitle">Periksa data di bawah, lalu klik tombol download untuk menyimpan ke Excel</div>
+  </div>
+  <button class="btn-download" onclick="downloadCSV()">⬇ Download Excel (.csv)</button>
+</div>
+<div class="wrapper">
+  <div class="report-header">
+    <h1>Laporan Persewaan Lapangan</h1>
+    <p>Gelora Bumi Mintarsih - Kalisegoro, Gunungpati, Kota Semarang</p>
+  </div>
+  <div class="meta">
+    <div class="meta-item"><label>Bulan</label><span>${bulanLabel}</span></div>
+    <div class="meta-item"><label>Filter Status</label><span>${filterLabel}</span></div>
+    <div class="meta-item"><label>Total Data</label><span>${filtered.length} transaksi</span></div>
+    <div class="meta-item"><label>Tanggal Export</label><span>${nowLabel}</span></div>
+  </div>
+  <table>
+    <thead><tr>
+      <th style="width:40px; text-align:center">No</th>
+      <th>Penyewa</th>
+      <th>Tanggal</th>
+      <th>Sesi</th>
+      <th style="text-align:right">Total</th>
+      <th style="text-align:center">Status</th>
+      <th>Catatan</th>
+    </tr></thead>
+    <tbody>${tableRows}</tbody>
+  </table>
+  <div class="summary">
+    <div class="summary-item"><label>Total Transaksi</label><span>${filtered.length} data</span></div>
+    <div class="summary-item"><label>Total Pendapatan (Selesai/Dikonfirmasi)</label><span style="color:#16a34a">Rp ${totalPendapatan.toLocaleString('id-ID')}</span></div>
+  </div>
+  <div class="footer">Sistem Persewaan Lapangan Gelora Bumi Mintarsih &bull; Dicetak: ${nowLabel}</div>
+</div>
+<script>
+  const csvData = \`${csv.replace(/\\n/g, '\\\\n').replace(/'/g, "\\'")}\`;
+  const fileName = "${fileName}";
+  function downloadCSV() {
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fileName; a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body></html>`
+
+    const win = window.open('', '_blank')
+    if (win) { win.document.write(html); win.document.close(); }
   }
 
   const filtered = bookings

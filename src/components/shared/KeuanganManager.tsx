@@ -157,13 +157,8 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
   const handleExportExcel = () => {
     const bulanLabel = formatBulanTahun(filterBulan)
     const nowLabel = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+    const fileName = `laporan-keuangan-${filterBulan}.csv`
 
-    const infoRows = [
-      ['Laporan Keuangan Gelora Bumi Mintarsih'],
-      [`Periode: ${bulanLabel}`, `Dicetak: ${nowLabel}`],
-      [`Total Pemasukan: Rp ${currentPemasukan.toLocaleString('id-ID')}`, `Total Pengeluaran: Rp ${currentPengeluaran.toLocaleString('id-ID')}`, `Saldo: Rp ${currentSaldo.toLocaleString('id-ID')}`],
-      [],
-    ]
     const header = ['No', 'Tanggal', 'Tipe', 'Keterangan', 'Jumlah (Rp)', 'Sumber']
     const dataRows = filteredTransaksi.map((t, i) => [
       i + 1,
@@ -173,22 +168,116 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
       Number(t.jumlah),
       t.sumber || 'Manual',
     ])
-    const allRows = [...infoRows, header, ...dataRows]
-    const csv = allRows.map(row =>
+    
+    const csvRows = [header, ...dataRows]
+    const csv = '\\uFEFF' + csvRows.map(row =>
       row.map(cell => {
         const val = String(cell ?? '')
-        return val.includes(',') || val.includes('"') || val.includes('\n')
+        return val.includes(',') || val.includes('"') || val.includes('\\n')
           ? `"${val.replace(/"/g, '""')}"` : val
       }).join(',')
-    ).join('\n')
-    const bom = '\uFEFF'
-    const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `laporan-keuangan-${filterBulan}.csv`
-    a.click()
-    URL.revokeObjectURL(url)
+    ).join('\\n')
+
+    const tableRows = filteredTransaksi.map((t, i) => `
+      <tr class="${i % 2 === 0 ? 'even' : 'odd'}">
+        <td class="center">${i + 1}</td>
+        <td>${new Date(t.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+        <td class="center"><span class="badge tipe-${t.tipe}">${t.tipe === 'pemasukan' ? 'Pemasukan' : 'Pengeluaran'}</span></td>
+        <td>${t.keterangan}</td>
+        <td class="right ${t.tipe === 'pemasukan' ? 'text-green' : 'text-red'}">Rp ${Number(t.jumlah).toLocaleString('id-ID')}</td>
+        <td class="center">${t.sumber || 'Manual'}</td>
+      </tr>`).join('')
+
+    const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8">
+<title>Preview Export Excel - Laporan Keuangan</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; font-size: 13px; color: #09090b; background: #f4f4f5; }
+  .toolbar { position: sticky; top: 0; z-index: 10; background: #09090b; color: white; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .toolbar h2 { font-size: 15px; font-weight: 700; }
+  .toolbar .subtitle { font-size: 12px; color: #a1a1aa; margin-top: 2px; }
+  .btn-download { background: #16a34a; color: white; border: none; padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .btn-download:hover { background: #15803d; }
+  .wrapper { max-width: 1000px; margin: 28px auto; background: white; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); overflow: hidden; }
+  .report-header { padding: 28px 32px 20px; border-bottom: 2px solid #e4e4e7; }
+  .report-header h1 { font-size: 20px; font-weight: 800; color: #09090b; }
+  .report-header p { font-size: 13px; color: #71717a; margin-top: 4px; }
+  .meta { display: flex; gap: 32px; padding: 16px 32px; background: #fafafa; border-bottom: 1px solid #e4e4e7; flex-wrap: wrap; }
+  .meta-item label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; letter-spacing: .05em; display: block; }
+  .meta-item span { font-size: 13px; font-weight: 600; color: #09090b; }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: #f4f4f5; }
+  th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #52525b; border-bottom: 2px solid #e4e4e7; white-space: nowrap; }
+  td { padding: 12px 16px; border-bottom: 1px solid #f4f4f5; vertical-align: middle; }
+  tr.even td { background: #fff; }
+  tr.odd td { background: #fafafa; }
+  tr:hover td { background: #f0fdf4 !important; }
+  .center { text-align: center; }
+  .right { text-align: right; font-weight: 600; }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .tipe-pemasukan { background: #dcfce7; color: #16a34a; }
+  .tipe-pengeluaran { background: #fee2e2; color: #dc2626; }
+  .text-green { color: #16a34a; }
+  .text-red { color: #dc2626; }
+  .footer { padding: 20px 32px; text-align: center; font-size: 11px; color: #a1a1aa; border-top: 1px solid #e4e4e7; }
+  .summary { display: flex; gap: 16px; padding: 20px 32px; background: #f4f4f5; border-top: 2px solid #e4e4e7; }
+  .summary-item { flex: 1; background: white; border-radius: 8px; padding: 14px 18px; border: 1px solid #e4e4e7; }
+  .summary-item label { font-size: 11px; color: #71717a; font-weight: 600; display: block; margin-bottom: 4px; text-transform:uppercase; letter-spacing:0.05em; }
+  .summary-item span { font-size: 18px; font-weight: 800; }
+  .summary-item .pemasukan { color: #16a34a; }
+  .summary-item .pengeluaran { color: #dc2626; }
+  .summary-item .saldo { color: #09090b; }
+</style></head><body>
+<div class="toolbar">
+  <div>
+    <h2>📊 Preview Export Excel - Keuangan</h2>
+    <div class="subtitle">Periksa data di bawah, lalu klik tombol download untuk menyimpan ke Excel</div>
+  </div>
+  <button class="btn-download" onclick="downloadCSV()">⬇ Download Excel (.csv)</button>
+</div>
+<div class="wrapper">
+  <div class="report-header">
+    <h1>Laporan Keuangan</h1>
+    <p>Gelora Bumi Mintarsih - Kalisegoro, Gunungpati, Kota Semarang</p>
+  </div>
+  <div class="meta">
+    <div class="meta-item"><label>Periode</label><span>${bulanLabel}</span></div>
+    <div class="meta-item"><label>Total Data</label><span>${filteredTransaksi.length} transaksi</span></div>
+    <div class="meta-item"><label>Tanggal Export</label><span>${nowLabel}</span></div>
+  </div>
+  <table>
+    <thead><tr>
+      <th style="width:40px; text-align:center">No</th>
+      <th>Tanggal</th>
+      <th style="text-align:center">Tipe</th>
+      <th>Keterangan</th>
+      <th style="text-align:right">Jumlah</th>
+      <th style="text-align:center">Sumber</th>
+    </tr></thead>
+    <tbody>${tableRows}</tbody>
+  </table>
+  <div class="summary">
+    <div class="summary-item"><label>Total Pemasukan</label><span class="pemasukan">Rp ${currentPemasukan.toLocaleString('id-ID')}</span></div>
+    <div class="summary-item"><label>Total Pengeluaran</label><span class="pengeluaran">Rp ${currentPengeluaran.toLocaleString('id-ID')}</span></div>
+    <div class="summary-item"><label>Saldo Tersisa</label><span class="saldo">Rp ${currentSaldo.toLocaleString('id-ID')}</span></div>
+  </div>
+  <div class="footer">Sistem Keuangan Lapangan Gelora Bumi Mintarsih &bull; Dicetak: ${nowLabel}</div>
+</div>
+<script>
+  const csvData = \`${csv.replace(/\\n/g, '\\\\n').replace(/'/g, "\\'")}\`;
+  const fileName = "${fileName}";
+  function downloadCSV() {
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fileName; a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body></html>`
+
+    const win = window.open('', '_blank')
+    if (win) { win.document.write(html); win.document.close(); }
   }
 
 
