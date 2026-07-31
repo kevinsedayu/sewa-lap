@@ -160,6 +160,47 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
     if (win) { win.document.write(html); win.document.close(); win.focus(); setTimeout(() => win.print(), 500) }
   }
 
+  const handleExportExcel = () => {
+    const bulanLabel = showAllMonths ? 'Semua Bulan' : monthLabel
+    const filterLabel = filter === 'all' ? 'Semua' : (statusLabel[filter] || filter)
+    const nowLabel = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+
+    const infoRows = [
+      ['Laporan Persewaan Lapangan Gelora Bumi Mintarsih'],
+      [`Bulan: ${bulanLabel}`, `Filter Status: ${filterLabel}`, `Jumlah: ${filtered.length} data`, `Dicetak: ${nowLabel}`],
+      [],
+    ]
+    const header = ['No', 'Nama Penyewa', 'No. Telepon', 'Tanggal', 'Sesi', 'Jam Mulai', 'Jam Selesai', 'Total Harga (Rp)', 'Status', 'Catatan']
+    const dataRows = filtered.map((b, i) => [
+      i + 1,
+      b.profiles?.full_name || '-',
+      b.profiles?.phone || '-',
+      new Date(b.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+      b.sesi || '-',
+      b.jam_mulai?.slice(0, 5) || '-',
+      b.jam_selesai?.slice(0, 5) || '-',
+      Number(b.total_harga) || 0,
+      statusLabel[b.status] || b.status,
+      b.catatan || '-',
+    ])
+    const allRows = [...infoRows, header, ...dataRows]
+    const csv = allRows.map(row =>
+      row.map(cell => {
+        const val = String(cell ?? '')
+        return val.includes(',') || val.includes('"') || val.includes('\n')
+          ? `"${val.replace(/"/g, '""')}"` : val
+      }).join(',')
+    ).join('\n')
+    const bom = '\uFEFF'
+    const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `laporan-persewaan-${showAllMonths ? 'semua' : selectedMonth}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const filtered = bookings
     .filter(b => {
       // Month filter
@@ -242,6 +283,10 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
           <button onClick={handlePrint} title="Cetak / Export PDF"
             className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border border-zinc-800 bg-[#09090b] hover:bg-zinc-900 text-zinc-400 hover:text-white transition-colors shadow-sm whitespace-nowrap">
             <Printer size={14} /> Cetak / PDF
+          </button>
+          <button onClick={handleExportExcel} title="Export ke Excel / CSV"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border border-emerald-800/60 bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-400 hover:text-emerald-200 transition-colors shadow-sm whitespace-nowrap">
+            <FileText size={14} /> Export Excel
           </button>
         </div>
       </div>
