@@ -285,7 +285,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
             <Printer size={14} /> Cetak / PDF
           </button>
           <button onClick={handleExportExcel} title="Export ke Excel / CSV"
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border border-emerald-800/60 bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-400 hover:text-emerald-200 transition-colors shadow-sm whitespace-nowrap">
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border border-zinc-800 bg-[#09090b] hover:bg-zinc-900 text-zinc-400 hover:text-white transition-colors shadow-sm whitespace-nowrap">
             <FileText size={14} /> Export Excel
           </button>
         </div>

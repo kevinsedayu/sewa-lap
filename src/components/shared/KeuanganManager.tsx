@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
+import { FileText, Printer } from 'lucide-react'
 
 export type TransaksiKeuangan = {
   id: string
@@ -129,14 +130,9 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
     setShowForm(true)
   }
 
-  // Handle Print
-  const handlePrint = () => {
-    window.print()
-  }
-
   // Filter transaksi berdasarkan bulan
   const filteredTransaksi = transaksi.filter(t => {
-    const tBulan = t.tanggal.substring(0, 7) // 'YYYY-MM-DD' -> 'YYYY-MM'
+    const tBulan = t.tanggal.substring(0, 7)
     return tBulan === filterBulan
   })
 
@@ -151,6 +147,50 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
     const date = new Date(parseInt(y), parseInt(m) - 1, 1)
     return date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })
   }
+
+  // Handle Print
+  const handlePrint = () => {
+    window.print()
+  }
+
+  // Handle Export Excel (CSV)
+  const handleExportExcel = () => {
+    const bulanLabel = formatBulanTahun(filterBulan)
+    const nowLabel = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+
+    const infoRows = [
+      ['Laporan Keuangan Gelora Bumi Mintarsih'],
+      [`Periode: ${bulanLabel}`, `Dicetak: ${nowLabel}`],
+      [`Total Pemasukan: Rp ${currentPemasukan.toLocaleString('id-ID')}`, `Total Pengeluaran: Rp ${currentPengeluaran.toLocaleString('id-ID')}`, `Saldo: Rp ${currentSaldo.toLocaleString('id-ID')}`],
+      [],
+    ]
+    const header = ['No', 'Tanggal', 'Tipe', 'Keterangan', 'Jumlah (Rp)', 'Sumber']
+    const dataRows = filteredTransaksi.map((t, i) => [
+      i + 1,
+      new Date(t.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+      t.tipe === 'pemasukan' ? 'Pemasukan' : 'Pengeluaran',
+      t.keterangan,
+      Number(t.jumlah),
+      t.sumber || 'Manual',
+    ])
+    const allRows = [...infoRows, header, ...dataRows]
+    const csv = allRows.map(row =>
+      row.map(cell => {
+        const val = String(cell ?? '')
+        return val.includes(',') || val.includes('"') || val.includes('\n')
+          ? `"${val.replace(/"/g, '""')}"` : val
+      }).join(',')
+    ).join('\n')
+    const bom = '\uFEFF'
+    const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `laporan-keuangan-${filterBulan}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
 
   return (
     <div>
@@ -178,12 +218,20 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
             style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #d4d4d8', fontSize: '14px' }}
           />
         </div>
-        <button 
-          onClick={handlePrint}
-          style={{ padding: '8px 16px', background: '#ffffff', color: '#09090b', border: '1px solid #e4e4e7', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-        >
-          🖨️ Cetak Laporan
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button
+            onClick={handlePrint}
+            style={{ padding: '8px 16px', background: '#09090b', color: '#a1a1aa', border: '1px solid #27272a', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <Printer size={14} /> Cetak Laporan
+          </button>
+          <button
+            onClick={handleExportExcel}
+            style={{ padding: '8px 16px', background: '#09090b', color: '#a1a1aa', border: '1px solid #27272a', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <FileText size={14} /> Export Excel
+          </button>
+        </div>
       </div>
 
       <div id="print-area">
