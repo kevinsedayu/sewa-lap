@@ -137,7 +137,7 @@ export default async function Home() {
             </h2>
           </div>
           <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             
             <div className="text-center mb-8 relative z-10">
               <h3 className="text-2xl font-bold mb-3 font-bricolage">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
@@ -153,7 +153,7 @@ export default async function Home() {
                     <div className="font-bold text-white mb-1">{s.nama}</div>
                     <div className="text-xs text-zinc-400">{s.jam}</div>
                   </div>
-                  <div className="text-lg font-bold text-emerald-400 font-bricolage">
+                  <div className="text-lg font-bold text-rose-400 font-bricolage">
                     Rp {s.harga.toLocaleString('id-ID')}
                   </div>
                 </div>

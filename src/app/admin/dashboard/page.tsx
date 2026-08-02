@@ -116,7 +116,7 @@ export default async function AdminDashboard() {
 
       {/* Fasilitas Gallery */}
       <div className="mb-8 text-center">
-        <h2 className="text-2xl font-bold text-emerald-800 mb-4 tracking-tight uppercase">
+        <h2 className="text-2xl font-bold text-rose-900 mb-4 tracking-tight uppercase">
           Fasilitas Kami
         </h2>
         <FasilitasGallery />
@@ -165,9 +165,9 @@ export default async function AdminDashboard() {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
-          { ...stats[0], color: 'text-white', bg: 'bg-white/10', border: 'border-teal-600/30', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
+          { ...stats[0], color: 'text-white', bg: 'bg-white/10', border: 'border-rose-700/30', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
           { ...stats[1], color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
-          { ...stats[2], color: 'text-rose-300', bg: 'bg-white/10', border: 'border-teal-600/30', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
+          { ...stats[2], color: 'text-rose-300', bg: 'bg-white/10', border: 'border-rose-700/30', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
           { ...stats[3], color: 'text-rose-200', bg: 'bg-blue-500/20', border: 'border-blue-500/20', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' }
         ].map((stat) => (
           <div key={stat.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(112,26,34,0.6)]`} style={{ background: `${stat.gFrom}`, border: `1px solid rgba(225,29,72,0.2)` }}>

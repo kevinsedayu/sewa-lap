@@ -104,7 +104,7 @@ export default async function UserDashboard() {
 
       {/* Fasilitas Gallery */}
       <div className="mb-8 text-center">
-        <h2 className="text-2xl font-bold text-emerald-800 mb-4 tracking-tight uppercase">
+        <h2 className="text-2xl font-bold text-rose-900 mb-4 tracking-tight uppercase">
           Fasilitas Kami
         </h2>
         <FasilitasGallery />
@@ -153,7 +153,7 @@ export default async function UserDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         {[
-          { label: 'Booking Aktif', value: String(bookingAktif), desc: 'Sudah dikonfirmasi', color: 'text-rose-300', bg: 'bg-white/10', border: 'border-teal-600/30' },
+          { label: 'Booking Aktif', value: String(bookingAktif), desc: 'Sudah dikonfirmasi', color: 'text-rose-300', bg: 'bg-white/10', border: 'border-rose-700/30' },
           { label: 'Menunggu', value: String(bookingPending), desc: 'Sedang diproses', color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20' },
           { label: 'Total Booking', value: String(totalBooking), desc: 'Semua riwayat', color: 'text-rose-200', bg: 'bg-blue-500/20', border: 'border-blue-500/20' },
         ].map((card) => (

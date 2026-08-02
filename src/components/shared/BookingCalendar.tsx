@@ -231,7 +231,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                         router.push(`/user/booking?tanggal=${dateStr}&sesi=${sesiTypeObj.id}`)
                       }
                     }}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 hover:border-emerald-500/40 cursor-pointer transition-colors w-full justify-center shadow-sm"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold bg-rose-600/10 hover:bg-rose-600/20 text-rose-400 border border-rose-600/20 hover:border-rose-600/40 cursor-pointer transition-colors w-full justify-center shadow-sm"
                     title={isAdmin ? `Klik untuk input jadwal ${sesiTypeObj.nama}` : `Klik untuk booking ${sesiTypeObj.nama}`}
                   >
                     <CheckCircle2 size={12} className="shrink-0" />

@@ -363,7 +363,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
             { key: 'cancelled', label: 'Dibatalkan' },
           ].map(f => (
             <button key={f.key} onClick={() => setFilter(f.key)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${filter === f.key ? 'text-[#0A7A68] font-bold shadow-sm' : 'border-teal-700/40 text-teal-700 hover:border-teal-600 hover:text-teal-900'}`} style={filter === f.key ? { background: 'linear-gradient(135deg, #3DB8A0, #6CC9B4)', border: '1px solid rgba(61,184,160,0.5)' } : {}}>
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${filter === f.key ? 'text-[#881337] font-bold shadow-sm' : 'border-rose-800/40 text-rose-800 hover:border-rose-700 hover:text-rose-950'}`} style={filter === f.key ? { background: 'linear-gradient(135deg, #be123c, #fb7185)', border: '1px solid rgba(225,29,72,0.5)' } : {}}>
               {f.label}
               {f.key !== 'all' && <span className={`ml-1.5 ${filter === f.key ? 'opacity-70' : 'opacity-50'}`}>({bookings.filter(b => b.status === f.key).length})</span>}
             </button>
@@ -373,7 +373,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
           <div className="relative flex-1 sm:w-56">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
             <input type="text" placeholder="Cari nama / telepon..." value={search} onChange={e => setSearch(e.target.value)}
-              className="w-full pl-8 pr-3 py-2 text-sm border border-zinc-800 bg-[#09090b] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+              className="w-full pl-8 pr-3 py-2 text-sm border border-zinc-800 bg-[#09090b] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-600/20 focus:border-rose-600 transition-all" />
           </div>
           <button onClick={handlePrint} title="Cetak / Export PDF"
             className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border border-zinc-800 bg-[#09090b] hover:bg-zinc-900 text-zinc-400 hover:text-white transition-colors shadow-sm whitespace-nowrap">
@@ -437,7 +437,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                       <div className="flex flex-col gap-1.5">
                         {b.status === 'pending' && (<>
                           <button onClick={() => updateStatus(b.id, 'confirmed')} disabled={loadingId === b.id}
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 transition-colors shadow-sm whitespace-nowrap">
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 disabled:opacity-50 transition-colors shadow-sm whitespace-nowrap">
                             <CheckCircle2 size={12} /> Setujui
                           </button>
                           <button onClick={() => openModal('reject', b.id)} disabled={loadingId === b.id}
@@ -463,7 +463,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                             <CheckCircle2 size={12} /> Setujui Batal
                           </button>
                           <button onClick={() => updateStatus(b.id, 'confirmed')} disabled={loadingId === b.id}
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-emerald-700 bg-white border border-emerald-200 hover:bg-emerald-50 disabled:opacity-50 transition-colors whitespace-nowrap">
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-rose-700 bg-white border border-rose-200 hover:bg-rose-50 disabled:opacity-50 transition-colors whitespace-nowrap">
                             <XCircle size={12} /> Tolak Batal
                           </button>
                         </>)}
