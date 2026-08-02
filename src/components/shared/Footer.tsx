@@ -3,12 +3,12 @@ import { Copyright } from 'lucide-react'
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden text-center px-6 py-10" style={{
-      background: 'linear-gradient(135deg, rgba(2,44,34,0.8) 0%, rgba(6,78,59,0.8) 100%)', backdropFilter: 'blur(16px)',
-      borderTop: '1px solid rgba(16,185,129,0.2)',
+      background: 'linear-gradient(135deg, #2A0812 0%, #4C0519 100%)',
+      borderTop: '1px solid rgba(225,29,72,0.2)',
     }}>
       {/* Subtle glow */}
       <div className="absolute top-[-40px] left-1/2 -translate-x-1/2 w-[400px] h-[80px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(16,185,129,0.12) 0%, transparent 70%)' }} 
+        style={{ background: 'radial-gradient(ellipse, rgba(225,29,72,0.12) 0%, transparent 70%)' }} 
       />
 
       <div className="relative z-10 flex flex-col items-center gap-2">

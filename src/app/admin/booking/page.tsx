@@ -40,8 +40,8 @@ export default async function AdminBookingPage() {
           { label: 'Dibatalkan', value: cancelled, color: '#ef4444' },
         ].map(s => (
           <div key={s.label} className="relative overflow-hidden" style={{
-            background: 'rgba(2, 44, 34, 0.65)', backdropFilter: 'blur(16px)',
-            border: '1px solid rgba(16,185,129,0.25)',
+            background: '#2A0812',
+            border: '1px solid rgba(225,29,72,0.25)',
             borderRadius: '16px',
             padding: '20px',
             borderTop: `3px solid ${s.color}`,

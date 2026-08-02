@@ -316,9 +316,9 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
     <div className="space-y-4">
 
       {/* Month Filter Row */}
-      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between p-4 rounded-2xl" style={{ background: 'rgba(2, 44, 34, 0.65)', backdropFilter: 'blur(16px)', border: '1px solid rgba(16,185,129,0.25)' }}>
+      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between p-4 rounded-2xl" style={{ background: '#2A0812', border: '1px solid rgba(225,29,72,0.25)' }}>
         <div className="flex items-center gap-2">
-          <Calendar size={16} className="text-emerald-300 shrink-0" />
+          <Calendar size={16} className="text-rose-300 shrink-0" />
           <span className="text-sm font-bold text-white/80">Filter Bulan:</span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -326,7 +326,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
           <button onClick={() => setShowAllMonths(true)}
             className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
             style={showAllMonths
-              ? { background: 'linear-gradient(135deg, #064e3b, #047857)', border: '1px solid rgba(16,185,129,0.6)', color: '#a7f3d0' }
+              ? { background: 'linear-gradient(135deg, #4C0519, #881337)', border: '1px solid rgba(225,29,72,0.6)', color: '#fecdd3' }
               : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }
             }>
             Semua Persewaan
@@ -339,7 +339,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
             <button onClick={() => setShowAllMonths(false)}
               className="px-3 py-1.5 rounded-full text-xs font-bold transition-all"
               style={!showAllMonths
-                ? { background: 'linear-gradient(135deg, #064e3b, #047857)', border: '1px solid rgba(16,185,129,0.6)', color: '#a7f3d0', minWidth: '110px', textAlign: 'center' }
+                ? { background: 'linear-gradient(135deg, #4C0519, #881337)', border: '1px solid rgba(225,29,72,0.6)', color: '#fecdd3', minWidth: '110px', textAlign: 'center' }
                 : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', minWidth: '110px', textAlign: 'center' }
               }>
               {monthLabel}
@@ -387,7 +387,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       </div>
 
       {/* Table */}
-      <div className="rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(2,44,34,0.4)] relative" style={{ background: 'rgba(2, 44, 34, 0.65)', backdropFilter: 'blur(16px)', border: '1px solid rgba(16,185,129,0.25)' }}>
+      <div className="rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(69,10,10,0.4)] relative" style={{ background: '#2A0812', border: '1px solid rgba(225,29,72,0.25)' }}>
         <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         {filtered.length > 0 ? (
           <div className="overflow-x-auto relative z-10">
@@ -419,7 +419,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                     <td className="px-5 py-4">
                       {b.bukti_pembayaran ? (
                         <a href={b.bukti_pembayaran} target="_blank" rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 font-medium text-xs underline underline-offset-2">
+                          className="inline-flex items-center gap-1 text-rose-300 hover:text-rose-200 font-medium text-xs underline underline-offset-2">
                           <FileText size={12} /> Lihat
                         </a>
                       ) : <span className="text-white/20">-</span>}
@@ -496,7 +496,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       {/* Modal Tolak / Batalkan */}
       {showModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="rounded-2xl shadow-2xl w-full max-w-md p-6" style={{ background: 'rgba(2, 44, 34, 0.65)', backdropFilter: 'blur(16px)', border: '1px solid rgba(16,185,129,0.3)' }}>
+          <div className="rounded-2xl shadow-2xl w-full max-w-md p-6" style={{ background: '#2A0812', border: '1px solid rgba(225,29,72,0.3)' }}>
             <div className="flex items-center gap-3 mb-4">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${modalType === 'reject' ? 'bg-red-500/20' : 'bg-orange-500/20'}`}>
                 {modalType === 'reject' ? <XCircle size={20} className="text-red-300" /> : <Ban size={20} className="text-orange-300" />}
