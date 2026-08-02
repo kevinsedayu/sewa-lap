@@ -181,13 +181,13 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
     ])
     
     const csvRows = [header, ...dataRows]
-    const csv = '\\uFEFFsep=;\\n' + csvRows.map(row =>
+    const csv = '\uFEFFsep=;\n' + csvRows.map(row =>
       row.map(cell => {
         const val = String(cell ?? '')
-        return val.includes(';') || val.includes('"') || val.includes('\\n')
+        return val.includes(';') || val.includes('"') || val.includes('\n')
           ? `"${val.replace(/"/g, '""')}"` : val
       }).join(';')
-    ).join('\\n')
+    ).join('\n')
 
     const tableRows = filtered.map((b, i) => `
       <tr class="${i % 2 === 0 ? 'even' : 'odd'}">

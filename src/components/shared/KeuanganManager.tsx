@@ -170,13 +170,13 @@ export default function KeuanganManager({ isAdmin, initialTransaksi, totalPemasu
     ])
     
     const csvRows = [header, ...dataRows]
-    const csv = '\\uFEFFsep=;\\n' + csvRows.map(row =>
+    const csv = '\uFEFFsep=;\n' + csvRows.map(row =>
       row.map(cell => {
         const val = String(cell ?? '')
-        return val.includes(';') || val.includes('"') || val.includes('\\n')
+        return val.includes(';') || val.includes('"') || val.includes('\n')
           ? `"${val.replace(/"/g, '""')}"` : val
       }).join(';')
-    ).join('\\n')
+    ).join('\n')
 
     const tableRows = filteredTransaksi.map((t, i) => `
       <tr class="${i % 2 === 0 ? 'even' : 'odd'}">
