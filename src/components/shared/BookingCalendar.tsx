@@ -159,7 +159,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
   return (
     <div className="relative">
-      <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(30,64,175,0.5)] relative overflow-hidden" style={{ background: '#1D4ED8', border: '1px solid rgba(59,130,246,0.25)' }}>
+      <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(23,37,84,0.5)] relative overflow-hidden" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.25)' }}>
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         
         {/* Header Kalender */}
@@ -231,7 +231,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                         router.push(`/user/booking?tanggal=${dateStr}&sesi=${sesiTypeObj.id}`)
                       }
                     }}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/20 hover:border-blue-500/40 cursor-pointer transition-colors w-full justify-center shadow-sm"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold bg-indigo-500/10 hover:bg-indigo-500/20 text-blue-400 border border-indigo-500/20 hover:border-indigo-500/40 cursor-pointer transition-colors w-full justify-center shadow-sm"
                     title={isAdmin ? `Klik untuk input jadwal ${sesiTypeObj.nama}` : `Klik untuk booking ${sesiTypeObj.nama}`}
                   >
                     <CheckCircle2 size={12} className="shrink-0" />
@@ -262,7 +262,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
                 const label = sesiInfo.penyewa || sesiInfo.catatan || 'Saya'
                 return (
                   <div key={sesiTypeObj.id}
-                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-blue-500/20 text-blue-400 border-blue-500/30"
+                    className="flex items-center gap-1.5 text-[11px] p-1.5 rounded-md font-semibold w-full shadow-sm border cursor-default bg-indigo-500/20 text-blue-400 border-indigo-500/30"
                     title={`Booking Anda: ${label}`}
                   >
                     <CheckCircle2 size={12} className="shrink-0" />
@@ -347,7 +347,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
       {/* Modal Input Admin */}
       {showModal && isAdmin && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <div style={{ background: '#1D4ED8', border: '1px solid rgba(59,130,246,0.3)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 60px rgba(30,64,175,0.5)' }}>
+          <div style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.3)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 60px rgba(23,37,84,0.5)' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 700 }}>Input Jadwal: {modalDate} ({modalSesi})</h3>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>

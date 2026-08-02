@@ -63,7 +63,7 @@ export default function FasilitasGallery() {
             </div>
 
             <div className="absolute inset-x-0 bottom-0 p-6">
-              <div className="w-8 h-1 bg-blue-500 mb-3 rounded-full"></div>
+              <div className="w-8 h-1 bg-indigo-500 mb-3 rounded-full"></div>
               <h3 className="text-white text-lg font-bold font-bricolage leading-tight">
                 {img.label}
               </h3>
@@ -104,7 +104,7 @@ export default function FasilitasGallery() {
             />
             {/* Caption */}
             <div className="absolute bottom-0 inset-x-0 px-6 py-4" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85), transparent)' }}>
-              <div className="w-8 h-1 bg-blue-500 mb-2 rounded-full"></div>
+              <div className="w-8 h-1 bg-indigo-500 mb-2 rounded-full"></div>
               <p className="text-white font-bold text-lg font-bricolage">{images[active].label}</p>
             </div>
           </div>

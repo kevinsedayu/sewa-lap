@@ -8,15 +8,15 @@ export default function BantuanPage() {
       
       {/* Hero Section */}
       <section style={{ 
-        background: '#1D4ED8', 
+        background: '#172554', 
         borderRadius: '16px', 
         padding: '40px 32px',
         color: 'white',
         marginBottom: '32px',
         position: 'relative',
         overflow: 'hidden',
-        boxShadow: '0 10px 40px rgba(30,64,175,0.4)',
-        border: '1px solid rgba(59,130,246,0.25)'
+        boxShadow: '0 10px 40px rgba(23,37,84,0.4)',
+        border: '1px solid rgba(67,56,202,0.25)'
       }}>
         <div style={{
           position: 'absolute',
@@ -24,7 +24,7 @@ export default function BantuanPage() {
           right: '-20%',
           width: '400px',
           height: '400px',
-          background: 'radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(30,64,175,0) 70%)',
+          background: 'radial-gradient(circle, rgba(67,56,202,0.2) 0%, rgba(23,37,84,0) 70%)',
           borderRadius: '50%',
           pointerEvents: 'none'
         }}></div>
@@ -80,15 +80,15 @@ export default function BantuanPage() {
           <a href="https://wa.me/6281328215620" target="_blank" rel="noopener noreferrer" style={{
             position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#1D4ED8', border: '1px solid rgba(59,130,246,0.25)', borderRadius: '16px',
+            background: '#172554', border: '1px solid rgba(67,56,202,0.25)', borderRadius: '16px',
             textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
-            boxShadow: '0 4px 20px rgba(30,64,175,0.3)'
+            boxShadow: '0 4px 20px rgba(23,37,84,0.3)'
           }}
           onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#25d366'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(37,211,102,0.25)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(59,130,246,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(30,64,175,0.3)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(67,56,202,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(23,37,84,0.3)' }}
           >
             {/* Glow */}
-            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(37,211,102,0.15) 0%, rgba(30,64,175,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(37,211,102,0.15) 0%, rgba(23,37,84,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
             
             <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(37,211,102,0.15)', color: '#25d366', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <MessageCircle size={24} />
@@ -104,15 +104,15 @@ export default function BantuanPage() {
           <a href="https://www.instagram.com/putrapermadafc?igsh=dmV3czcwN2dqOWZn" target="_blank" rel="noopener noreferrer" style={{
             position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#1D4ED8', border: '1px solid rgba(59,130,246,0.25)', borderRadius: '16px',
+            background: '#172554', border: '1px solid rgba(67,56,202,0.25)', borderRadius: '16px',
             textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
-            boxShadow: '0 4px 20px rgba(30,64,175,0.3)'
+            boxShadow: '0 4px 20px rgba(23,37,84,0.3)'
           }}
           onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#e1306c'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(225,48,108,0.25)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(59,130,246,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(30,64,175,0.3)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(67,56,202,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(23,37,84,0.3)' }}
           >
             {/* Glow */}
-            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(225,48,108,0.15) 0%, rgba(30,64,175,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            <div style={{ position: 'absolute', top: '-50%', right: '-30%', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(225,48,108,0.15) 0%, rgba(23,37,84,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
             
             <div style={{ position: 'relative', zIndex: 1, width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(225,48,108,0.15)', color: '#e1306c', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <Instagram size={24} />
@@ -128,11 +128,11 @@ export default function BantuanPage() {
 
       {/* Values Grid Section */}
       <section style={{ 
-        background: '#1D4ED8', 
-        border: '1px solid rgba(59,130,246,0.25)', 
+        background: '#172554', 
+        border: '1px solid rgba(67,56,202,0.25)', 
         borderRadius: '24px', 
         padding: '32px',
-        boxShadow: '0 10px 40px rgba(30,64,175,0.3)'
+        boxShadow: '0 10px 40px rgba(23,37,84,0.3)'
       }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
           

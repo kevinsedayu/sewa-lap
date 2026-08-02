@@ -316,7 +316,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
     <div className="space-y-4">
 
       {/* Month Filter Row */}
-      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between p-4 rounded-2xl" style={{ background: '#1D4ED8', border: '1px solid rgba(59,130,246,0.25)' }}>
+      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between p-4 rounded-2xl" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.25)' }}>
         <div className="flex items-center gap-2">
           <Calendar size={16} className="text-blue-300 shrink-0" />
           <span className="text-sm font-bold text-white/80">Filter Bulan:</span>
@@ -326,7 +326,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
           <button onClick={() => setShowAllMonths(true)}
             className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all"
             style={showAllMonths
-              ? { background: 'linear-gradient(135deg, #1E40AF, #2563EB)', border: '1px solid rgba(59,130,246,0.6)', color: '#bfdbfe' }
+              ? { background: 'linear-gradient(135deg, #1e3a8a, #3730a3)', border: '1px solid rgba(67,56,202,0.6)', color: '#bfdbfe' }
               : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }
             }>
             Semua Persewaan
@@ -339,7 +339,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
             <button onClick={() => setShowAllMonths(false)}
               className="px-3 py-1.5 rounded-full text-xs font-bold transition-all"
               style={!showAllMonths
-                ? { background: 'linear-gradient(135deg, #1E40AF, #2563EB)', border: '1px solid rgba(59,130,246,0.6)', color: '#bfdbfe', minWidth: '110px', textAlign: 'center' }
+                ? { background: 'linear-gradient(135deg, #1e3a8a, #3730a3)', border: '1px solid rgba(67,56,202,0.6)', color: '#bfdbfe', minWidth: '110px', textAlign: 'center' }
                 : { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', minWidth: '110px', textAlign: 'center' }
               }>
               {monthLabel}
@@ -363,7 +363,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
             { key: 'cancelled', label: 'Dibatalkan' },
           ].map(f => (
             <button key={f.key} onClick={() => setFilter(f.key)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${filter === f.key ? 'text-[#2563EB] font-bold shadow-sm' : 'border-blue-700/40 text-blue-700 hover:border-blue-600 hover:text-blue-900'}`} style={filter === f.key ? { background: 'linear-gradient(135deg, #2563EB, #60A5FA)', border: '1px solid rgba(59,130,246,0.5)' } : {}}>
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${filter === f.key ? 'text-[#3730a3] font-bold shadow-sm' : 'border-indigo-700/40 text-indigo-700 hover:border-indigo-600 hover:text-indigo-900'}`} style={filter === f.key ? { background: 'linear-gradient(135deg, #3730a3, #60A5FA)', border: '1px solid rgba(67,56,202,0.5)' } : {}}>
               {f.label}
               {f.key !== 'all' && <span className={`ml-1.5 ${filter === f.key ? 'opacity-70' : 'opacity-50'}`}>({bookings.filter(b => b.status === f.key).length})</span>}
             </button>
@@ -373,7 +373,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
           <div className="relative flex-1 sm:w-56">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
             <input type="text" placeholder="Cari nama / telepon..." value={search} onChange={e => setSearch(e.target.value)}
-              className="w-full pl-8 pr-3 py-2 text-sm border border-zinc-800 bg-[#09090b] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all" />
+              className="w-full pl-8 pr-3 py-2 text-sm border border-zinc-800 bg-[#09090b] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all" />
           </div>
           <button onClick={handlePrint} title="Cetak / Export PDF"
             className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold border border-zinc-800 bg-[#09090b] hover:bg-zinc-900 text-zinc-400 hover:text-white transition-colors shadow-sm whitespace-nowrap">
@@ -387,7 +387,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       </div>
 
       {/* Table */}
-      <div className="rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(30,64,175,0.4)] relative" style={{ background: '#1D4ED8', border: '1px solid rgba(59,130,246,0.25)' }}>
+      <div className="rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.25)' }}>
         <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         {filtered.length > 0 ? (
           <div className="overflow-x-auto relative z-10">
@@ -437,7 +437,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                       <div className="flex flex-col gap-1.5">
                         {b.status === 'pending' && (<>
                           <button onClick={() => updateStatus(b.id, 'confirmed')} disabled={loadingId === b.id}
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-blue-500 hover:bg-blue-600 disabled:opacity-50 transition-colors shadow-sm whitespace-nowrap">
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-white bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 transition-colors shadow-sm whitespace-nowrap">
                             <CheckCircle2 size={12} /> Setujui
                           </button>
                           <button onClick={() => openModal('reject', b.id)} disabled={loadingId === b.id}
@@ -463,7 +463,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
                             <CheckCircle2 size={12} /> Setujui Batal
                           </button>
                           <button onClick={() => updateStatus(b.id, 'confirmed')} disabled={loadingId === b.id}
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-blue-600 bg-white border border-blue-200 hover:bg-blue-50 disabled:opacity-50 transition-colors whitespace-nowrap">
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-indigo-600 bg-white border border-blue-200 hover:bg-indigo-50 disabled:opacity-50 transition-colors whitespace-nowrap">
                             <XCircle size={12} /> Tolak Batal
                           </button>
                         </>)}
@@ -496,7 +496,7 @@ td{padding:10px 12px;border-bottom:1px solid #f4f4f5;vertical-align:top}tr:last-
       {/* Modal Tolak / Batalkan */}
       {showModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="rounded-2xl shadow-2xl w-full max-w-md p-6" style={{ background: '#1D4ED8', border: '1px solid rgba(59,130,246,0.3)' }}>
+          <div className="rounded-2xl shadow-2xl w-full max-w-md p-6" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.3)' }}>
             <div className="flex items-center gap-3 mb-4">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${modalType === 'reject' ? 'bg-red-500/20' : 'bg-orange-500/20'}`}>
                 {modalType === 'reject' ? <XCircle size={20} className="text-red-300" /> : <Ban size={20} className="text-orange-300" />}
