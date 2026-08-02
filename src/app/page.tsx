@@ -51,7 +51,7 @@ export default async function Home() {
       <div className="w-full">
         <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#09090b]/90 backdrop-blur-md text-white border-b border-zinc-800 shadow-lg">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(225,29,72,0.5)] transition-transform hover:scale-105" />
+            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-transform hover:scale-105" />
             <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>
           </div>
 
@@ -99,7 +99,7 @@ export default async function Home() {
         </div>
 
         {/* Marquee Ticker — directly below video, no gap */}
-        <div className="marquee-wrapper py-2 border-y" style={{ background: '#2A0812', borderColor: 'rgba(225,29,72,0.25)' }}>
+        <div className="marquee-wrapper py-2 border-y" style={{ background: '#1D4ED8', borderColor: 'rgba(59,130,246,0.25)' }}>
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
               <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase tracking-widest" style={{ color: '#93c5fd' }}>
@@ -137,7 +137,7 @@ export default async function Home() {
             </h2>
           </div>
           <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             
             <div className="text-center mb-8 relative z-10">
               <h3 className="text-2xl font-bold mb-3 font-bricolage">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
@@ -153,7 +153,7 @@ export default async function Home() {
                     <div className="font-bold text-white mb-1">{s.nama}</div>
                     <div className="text-xs text-zinc-400">{s.jam}</div>
                   </div>
-                  <div className="text-lg font-bold text-rose-400 font-bricolage">
+                  <div className="text-lg font-bold text-blue-400 font-bricolage">
                     Rp {s.harga.toLocaleString('id-ID')}
                   </div>
                 </div>
