@@ -157,7 +157,7 @@ export default async function UserDashboard() {
           { label: 'Menunggu', value: String(bookingPending), desc: 'Sedang diproses', color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20' },
           { label: 'Total Booking', value: String(totalBooking), desc: 'Semua riwayat', color: 'text-blue-200', bg: 'bg-indigo-500/20', border: 'border-indigo-500/20' },
         ].map((card) => (
-          <div key={card.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.2)' }}>
+          <div key={card.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: 'linear-gradient(135deg, #172554 0%, #312e81 100%)', border: '1px solid rgba(67,56,202,0.2)' }}>
             <div className="flex justify-between items-center mb-4 relative z-10">
               <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{card.label}</span>
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${card.bg} ${card.color} font-bold`}>

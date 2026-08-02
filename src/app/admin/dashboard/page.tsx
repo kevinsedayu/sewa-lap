@@ -165,12 +165,12 @@ export default async function AdminDashboard() {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
-          { ...stats[0], color: 'text-white', bg: 'bg-white/10', border: 'border-indigo-600/30', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
-          { ...stats[1], color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
-          { ...stats[2], color: 'text-blue-300', bg: 'bg-white/10', border: 'border-indigo-600/30', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' },
-          { ...stats[3], color: 'text-blue-200', bg: 'bg-indigo-500/20', border: 'border-indigo-500/20', gFrom: 'rgba(2, 44, 34, 0.65)', gTo: 'rgba(2, 44, 34, 0.65)' }
+          { ...stats[0], color: 'text-white', bg: 'bg-white/10', border: 'border-indigo-600/30', gFrom: '#172554', gTo: '#172554' },
+          { ...stats[1], color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20', gFrom: '#172554', gTo: '#172554' },
+          { ...stats[2], color: 'text-blue-300', bg: 'bg-white/10', border: 'border-indigo-600/30', gFrom: '#172554', gTo: '#172554' },
+          { ...stats[3], color: 'text-blue-200', bg: 'bg-indigo-500/20', border: 'border-indigo-500/20', gFrom: '#172554', gTo: '#172554' }
         ].map((stat) => (
-          <div key={stat.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: `${stat.gFrom}`, border: `1px solid rgba(67,56,202,0.2)` }}>
+          <div key={stat.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: 'linear-gradient(135deg, #172554 0%, #312e81 100%)', border: `1px solid rgba(67,56,202,0.2)` }}>
             <div className="flex justify-between items-center mb-4 relative z-10">
               <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{stat.label}</span>
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${stat.bg} ${stat.color} font-bold`}>
