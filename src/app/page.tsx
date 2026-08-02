@@ -99,7 +99,7 @@ export default async function Home() {
         </div>
 
         {/* Marquee Ticker — directly below video, no gap */}
-        <div className="marquee-wrapper py-2 border-y" style={{ background: '#0F172A', borderColor: '#1e2d5a' }}>
+        <div className="marquee-wrapper py-2 border-y" style={{ background: 'rgba(2, 44, 34, 0.65)', backdropFilter: 'blur(16px)', borderColor: 'rgba(16,185,129,0.25)' }}>
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
               <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase tracking-widest" style={{ color: '#93c5fd' }}>
