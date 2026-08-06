@@ -26,6 +26,43 @@ export const metadata: Metadata = {
   title: "Gelora Bumi Mintarsih - Booking Lapangan Sepakbola",
   description: "Sistem penyewaan lapangan sepakbola online.",
   keywords: ["sewa lapangan", "booking lapangan", "sepakbola", "futsal"],
+  // SEO enhancements
+  openGraph: {
+    title: "Gelora Bumi Mintarsih - Booking Lapangan Sepakbola",
+    description: "Sistem penyewaan lapangan sepakbola online. Booking mudah, pembayaran aman.",
+    url: "https://bumimintarsih.my.id", // replace with actual domain
+    siteName: "Gelora Bumi Mintarsih",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Gelora Bumi Mintarsih - Booking Lapangan Sepakbola",
+      },
+    ],
+    locale: "id_ID",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gelora Bumi Mintarsih - Booking Lapangan Sepakbola",
+    description: "Sistem penyewaan lapangan sepakbola online. Booking mudah, pembayaran aman.",
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: "/logo.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  alternates: {
+    canonical: "https://bumimintarsih.my.id",
+  },
 };
 
 import NextTopLoader from 'nextjs-toploader';
