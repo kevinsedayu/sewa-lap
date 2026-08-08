@@ -49,7 +49,6 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-transparent font-sans pb-12">
       {/* Top Navbar Bar - Dark & Luxurious */}
-      <div className="w-full">
         <div className="sticky top-0 z-50 flex flex-col w-full shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
           <header className="flex items-center justify-between px-6 py-4 bg-[#09090b]/90 backdrop-blur-md text-white border-b border-zinc-800">
             <div className="flex items-center gap-3">
@@ -114,8 +113,6 @@ export default async function Home() {
             </p>
           </div>
         </div>
-      </div>
-
       {/* Main Content (White Base with emerald glow from globals.css) */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
         
