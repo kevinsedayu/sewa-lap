@@ -2,13 +2,13 @@
 
 @layer base {
   :root {
-    --bg-primary: #05080f;
-    --bg-secondary: #0a0f1e;
-    --bg-muted: #0d1527;
-    --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --border: rgba(30,45,90,0.5);
+    --bg-primary: #f8faff;
+    --bg-secondary: #ffffff;
+    --bg-muted: #f0f4ff;
+    --text-primary: #09090b;
+    --text-secondary: #52525b;
+    --text-muted: #a1a1aa;
+    --border: #e4e4e7;
     --accent: #18181b;
     --accent-hover: #27272a;
     --accent-fg: #fafafa;
@@ -34,9 +34,9 @@
   body {
     background-color: var(--bg-primary);
     background-image: 
-      radial-gradient(circle at top right, rgba(49, 46, 129, 0.08), transparent 60%),
-      radial-gradient(circle at top left, rgba(49, 46, 129, 0.08), transparent 40%),
-      radial-gradient(circle at bottom left, rgba(49, 46, 129, 0.08), transparent 60%);
+      radial-gradient(circle at top right, rgba(67, 56, 202, 0.08), transparent 60%),
+      radial-gradient(circle at top left, rgba(99, 102, 241, 0.05), transparent 40%),
+      radial-gradient(circle at bottom left, rgba(67, 56, 202, 0.07), transparent 60%);
     background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
