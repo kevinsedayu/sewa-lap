@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
           {/* Brand Info */}
           <div>
             <div className="flex items-center gap-3 mb-6">
@@ -22,16 +22,6 @@ export default function Footer() {
             <p className="text-blue-100/70 text-sm leading-relaxed mb-6 max-w-sm">
               Official website pengelola lapangan Gelora Bumi Mintarsih.
             </p>
-          </div>
-
-          {/* Quick Links */}
-          <div className="md:ml-auto">
-            <h3 className="font-bricolage text-lg font-bold text-white mb-6">Tautan Singkat</h3>
-            <ul className="space-y-3">
-              <li><Link href="/" className="text-sm text-blue-100/70 hover:text-white transition-colors">Beranda</Link></li>
-              <li><Link href="/user/bantuan" className="text-sm text-blue-100/70 hover:text-white transition-colors">Pusat Bantuan</Link></li>
-              <li><Link href="/login" className="text-sm text-blue-100/70 hover:text-white transition-colors">Login / Daftar</Link></li>
-            </ul>
           </div>
 
           {/* Contact & Location */}
