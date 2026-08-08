@@ -3,6 +3,7 @@ import Link from 'next/link'
 import BookingCalendar from '@/components/shared/BookingCalendar'
 import FasilitasGallery from '@/components/landing/FasilitasGallery'
 import BackgroundVideo from '@/components/landing/BackgroundVideo'
+import FadeIn from '@/components/shared/FadeIn'
 
 export default async function Home() {
   const supabase = await createClient()
@@ -117,100 +118,106 @@ export default async function Home() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
         
         {/* Tentang Lapangan (Simple Card Style) */}
-        <div className="mb-20">
-          <div className="flex flex-col md:flex-row items-center gap-8 p-8 sm:p-10" style={{
-            background: '#172554', border: '1px solid rgba(67,56,202,0.25)', borderRadius: '24px',
-            boxShadow: '0 10px 40px rgba(23,37,84,0.3)', position: 'relative', overflow: 'hidden'
-          }}>
-            {/* Glow */}
-            <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(67,56,202,0.15) 0%, rgba(23,37,84,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
-            
-            <div className="flex-1 relative z-10">
-              <h2 className="text-3xl font-extrabold text-white tracking-tight font-bricolage mb-4">
-                Tentang Lapangan
-              </h2>
-              <p className="text-white/80 leading-relaxed text-base mb-4">
-                Lapangan Gelora Bumi Mintarsih yang berlokasi di Sedayu RW 01 Kalisegoro Gunungpati Kota Semarang merupakan lapangan berstandar nasional dengan perawatan rutin dan fasilitas lengkap.
-              </p>
-              <p className="text-blue-300 font-medium">
-                Lapangan ini secara resmi di kelola oleh <strong>@putrapermadafc</strong>
-              </p>
-            </div>
+        <FadeIn delay={100}>
+          <div className="mb-20">
+            <div className="flex flex-col md:flex-row items-center gap-8 p-8 sm:p-10" style={{
+              background: '#172554', border: '1px solid rgba(67,56,202,0.25)', borderRadius: '24px',
+              boxShadow: '0 10px 40px rgba(23,37,84,0.3)', position: 'relative', overflow: 'hidden'
+            }}>
+              {/* Glow */}
+              <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(67,56,202,0.15) 0%, rgba(23,37,84,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+              
+              <div className="flex-1 relative z-10">
+                <h2 className="text-3xl font-extrabold text-white tracking-tight font-bricolage mb-4">
+                  Tentang Lapangan
+                </h2>
+                <p className="text-white/80 leading-relaxed text-base mb-4">
+                  Lapangan Gelora Bumi Mintarsih yang berlokasi di Sedayu RW 01 Kalisegoro Gunungpati Kota Semarang merupakan lapangan berstandar nasional dengan perawatan rutin dan fasilitas lengkap.
+                </p>
+                <p className="text-blue-300 font-medium">
+                  Lapangan ini secara resmi di kelola oleh <strong>@putrapermadafc</strong>
+                </p>
+              </div>
 
-            <div className="w-full md:w-1/3 relative z-10 shrink-0">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 shadow-lg">
-                <img src="/tentanglap.png" alt="Tentang Lapangan" className="w-full h-full object-cover" />
+              <div className="w-full md:w-1/3 relative z-10 shrink-0">
+                <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                  <img src="/tentanglap.png" alt="Tentang Lapangan" className="w-full h-full object-cover" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </FadeIn>
 
         {/* Fasilitas Section (Luxurious Cards) */}
-        <div className="mb-20">
-          <div className="flex flex-col items-center justify-center text-center mb-8">
-            <div>
-              <h2 className="text-4xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
-                Fasilitas Kami
-              </h2>
+        <FadeIn delay={200}>
+          <div className="mb-20">
+            <div className="flex flex-col items-center justify-center text-center mb-8">
+              <div>
+                <h2 className="text-4xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
+                  Fasilitas Kami
+                </h2>
+              </div>
             </div>
+            
+            <FasilitasGallery />
           </div>
-          
-          <FasilitasGallery />
-        </div>
+        </FadeIn>
 
         {/* Info Lapangan & Harga */}
-        <div className="mb-20 max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
-              Informasi Detail Sewa
-            </h2>
-          </div>
-          <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            
-            <div className="text-center mb-8 relative z-10">
-              <h3 className="text-2xl font-bold mb-3 font-bricolage">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
-              <p className="text-zinc-400 leading-relaxed text-sm max-w-2xl mx-auto">
-                {lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap untuk pengalaman bermain terbaik.'}
-              </p>
+        <FadeIn delay={100}>
+          <div className="mb-20 max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
+                Informasi Detail Sewa
+              </h2>
             </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
-              {sesiList.map((s: any) => (
-                <div key={s.id} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm hover:bg-white/10 transition-colors">
-                  <div>
-                    <div className="font-bold text-white mb-1">{s.nama}</div>
-                    <div className="text-xs text-zinc-400">{s.jam}</div>
-                  </div>
-                  <div className="text-lg font-bold text-blue-400 font-bricolage">
-                    Rp {s.harga.toLocaleString('id-ID')}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Cara Sewa Steps */}
-            <div className="mt-12 pt-8 border-t border-white/10 relative z-10">
-              <h4 className="text-xl font-bold text-white mb-6 font-bricolage text-center">Cara Sewa Lapangan</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                {[
-                  { step: '1', title: 'Pilih Jadwal', desc: 'Cek ketersediaan di kalender bawah' },
-                  { step: '2', title: 'Login Akun', desc: 'Masuk atau daftar sebagai pengguna' },
-                  { step: '3', title: 'Isi Formulir', desc: 'Pilih sesi & isi detail pemesanan' },
-                  { step: '4', title: 'Pembayaran', desc: 'Selesaikan bayar untuk konfirmasi' },
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-white/5 rounded-xl p-4 text-center border border-white/5 relative">
-                    <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-blue-400 flex items-center justify-center font-bold text-sm mx-auto mb-3 border border-indigo-500/30">
-                      {item.step}
+            <div className="bg-[#09090b] text-white border border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.1)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              
+              <div className="text-center mb-8 relative z-10">
+                <h3 className="text-2xl font-bold mb-3 font-bricolage">{lapangan?.nama || 'Gelora Bumi Mintarsih'}</h3>
+                <p className="text-zinc-400 leading-relaxed text-sm max-w-2xl mx-auto">
+                  {lapangan?.deskripsi || 'Lapangan sepakbola standart nasional dengan rumput berkualitas dan fasilitas lengkap untuk pengalaman bermain terbaik.'}
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                {sesiList.map((s: any) => (
+                  <div key={s.id} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                    <div>
+                      <div className="font-bold text-white mb-1">{s.nama}</div>
+                      <div className="text-xs text-zinc-400">{s.jam}</div>
                     </div>
-                    <h5 className="text-white font-bold text-sm mb-1">{item.title}</h5>
-                    <p className="text-xs text-zinc-400 leading-relaxed">{item.desc}</p>
+                    <div className="text-lg font-bold text-blue-400 font-bricolage">
+                      Rp {s.harga.toLocaleString('id-ID')}
+                    </div>
                   </div>
                 ))}
               </div>
+
+              {/* Cara Sewa Steps */}
+              <div className="mt-12 pt-8 border-t border-white/10 relative z-10">
+                <h4 className="text-xl font-bold text-white mb-6 font-bricolage text-center">Cara Sewa Lapangan</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                  {[
+                    { step: '1', title: 'Pilih Jadwal', desc: 'Cek ketersediaan di kalender bawah' },
+                    { step: '2', title: 'Login Akun', desc: 'Masuk atau daftar sebagai pengguna' },
+                    { step: '3', title: 'Isi Formulir', desc: 'Pilih sesi & isi detail pemesanan' },
+                    { step: '4', title: 'Pembayaran', desc: 'Selesaikan bayar untuk konfirmasi' },
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-white/5 rounded-xl p-4 text-center border border-white/5 relative">
+                      <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-blue-400 flex items-center justify-center font-bold text-sm mx-auto mb-3 border border-indigo-500/30">
+                        {item.step}
+                      </div>
+                      <h5 className="text-white font-bold text-sm mb-1">{item.title}</h5>
+                      <p className="text-xs text-zinc-400 leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </FadeIn>
 
         {/* Calendar Section */}
         <div id="jadwal" className="mb-20 scroll-mt-24">
