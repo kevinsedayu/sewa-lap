@@ -50,35 +50,51 @@ export default async function Home() {
     <div className="min-h-screen bg-transparent font-sans pb-12">
       {/* Top Navbar Bar - Dark & Luxurious */}
       <div className="w-full">
-        <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#09090b]/90 backdrop-blur-md text-white border-b border-zinc-800 shadow-lg">
-          <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(67,56,202,0.5)] transition-transform hover:scale-105" />
-            <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>
-          </div>
+        <div className="sticky top-0 z-50 flex flex-col w-full shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+          <header className="flex items-center justify-between px-6 py-4 bg-[#09090b]/90 backdrop-blur-md text-white border-b border-zinc-800">
+            <div className="flex items-center gap-3">
+              <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(67,56,202,0.5)] transition-transform hover:scale-105" />
+              <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>
+            </div>
 
-          <div>
-            {user ? (
-              <Link 
-                href={dashboardPath} 
-                className="bg-white hover:bg-zinc-200 text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-              >
-                Ke Dashboard
-              </Link>
-            ) : (
-              <div className="flex items-center gap-4">
-                <span className="hidden sm:inline-block text-sm text-zinc-400 font-medium">
-                  Belum punya akun?
-                </span>
+            <div>
+              {user ? (
                 <Link 
-                  href="/login" 
-                  className="bg-white hover:bg-zinc-200 text-black px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:-translate-y-0.5"
+                  href={dashboardPath} 
+                  className="bg-white hover:bg-zinc-200 text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                 >
-                  Login
+                  Ke Dashboard
                 </Link>
-              </div>
-            )}
+              ) : (
+                <div className="flex items-center gap-4">
+                  <span className="hidden sm:inline-block text-sm text-zinc-400 font-medium">
+                    Belum punya akun?
+                  </span>
+                  <Link 
+                    href="/login" 
+                    className="bg-white hover:bg-zinc-200 text-black px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:-translate-y-0.5"
+                  >
+                    Login
+                  </Link>
+                </div>
+              )}
+            </div>
+          </header>
+
+          {/* Marquee Ticker — Dark Navy */}
+          <div className="marquee-wrapper py-2 border-b" style={{ background: '#0F172A', borderColor: 'rgba(67,56,202,0.3)' }}>
+            <div className="marquee-track">
+              {[...Array(8)].map((_, i) => (
+                <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase tracking-widest" style={{ color: '#93c5fd' }}>
+                  Gelora Bumi Mintarsih
+                  <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
+                  Kalisegoro Semarang
+                  <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
+                </span>
+              ))}
+            </div>
           </div>
-        </header>
+        </div>
 
         {/* Hero Section — Video Background, full width, constrained height on desktop */}
         <div className="w-full relative overflow-hidden text-center text-white h-[55vh] md:h-[90vh] max-h-[1000px]">
@@ -98,20 +114,6 @@ export default async function Home() {
             </p>
           </div>
         </div>
-
-        {/* Marquee Ticker — directly below video, no gap */}
-        <div className="marquee-wrapper py-2 border-y" style={{ background: '#172554', borderColor: 'rgba(67,56,202,0.25)' }}>
-          <div className="marquee-track">
-            {[...Array(8)].map((_, i) => (
-              <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase tracking-widest" style={{ color: '#93c5fd' }}>
-                Gelora Bumi Mintarsih
-                <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
-                Kalisegoro Semarang
-                <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Main Content (White Base with emerald glow from globals.css) */}
@@ -119,7 +121,7 @@ export default async function Home() {
         
         {/* Tentang Lapangan (Simple Card Style) */}
         <FadeIn delay={100}>
-          <div className="mb-20">
+          <div className="mb-10 mt-10">
             <div className="flex flex-col md:flex-row items-center gap-8 p-8 sm:p-10" style={{
               background: '#172554', border: '1px solid rgba(67,56,202,0.25)', borderRadius: '24px',
               boxShadow: '0 10px 40px rgba(23,37,84,0.3)', position: 'relative', overflow: 'hidden'
@@ -150,7 +152,7 @@ export default async function Home() {
 
         {/* Fasilitas Section (Luxurious Cards) */}
         <FadeIn delay={200}>
-          <div className="mb-20">
+          <div className="mb-10">
             <div className="flex flex-col items-center justify-center text-center mb-8">
               <div>
                 <h2 className="text-4xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
@@ -165,7 +167,7 @@ export default async function Home() {
 
         {/* Info Lapangan & Harga */}
         <FadeIn delay={100}>
-          <div className="mb-20 max-w-4xl mx-auto">
+          <div className="mb-12 max-w-4xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
                 Informasi Detail Sewa
@@ -220,7 +222,7 @@ export default async function Home() {
         </FadeIn>
 
         {/* Calendar Section */}
-        <div id="jadwal" className="mb-20 scroll-mt-24">
+        <div id="jadwal" className="mb-12 scroll-mt-24">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
               Cek Ketersediaan
