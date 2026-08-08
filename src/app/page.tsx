@@ -48,52 +48,35 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-transparent font-sans pb-12">
-      {/* Top Navbar Bar - Dark & Luxurious */}
-        <div className="sticky top-0 z-50 flex flex-col w-full shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-          <header className="flex items-center justify-between px-6 py-4 bg-[#09090b]/90 backdrop-blur-md text-white border-b border-zinc-800">
-            <div className="flex items-center gap-3">
-              <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(67,56,202,0.5)] transition-transform hover:scale-105" />
-              <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>
-            </div>
-
-            <div>
-              {user ? (
-                <Link 
-                  href={dashboardPath} 
-                  className="bg-white hover:bg-zinc-200 text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-                >
-                  Ke Dashboard
-                </Link>
-              ) : (
-                <div className="flex items-center gap-4">
-                  <span className="hidden sm:inline-block text-sm text-zinc-400 font-medium">
-                    Belum punya akun?
-                  </span>
-                  <Link 
-                    href="/login" 
-                    className="bg-white hover:bg-zinc-200 text-black px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:-translate-y-0.5"
-                  >
-                    Login
-                  </Link>
-                </div>
-              )}
-            </div>
-          </header>
-
-          {/* Marquee Ticker — Dark Navy */}
-          <div className="marquee-wrapper py-2 border-b" style={{ background: '#0F172A', borderColor: 'rgba(67,56,202,0.3)' }}>
-            <div className="marquee-track">
-              {[...Array(8)].map((_, i) => (
-                <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase tracking-widest" style={{ color: '#93c5fd' }}>
-                  Gelora Bumi Mintarsih
-                  <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
-                  Kalisegoro Semarang
-                  <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
-                </span>
-              ))}
-            </div>
-          </div>
+      <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-[#09090b]/90 backdrop-blur-md text-white border-b border-zinc-800 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-3">
+          <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain shrink-0 drop-shadow-[0_0_15px_rgba(67,56,202,0.5)] transition-transform hover:scale-105" />
+          <span className="text-lg font-bold tracking-wide font-bricolage">BumiMintarsih</span>
         </div>
+
+        <div>
+          {user ? (
+            <Link 
+              href={dashboardPath} 
+              className="bg-white hover:bg-zinc-200 text-black px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+            >
+              Ke Dashboard
+            </Link>
+          ) : (
+            <div className="flex items-center gap-4">
+              <span className="hidden sm:inline-block text-sm text-zinc-400 font-medium">
+                Belum punya akun?
+              </span>
+              <Link 
+                href="/login" 
+                className="bg-white hover:bg-zinc-200 text-black px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:-translate-y-0.5"
+              >
+                Login
+              </Link>
+            </div>
+          )}
+        </div>
+      </header>
 
         {/* Hero Section — Video Background, full width, constrained height on desktop */}
         <div className="w-full relative overflow-hidden text-center text-white h-[55vh] md:h-[90vh] max-h-[1000px]">
@@ -111,6 +94,20 @@ export default async function Home() {
             <p className="text-xs sm:text-lg text-[rgba(255,255,255,0.85)] max-w-2xl mx-auto leading-relaxed drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)] px-2 mt-3 sm:mt-0">
               Sistem penyewaan lapangan sepakbola online Gelora Bumi Mintarsih Kalisegoro, Gunungpati, Kota Semarang
             </p>
+          </div>
+        </div>
+
+        {/* Marquee Ticker — Dark Navy */}
+        <div className="marquee-wrapper py-2 border-b" style={{ background: '#0F172A', borderColor: 'rgba(67,56,202,0.3)' }}>
+          <div className="marquee-track">
+            {[...Array(8)].map((_, i) => (
+              <span key={i} className="flex items-center gap-8 px-8 font-bold text-xs uppercase tracking-widest" style={{ color: '#93c5fd' }}>
+                Gelora Bumi Mintarsih
+                <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
+                Kalisegoro Semarang
+                <span style={{ color: '#60a5fa', fontSize: '10px' }}>✦</span>
+              </span>
+            ))}
           </div>
         </div>
       {/* Main Content (White Base with emerald glow from globals.css) */}
