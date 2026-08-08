@@ -188,6 +188,27 @@ export default async function Home() {
                 </div>
               ))}
             </div>
+
+            {/* Cara Sewa Steps */}
+            <div className="mt-12 pt-8 border-t border-white/10 relative z-10">
+              <h4 className="text-xl font-bold text-white mb-6 font-bricolage text-center">Cara Sewa Lapangan</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                {[
+                  { step: '1', title: 'Pilih Jadwal', desc: 'Cek ketersediaan di kalender bawah' },
+                  { step: '2', title: 'Login Akun', desc: 'Masuk atau daftar sebagai pengguna' },
+                  { step: '3', title: 'Isi Formulir', desc: 'Pilih sesi & isi detail pemesanan' },
+                  { step: '4', title: 'Pembayaran', desc: 'Selesaikan bayar untuk konfirmasi' },
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-white/5 rounded-xl p-4 text-center border border-white/5 relative">
+                    <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-blue-400 flex items-center justify-center font-bold text-sm mx-auto mb-3 border border-indigo-500/30">
+                      {item.step}
+                    </div>
+                    <h5 className="text-white font-bold text-sm mb-1">{item.title}</h5>
+                    <p className="text-xs text-zinc-400 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
