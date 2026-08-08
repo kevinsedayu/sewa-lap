@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden pt-16 pb-8 px-6 sm:px-12" style={{
-      background: 'linear-gradient(135deg, #0F172A 0%, #1e2d5a 100%)',
+      background: 'linear-gradient(135deg, #000000 0%, #0F172A 100%)',
       borderTop: '1px solid rgba(67,56,202,0.3)',
     }}>
       {/* Subtle background glow */}
@@ -17,10 +17,10 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <img src="/logo.png" alt="Logo" className="w-12 h-12 object-contain drop-shadow-[0_0_15px_rgba(67,56,202,0.5)]" />
-              <span className="text-2xl font-extrabold tracking-wide font-bricolage text-white">BumiMintarsih</span>
+              <span className="text-2xl font-extrabold tracking-wide font-bricolage text-white">Putra Permada FC</span>
             </div>
             <p className="text-blue-100/70 text-sm leading-relaxed mb-6 max-w-sm">
-              Sistem penyewaan lapangan sepakbola online berstandar nasional. Kami memastikan kenyamanan dan kualitas rumput terbaik untuk pengalaman bermain Anda.
+              Official website pengelola lapangan Gelora Bumi Mintarsih.
             </p>
           </div>
 
