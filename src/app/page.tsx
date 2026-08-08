@@ -116,48 +116,46 @@ export default async function Home() {
       {/* Main Content (White Base with emerald glow from globals.css) */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
         
-        {/* Info & Fasilitas Hub (Premium Dark Section) */}
-        <div className="mb-20 rounded-3xl p-8 sm:p-12 shadow-[0_20px_60px_rgba(23,37,84,0.4)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #172554 0%, #312e81 100%)', border: '1px solid rgba(67,56,202,0.3)' }}>
-          {/* Subtle Glow Background */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            {/* Teks Tentang Lapangan */}
-            <div>
-              <div className="w-12 h-1 bg-indigo-400 mb-6 rounded-full"></div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-bricolage mb-6 leading-tight">
-                Mengenal <span className="text-blue-300">Gelora Bumi Mintarsih</span>
+        {/* Tentang Lapangan (Simple Card Style) */}
+        <div className="mb-20">
+          <div className="flex flex-col md:flex-row items-center gap-8 p-8 sm:p-10" style={{
+            background: '#172554', border: '1px solid rgba(67,56,202,0.25)', borderRadius: '24px',
+            boxShadow: '0 10px 40px rgba(23,37,84,0.3)', position: 'relative', overflow: 'hidden'
+          }}>
+            {/* Glow */}
+            <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(67,56,202,0.15) 0%, rgba(23,37,84,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+            
+            <div className="flex-1 relative z-10">
+              <h2 className="text-3xl font-extrabold text-white tracking-tight font-bricolage mb-4">
+                Tentang Lapangan
               </h2>
-              <div className="space-y-4 text-white/80 leading-relaxed text-base sm:text-lg font-medium">
-                <p>
-                  Gelora Bumi Mintarsih adalah lapangan sepakbola berstandar nasional yang berlokasi strategis di <strong>Sedayu RW 01, Kalisegoro, Gunungpati, Kota Semarang</strong>. 
-                </p>
-                <p>
-                  Kami hadir untuk memenuhi kebutuhan para pecinta sepakbola dengan menyajikan kualitas rumput terbaik yang selalu mendapat perawatan rutin secara profesional. Dilengkapi dengan berbagai fasilitas pendukung yang memadai, Gelora Bumi Mintarsih memastikan kenyamanan bermain Anda baik untuk latihan rutin maupun turnamen resmi.
-                </p>
-                <p className="pt-4 mt-4 border-t border-white/10 text-blue-200">
-                  Lapangan ini secara resmi dikelola oleh <strong>@putrapermadafc</strong>, menjamin tata kelola yang profesional dan pelayanan yang tanggap.
-                </p>
-              </div>
+              <p className="text-white/80 leading-relaxed text-base mb-4">
+                Lapangan Gelora Bumi Mintarsih yang berlokasi di Sedayu RW 01 Kalisegoro Gunungpati Kota Semarang merupakan lapangan berstandar nasional dengan perawatan rutin dan fasilitas lengkap.
+              </p>
+              <p className="text-blue-300 font-medium">
+                Lapangan ini secara resmi di kelola oleh <strong>@putrapermadafc</strong>
+              </p>
             </div>
 
-            {/* Foto Lapangan Utama */}
-            <div className="relative h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 group">
-              <img src="/lapangan.jpeg" alt="Gelora Bumi Mintarsih Lapangan Utama" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/90 via-transparent to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-white font-bold text-lg font-bricolage">Kualitas Rumput Standar Nasional</p>
+            <div className="w-full md:w-1/3 relative z-10 shrink-0">
+              <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                <img src="/tentanglap.png" alt="Tentang Lapangan" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="relative z-10">
-            <h3 className="text-2xl font-bold text-white mb-8 font-bricolage text-center lg:text-left">
-              Fasilitas Pendukung
-            </h3>
-            <FasilitasGallery />
+        {/* Fasilitas Section (Luxurious Cards) */}
+        <div className="mb-20">
+          <div className="flex flex-col items-center justify-center text-center mb-8">
+            <div>
+              <h2 className="text-4xl font-extrabold text-zinc-900 tracking-tight font-bricolage">
+                Fasilitas Kami
+              </h2>
+            </div>
           </div>
+          
+          <FasilitasGallery />
         </div>
 
         {/* Info Lapangan & Harga */}
