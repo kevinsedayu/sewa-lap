@@ -47,11 +47,11 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
   return (
     <>
       {/* Desktop Table */}
-      <div className="booking-table-view" style={{ background: '#ffffff', border: '1px solid #e4e4e7', borderRadius: '12px', overflow: 'hidden' }}>
+      <div className="booking-table-view" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '12px', overflow: 'hidden' }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '640px' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid #f4f4f5', background: '#fafafa' }}>
+              <tr style={{ borderBottom: '1px solid rgba(30,45,90,0.5)', background: '#0d1527' }}>
                 {['Tgl. Main', 'Sesi', 'Tanggal Dipesan', 'Total Bayar', 'Status', 'Aksi'].map(h => (
                   <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     {h}
@@ -61,12 +61,12 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
             </thead>
             <tbody>
               {bookings.length > 0 ? bookings.map((b: any, i: number) => (
-                <tr key={b.id} style={{ borderBottom: i < bookings.length - 1 ? '1px solid #f4f4f5' : 'none' }}>
-                  <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 600, color: '#09090b' }}>
+                <tr key={b.id} style={{ borderBottom: i < bookings.length - 1 ? '1px solid rgba(30,45,90,0.5)' : 'none' }}>
+                  <td style={{ padding: '14px 16px', fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>
                     {new Date(b.tanggal).toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
                   </td>
                   <td style={{ padding: '14px 16px', fontSize: '13px', color: '#3f3f46' }}>
-                    <div style={{ fontWeight: 600, textTransform: 'capitalize', color: '#09090b' }}>{b.sesi}</div>
+                    <div style={{ fontWeight: 600, textTransform: 'capitalize', color: '#ffffff' }}>{b.sesi}</div>
                     <div style={{ fontSize: '11px', color: '#71717a', marginTop: '2px' }}>{b.jam_mulai?.slice(0, 5)} - {b.jam_selesai?.slice(0, 5)}</div>
                   </td>
                   <td style={{ padding: '14px 16px', fontSize: '13px', color: '#52525b' }}>
@@ -128,12 +128,12 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
       <div className="booking-card-list">
         {bookings.length > 0 ? bookings.map((b: any) => (
           <div key={b.id} style={{
-            background: '#fff', border: '1px solid #e4e4e7', borderRadius: '10px',
+            background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '10px',
             padding: '14px 16px', marginBottom: '10px',
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <div style={{ fontWeight: 600, fontSize: '14px', textTransform: 'capitalize', color: '#09090b' }}>
+                <div style={{ fontWeight: 600, fontSize: '14px', textTransform: 'capitalize', color: '#ffffff' }}>
                   Sesi {b.sesi}
                 </div>
                 <div style={{ fontSize: '12px', color: '#71717a', marginTop: '2px' }}>
@@ -182,7 +182,7 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
             )}
           </div>
         )) : (
-          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#a1a1aa', background: '#fff', borderRadius: '12px', border: '1px solid #e4e4e7' }}>
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#a1a1aa', background: '#0a0f1e', borderRadius: '12px', border: '1px solid rgba(30,45,90,0.5)' }}>
             <div style={{ fontSize: '28px', marginBottom: '8px' }}>📭</div>
             <p style={{ fontSize: '14px', margin: 0 }}>Belum ada riwayat sewa</p>
           </div>

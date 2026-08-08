@@ -206,10 +206,10 @@ export default function UserBookingPage() {
   return (
     <div className="page-content" style={{ maxWidth: '800px', margin: '0 auto', fontFamily: "'Inter', system-ui, sans-serif" }}>
       <div style={{ marginBottom: '28px' }}>
-        <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#09090b', marginBottom: '8px' }}>
+        <h1 style={{ fontSize: '24px', fontWeight: 700, color: '#ffffff', marginBottom: '8px' }}>
           Sewa Lapangan
         </h1>
-        <p style={{ fontSize: '14px', color: '#71717a' }}>
+        <p style={{ fontSize: '14px', color: '#94a3b8' }}>
           Pilih jadwal bermain Anda dan unggah bukti transfer.
         </p>
       </div>
@@ -251,7 +251,7 @@ export default function UserBookingPage() {
           <p style={{ fontSize: '14px' }}>Menunggu konfirmasi admin. Mengalihkan ke dashboard...</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ background: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #e4e4e7' }}>
+        <form onSubmit={handleSubmit} style={{ background: '#0a0f1e', padding: '24px', borderRadius: '12px', border: '1px solid rgba(30,45,90,0.5)' }}>
           
           {error && (
              <div style={{ padding: '12px', background: '#fee2e2', color: '#b91c1c', borderRadius: '8px', marginBottom: '20px', fontSize: '14px' }}>
@@ -293,8 +293,8 @@ export default function UserBookingPage() {
                 {activeSesiList.map(s => (
                   <label key={s.id} style={{ 
                     flex: 1, minWidth: '150px', padding: '16px', border: '1px solid', borderRadius: '8px', cursor: 'pointer',
-                    borderColor: sesi === s.id ? '#09090b' : '#e4e4e7',
-                    background: sesi === s.id ? '#fafafa' : '#fff',
+                    borderColor: sesi === s.id ? 'rgba(30,45,90,1)' : 'rgba(30,45,90,0.5)',
+                    background: sesi === s.id ? '#0d1527' : '#0a0f1e',
                     opacity: tanggal && isSessionBooked(tanggal, s.id) ? 0.5 : 1
                   }}>
                     <input 
@@ -306,9 +306,9 @@ export default function UserBookingPage() {
                       disabled={tanggal ? isSessionBooked(tanggal, s.id) : false}
                       style={{ display: 'none' }} 
                     />
-                    <div style={{ fontWeight: 600, fontSize: '15px', color: '#09090b' }}>{s.nama}</div>
+                    <div style={{ fontWeight: 600, fontSize: '15px', color: '#ffffff' }}>{s.nama}</div>
                     <div style={{ fontSize: '13px', color: '#71717a', marginTop: '4px' }}>{s.jam}</div>
-                    <div style={{ fontSize: '14px', fontWeight: 600, color: '#09090b', marginTop: '8px' }}>Rp {s.harga.toLocaleString('id-ID')}</div>
+                    <div style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff', marginTop: '8px' }}>Rp {s.harga.toLocaleString('id-ID')}</div>
                     {tanggal && isSessionBooked(tanggal, s.id) && <div style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px' }}>Sudah disewa</div>}
                   </label>
                 ))}
@@ -320,22 +320,22 @@ export default function UserBookingPage() {
           <div style={{ marginBottom: '32px' }}>
             <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '16px', borderBottom: '1px solid #e4e4e7', paddingBottom: '8px' }}>2. Pembayaran</h3>
             
-            <div style={{ background: '#f4f4f5', padding: '16px', borderRadius: '8px', marginBottom: '16px' }}>
-              <p style={{ fontSize: '14px', color: '#52525b', marginBottom: '12px', marginTop: 0 }}>Silakan transfer sesuai nominal ke salah satu rekening berikut:</p>
+            <div style={{ background: '#0d1527', padding: '16px', borderRadius: '8px', marginBottom: '16px' }}>
+              <p style={{ fontSize: '14px', color: '#94a3b8', marginBottom: '12px', marginTop: 0 }}>Silakan transfer sesuai nominal ke salah satu rekening berikut:</p>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ background: '#fff', padding: '12px', borderRadius: '6px', border: '1px solid #e4e4e7' }}>
+                <div style={{ background: '#0a0f1e', padding: '12px', borderRadius: '6px', border: '1px solid rgba(30,45,90,0.5)' }}>
                   <div style={{ fontSize: '12px', color: '#71717a', fontWeight: 600, marginBottom: '2px' }}>BANK MANDIRI</div>
-                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#09090b', letterSpacing: '1px' }}>1260021112003</div>
+                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff', letterSpacing: '1px' }}>1260021112003</div>
                 </div>
 
-                <div style={{ background: '#fff', padding: '12px', borderRadius: '6px', border: '1px solid #e4e4e7' }}>
+                <div style={{ background: '#0a0f1e', padding: '12px', borderRadius: '6px', border: '1px solid rgba(30,45,90,0.5)' }}>
                   <div style={{ fontSize: '12px', color: '#71717a', fontWeight: 600, marginBottom: '2px' }}>DANA</div>
-                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#09090b', letterSpacing: '1px' }}>081328215620</div>
+                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff', letterSpacing: '1px' }}>081328215620</div>
                 </div>
               </div>
               
-              <div style={{ fontSize: '14px', color: '#3f3f46', fontWeight: 600, marginTop: '12px' }}>a.n Kevin Apriliyanto</div>
+              <div style={{ fontSize: '14px', color: '#ffffff', fontWeight: 600, marginTop: '12px' }}>a.n Kevin Apriliyanto</div>
               
               <div style={{ marginTop: '16px', borderTop: '1px dashed #d4d4d8', paddingTop: '12px' }}>
                 <div style={{ fontSize: '13px', color: '#71717a' }}>Total yang harus dibayar:</div>
@@ -350,7 +350,7 @@ export default function UserBookingPage() {
                     <span style={{ background: '#dcfce7', color: '#15803d', fontSize: '12px', fontWeight: 700, padding: '2px 8px', borderRadius: '100px' }}>-{discountPct}%</span>
                   </div>
                 ) : (
-                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#09090b' }}>
+                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff' }}>
                     Rp {(activeSesiList.find(s => s.id === sesi)?.harga || 0).toLocaleString('id-ID')}
                   </div>
                 )}

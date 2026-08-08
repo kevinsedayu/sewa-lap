@@ -99,7 +99,7 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Marquee Ticker — scrolling text below hero */}
-        <div className="marquee-wrapper py-1.5 border-y" style={{ background: '#172554', borderColor: 'rgba(67,56,202,0.25)' }}>
+        <div className="marquee-wrapper py-1.5 border-y" style={{ background: '#0a0f1e', borderColor: 'rgba(30,45,90,0.5)' }}>
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
               <span key={i} className="flex items-center gap-6 px-6 font-bold text-sm uppercase" style={{ color: '#93c5fd', letterSpacing: '0.05em' }}>
@@ -125,7 +125,7 @@ export default async function AdminDashboard() {
       {/* Info Lapangan */}
       <div className="mb-6 relative">
         <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Informasi Lapangan</h2>
-        <div className="rounded-2xl p-6 shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative overflow-hidden" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.25)' }}>
+        <div className="rounded-2xl p-6 shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative overflow-hidden" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
           <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           
           <h3 className="text-lg font-bold text-white mb-2 relative z-10">{lapangan?.nama || 'Nama Lapangan'}</h3>
@@ -143,7 +143,7 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Greeting */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-8 rounded-3xl shadow-[0_10px_40px_rgba(23,37,84,0.5)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #172554 0%, #312e81 100%)', border: '1px solid rgba(67,56,202,0.25)' }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-8 rounded-3xl shadow-[0_10px_40px_rgba(23,37,84,0.5)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1527 100%)', border: '1px solid rgba(30,45,90,0.5)' }}>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
         <div className="relative z-10">
           <p className="text-sm text-white/70 font-bold tracking-widest uppercase mb-2">
@@ -156,7 +156,7 @@ export default async function AdminDashboard() {
         <Link 
           href="/admin/booking" 
           className="relative z-10 inline-flex items-center justify-center text-white px-6 py-3 rounded-xl text-sm font-bold transition-all hover:-translate-y-1"
-          style={{ background: '#172554', boxShadow: '0 0 20px rgba(23,37,84,0.5)', border: '1px solid rgba(67,56,202,0.4)' }}
+          style={{ background: '#0d1527', boxShadow: '0 0 20px rgba(23,37,84,0.5)', border: '1px solid rgba(30,45,90,0.5)' }}
         >
           Kelola Booking
         </Link>
@@ -170,7 +170,7 @@ export default async function AdminDashboard() {
           { ...stats[2], color: 'text-blue-300', bg: 'bg-white/10', border: 'border-indigo-600/30', gFrom: '#172554', gTo: '#172554' },
           { ...stats[3], color: 'text-blue-200', bg: 'bg-indigo-500/20', border: 'border-indigo-500/20', gFrom: '#172554', gTo: '#172554' }
         ].map((stat) => (
-          <div key={stat.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: 'linear-gradient(135deg, #172554 0%, #312e81 100%)', border: `1px solid rgba(67,56,202,0.2)` }}>
+          <div key={stat.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1527 100%)', border: `1px solid rgba(30,45,90,0.5)` }}>
             <div className="flex justify-between items-center mb-4 relative z-10">
               <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{stat.label}</span>
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${stat.bg} ${stat.color} font-bold`}>
@@ -198,12 +198,12 @@ export default async function AdminDashboard() {
         </div>
 
         {/* Desktop Table */}
-        <div className="hidden sm:block rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.25)' }}>
+        <div className="hidden sm:block rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
           <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
           {recentBookings && recentBookings.length > 0 ? (
             <table className="w-full text-left border-collapse relative z-10">
               <thead>
-                <tr className="bg-black/20 border-b border-white/10">
+                <tr className="bg-[#0d1527] border-b border-[rgba(30,45,90,0.5)]">
                   {['Nama Penyewa', 'Tanggal', 'Jam', 'Total', 'Status'].map(h => (
                     <th key={h} className="px-6 py-4 text-xs font-semibold text-white/60 uppercase tracking-wider">
                       {h}
@@ -248,7 +248,7 @@ export default async function AdminDashboard() {
         <div className="block sm:hidden space-y-3">
           {recentBookings && recentBookings.length > 0 ? (
             recentBookings.map((b: any) => (
-              <div key={b.id} className="rounded-xl p-4 shadow-sm relative overflow-hidden" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.25)' }}>
+              <div key={b.id} className="rounded-xl p-4 shadow-sm relative overflow-hidden" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
                 <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
                 <div className="flex justify-between items-start mb-3 relative z-10">
                   <div>
@@ -272,7 +272,7 @@ export default async function AdminDashboard() {
               </div>
             ))
           ) : (
-            <div className="rounded-xl py-12 text-center shadow-sm" style={{ background: '#172554', border: '1px solid rgba(67,56,202,0.25)' }}>
+            <div className="rounded-xl py-12 text-center shadow-sm" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
               <div className="text-3xl mb-2 opacity-30">📭</div>
               <p className="text-sm font-medium text-zinc-500">Belum ada booking masuk</p>
             </div>

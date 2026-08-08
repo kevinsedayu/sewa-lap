@@ -18,10 +18,10 @@ export default async function AdminBookingPage() {
     <div className="page-content" style={{ maxWidth: '1200px' }}>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
-        <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#09090b', letterSpacing: '-0.025em', margin: '0 0 4px' }}>
+        <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.025em', margin: '0 0 4px' }}>
           Kelola Persewaan
         </h1>
-        <p style={{ fontSize: '13px', color: '#71717a', margin: 0 }}>
+        <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>
           Konfirmasi, tolak, atau tandai persewaan sebagai selesai
         </p>
       </div>
@@ -40,8 +40,8 @@ export default async function AdminBookingPage() {
           { label: 'Dibatalkan', value: cancelled, color: '#ef4444' },
         ].map(s => (
           <div key={s.label} className="relative overflow-hidden" style={{
-            background: '#172554',
-            border: '1px solid rgba(67,56,202,0.25)',
+            background: '#0a0f1e',
+            border: '1px solid rgba(30,45,90,0.5)',
             borderRadius: '16px',
             padding: '20px',
             borderTop: `3px solid ${s.color}`,
