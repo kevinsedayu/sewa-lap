@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import AdminSidebar from '@/components/admin/AdminSidebar'
+import Footer from '@/components/shared/Footer'
 
 export default async function AdminLayout({
   children,
@@ -26,11 +27,12 @@ export default async function AdminLayout({
   if (role !== 'admin') redirect('/user/dashboard')
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <AdminSidebar user={{ email: user.email!, name: profile?.full_name || 'Admin' }} />
-      <main className="w-full">
+      <main className="w-full flex-1">
         {children}
       </main>
+      <Footer />
     </div>
   )
 }
