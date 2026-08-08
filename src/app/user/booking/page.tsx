@@ -251,7 +251,7 @@ export default function UserBookingPage() {
           <p style={{ fontSize: '14px' }}>Menunggu konfirmasi admin. Mengalihkan ke dashboard...</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ background: '#0a0f1e', padding: '24px', borderRadius: '12px', border: '1px solid rgba(30,45,90,0.5)' }}>
+        <form onSubmit={handleSubmit} style={{ background: '#0d1b3e', padding: '24px', borderRadius: '12px', border: '1px solid rgba(30,45,90,0.5)' }}>
           
           {error && (
              <div style={{ padding: '12px', background: '#fee2e2', color: '#b91c1c', borderRadius: '8px', marginBottom: '20px', fontSize: '14px' }}>
@@ -294,7 +294,7 @@ export default function UserBookingPage() {
                   <label key={s.id} style={{ 
                     flex: 1, minWidth: '150px', padding: '16px', border: '1px solid', borderRadius: '8px', cursor: 'pointer',
                     borderColor: sesi === s.id ? 'rgba(30,45,90,1)' : 'rgba(30,45,90,0.5)',
-                    background: sesi === s.id ? '#0d1527' : '#0a0f1e',
+                    background: sesi === s.id ? '#152044' : '#0d1b3e',
                     opacity: tanggal && isSessionBooked(tanggal, s.id) ? 0.5 : 1
                   }}>
                     <input 
@@ -320,16 +320,16 @@ export default function UserBookingPage() {
           <div style={{ marginBottom: '32px' }}>
             <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '16px', borderBottom: '1px solid #e4e4e7', paddingBottom: '8px' }}>2. Pembayaran</h3>
             
-            <div style={{ background: '#0d1527', padding: '16px', borderRadius: '8px', marginBottom: '16px' }}>
+            <div style={{ background: '#152044', padding: '16px', borderRadius: '8px', marginBottom: '16px' }}>
               <p style={{ fontSize: '14px', color: '#94a3b8', marginBottom: '12px', marginTop: 0 }}>Silakan transfer sesuai nominal ke salah satu rekening berikut:</p>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ background: '#0a0f1e', padding: '12px', borderRadius: '6px', border: '1px solid rgba(30,45,90,0.5)' }}>
+                <div style={{ background: '#0d1b3e', padding: '12px', borderRadius: '6px', border: '1px solid rgba(30,45,90,0.5)' }}>
                   <div style={{ fontSize: '12px', color: '#71717a', fontWeight: 600, marginBottom: '2px' }}>BANK MANDIRI</div>
                   <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff', letterSpacing: '1px' }}>1260021112003</div>
                 </div>
 
-                <div style={{ background: '#0a0f1e', padding: '12px', borderRadius: '6px', border: '1px solid rgba(30,45,90,0.5)' }}>
+                <div style={{ background: '#0d1b3e', padding: '12px', borderRadius: '6px', border: '1px solid rgba(30,45,90,0.5)' }}>
                   <div style={{ fontSize: '12px', color: '#71717a', fontWeight: 600, marginBottom: '2px' }}>DANA</div>
                   <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff', letterSpacing: '1px' }}>081328215620</div>
                 </div>

@@ -87,7 +87,7 @@ export default async function UserDashboard() {
         </div>
 
         {/* Marquee Ticker — scrolling text below hero */}
-        <div className="marquee-wrapper py-1.5 border-y" style={{ background: '#0a0f1e', borderColor: 'rgba(30,45,90,0.5)' }}>
+        <div className="marquee-wrapper py-1.5 border-y" style={{ background: '#0d1b3e', borderColor: 'rgba(30,45,90,0.5)' }}>
           <div className="marquee-track">
             {[...Array(8)].map((_, i) => (
               <span key={i} className="flex items-center gap-6 px-6 font-bold text-sm uppercase" style={{ color: '#93c5fd', letterSpacing: '0.05em' }}>
@@ -113,7 +113,7 @@ export default async function UserDashboard() {
       {/* Info Lapangan */}
       <div className="mb-6 relative">
         <h2 className="text-lg font-bold text-zinc-900 mb-4 tracking-tight">Informasi Lapangan</h2>
-        <div className="rounded-2xl p-6 shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative overflow-hidden" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
+        <div className="rounded-2xl p-6 shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative overflow-hidden" style={{ background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)' }}>
           <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           
           <h3 className="text-lg font-bold text-white mb-2 relative z-10">{lapangan?.nama || 'Nama Lapangan'}</h3>
@@ -131,7 +131,7 @@ export default async function UserDashboard() {
       </div>
 
       {/* Greeting & Quick Action */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-8 rounded-3xl shadow-[0_10px_40px_rgba(23,37,84,0.5)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1527 100%)', border: '1px solid rgba(30,45,90,0.5)' }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-8 rounded-3xl shadow-[0_10px_40px_rgba(23,37,84,0.5)] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0d1b3e 0%, #162348 100%)', border: '1px solid rgba(30,45,90,0.5)' }}>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
         <div className="relative z-10">
           <p className="text-sm text-white/70 font-bold tracking-widest uppercase mb-2">
@@ -144,7 +144,7 @@ export default async function UserDashboard() {
         <Link 
           href="/user/booking" 
           className="relative z-10 inline-flex items-center justify-center text-white px-6 py-3 rounded-xl text-sm font-bold transition-all hover:-translate-y-1"
-          style={{ background: '#0d1527', boxShadow: '0 0 20px rgba(23,37,84,0.5)', border: '1px solid rgba(30,45,90,0.5)' }}
+          style={{ background: '#152044', boxShadow: '0 0 20px rgba(23,37,84,0.5)', border: '1px solid rgba(30,45,90,0.5)' }}
         >
           Booking Sekarang
         </Link>
@@ -157,7 +157,7 @@ export default async function UserDashboard() {
           { label: 'Menunggu', value: String(bookingPending), desc: 'Sedang diproses', color: 'text-amber-200', bg: 'bg-amber-500/20', border: 'border-amber-500/20' },
           { label: 'Total Booking', value: String(totalBooking), desc: 'Semua riwayat', color: 'text-blue-200', bg: 'bg-indigo-500/20', border: 'border-indigo-500/20' },
         ].map((card) => (
-          <div key={card.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1527 100%)', border: '1px solid rgba(30,45,90,0.5)' }}>
+          <div key={card.label} className={`rounded-3xl p-6 shadow-sm relative overflow-hidden group transition-all hover:scale-[1.02] hover:shadow-[0_10px_40px_rgba(49,46,129,0.6)]`} style={{ background: 'linear-gradient(135deg, #0d1b3e 0%, #162348 100%)', border: '1px solid rgba(30,45,90,0.5)' }}>
             <div className="flex justify-between items-center mb-4 relative z-10">
               <span className="text-xs font-bold text-white/60 uppercase tracking-widest">{card.label}</span>
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${card.bg} ${card.color} font-bold`}>
@@ -176,7 +176,7 @@ export default async function UserDashboard() {
       </div>
 
       {/* CTA Banner */}
-      <div className="bg-[#0a0f1e] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md relative overflow-hidden" style={{ border: '1px solid rgba(30,45,90,0.5)' }}>
+      <div className="bg-[#0d1b3e] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-md relative overflow-hidden" style={{ border: '1px solid rgba(30,45,90,0.5)' }}>
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
         <div className="relative z-10">
           <h2 className="text-white text-lg font-bold mb-1 tracking-tight">
@@ -204,12 +204,12 @@ export default async function UserDashboard() {
         </div>
 
         {/* Desktop Table View */}
-        <div className="hidden sm:block rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
+        <div className="hidden sm:block rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(23,37,84,0.4)] relative" style={{ background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)' }}>
           <div className="absolute top-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
           {userBookings && userBookings.length > 0 ? (
             <table className="w-full text-left border-collapse relative z-10">
               <thead>
-                <tr className="bg-[#0d1527] border-b border-[rgba(30,45,90,0.5)]">
+                <tr className="bg-[#152044] border-b border-[rgba(30,45,90,0.5)]">
                   {['Tanggal', 'Sesi / Jam', 'Total Harga', 'Status'].map(h => (
                     <th key={h} className="px-6 py-4 text-xs font-semibold text-white/60 uppercase tracking-wider">
                       {h}
@@ -251,7 +251,7 @@ export default async function UserDashboard() {
         <div className="block sm:hidden space-y-3">
           {userBookings && userBookings.length > 0 ? (
             userBookings.slice(0, 5).map((b: any) => (
-              <div key={b.id} className="rounded-xl p-4 shadow-sm relative overflow-hidden" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
+              <div key={b.id} className="rounded-xl p-4 shadow-sm relative overflow-hidden" style={{ background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)' }}>
                 <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
                 <div className="flex justify-between items-start mb-3 relative z-10">
                   <div>
@@ -272,7 +272,7 @@ export default async function UserDashboard() {
               </div>
             ))
           ) : (
-              <div className="rounded-xl py-12 text-center shadow-sm" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
+              <div className="rounded-xl py-12 text-center shadow-sm" style={{ background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)' }}>
               <div className="text-3xl mb-2 opacity-30">📭</div>
               <p className="text-sm font-medium text-zinc-500">Belum ada riwayat booking</p>
             </div>

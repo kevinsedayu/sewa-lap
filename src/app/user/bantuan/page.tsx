@@ -8,7 +8,7 @@ export default function BantuanPage() {
       
       {/* Hero Section */}
       <section style={{ 
-        background: '#0a0f1e', 
+        background: '#0d1b3e', 
         borderRadius: '16px', 
         padding: '40px 32px',
         color: 'white',
@@ -80,7 +80,7 @@ export default function BantuanPage() {
           <a href="https://wa.me/6281328215620" target="_blank" rel="noopener noreferrer" style={{
             position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '16px',
+            background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '16px',
             textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
             boxShadow: '0 4px 20px rgba(23,37,84,0.3)'
           }}
@@ -104,7 +104,7 @@ export default function BantuanPage() {
           <a href="https://www.instagram.com/putrapermadafc?igsh=dmV3czcwN2dqOWZn" target="_blank" rel="noopener noreferrer" style={{
             position: 'relative', overflow: 'hidden',
             display: 'flex', alignItems: 'center', gap: '16px', padding: '20px',
-            background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '16px',
+            background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '16px',
             textDecoration: 'none', color: 'white', transition: 'all 0.3s ease',
             boxShadow: '0 4px 20px rgba(23,37,84,0.3)'
           }}
@@ -128,7 +128,7 @@ export default function BantuanPage() {
 
       {/* Values Grid Section */}
       <section style={{ 
-        background: '#0a0f1e', 
+        background: '#0d1b3e', 
         border: '1px solid rgba(30,45,90,0.5)', 
         borderRadius: '24px', 
         padding: '32px',

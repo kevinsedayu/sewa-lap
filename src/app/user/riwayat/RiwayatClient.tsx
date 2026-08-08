@@ -47,11 +47,11 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
   return (
     <>
       {/* Desktop Table */}
-      <div className="booking-table-view" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '12px', overflow: 'hidden' }}>
+      <div className="booking-table-view" style={{ background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '12px', overflow: 'hidden' }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '640px' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(30,45,90,0.5)', background: '#0d1527' }}>
+              <tr style={{ borderBottom: '1px solid rgba(30,45,90,0.5)', background: '#152044' }}>
                 {['Tgl. Main', 'Sesi', 'Tanggal Dipesan', 'Total Bayar', 'Status', 'Aksi'].map(h => (
                   <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '11px', fontWeight: 600, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     {h}
@@ -128,7 +128,7 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
       <div className="booking-card-list">
         {bookings.length > 0 ? bookings.map((b: any) => (
           <div key={b.id} style={{
-            background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '10px',
+            background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)', borderRadius: '10px',
             padding: '14px 16px', marginBottom: '10px',
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -182,7 +182,7 @@ export default function RiwayatClient({ initialBookings }: { initialBookings: an
             )}
           </div>
         )) : (
-          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#a1a1aa', background: '#0a0f1e', borderRadius: '12px', border: '1px solid rgba(30,45,90,0.5)' }}>
+          <div style={{ padding: '40px 24px', textAlign: 'center', color: '#a1a1aa', background: '#0d1b3e', borderRadius: '12px', border: '1px solid rgba(30,45,90,0.5)' }}>
             <div style={{ fontSize: '28px', marginBottom: '8px' }}>📭</div>
             <p style={{ fontSize: '14px', margin: 0 }}>Belum ada riwayat sewa</p>
           </div>

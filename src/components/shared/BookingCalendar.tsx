@@ -159,7 +159,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
   return (
     <div className="relative">
-      <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(23,37,84,0.5)] relative overflow-hidden" style={{ background: '#0a0f1e', border: '1px solid rgba(30,45,90,0.5)' }}>
+      <div className="rounded-2xl p-4 sm:p-6 shadow-[0_10px_40px_rgba(23,37,84,0.5)] relative overflow-hidden" style={{ background: '#0d1b3e', border: '1px solid rgba(30,45,90,0.5)' }}>
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
         
         {/* Header Kalender */}
@@ -195,7 +195,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
 
           {/* Tanggal Kosong di awal bulan */}
           {Array.from({ length: firstDayOfMonth }).map((_, i) => (
-            <div key={`empty-${i}`} className="min-h-[140px] p-2 bg-[#0d1527] rounded-xl border border-dashed border-zinc-800" />
+            <div key={`empty-${i}`} className="min-h-[140px] p-2 bg-[#152044] rounded-xl border border-dashed border-zinc-800" />
           ))}
 
           {/* Tanggal */}
@@ -298,7 +298,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
             const orphanBookings = getOrphanBookings(day)
 
             return (
-              <div key={day} className="flex flex-col gap-1.5 min-h-[140px] p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all" style={{ background: '#0d1527', border: '1px solid rgba(30,45,90,0.5)' }} onMouseOver={e => (e.currentTarget.style.borderColor='rgba(30,45,90,1)')} onMouseOut={e => (e.currentTarget.style.borderColor='rgba(30,45,90,0.5)')}>
+              <div key={day} className="flex flex-col gap-1.5 min-h-[140px] p-2.5 rounded-xl shadow-sm hover:shadow-md transition-all" style={{ background: '#152044', border: '1px solid rgba(30,45,90,0.5)' }} onMouseOver={e => (e.currentTarget.style.borderColor='rgba(30,45,90,1)')} onMouseOut={e => (e.currentTarget.style.borderColor='rgba(30,45,90,0.5)')}>
                 <div className="text-sm font-bold text-white mb-1 font-sans">{day}</div>
                 
                 <div className="flex flex-col gap-1.5 flex-1 justify-start">
@@ -347,7 +347,7 @@ export default function BookingCalendar({ bookings, isAdmin = false, currentUser
       {/* Modal Input Admin */}
       {showModal && isAdmin && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <div style={{ background: '#0d1527', border: '1px solid rgba(30,45,90,0.5)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 60px rgba(23,37,84,0.5)' }}>
+          <div style={{ background: '#152044', border: '1px solid rgba(30,45,90,0.5)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '400px', color: 'white', boxShadow: '0 20px 60px rgba(23,37,84,0.5)' }}>
             <h3 style={{ margin: '0 0 16px', fontSize: '18px', fontWeight: 700 }}>Input Jadwal: {modalDate} ({modalSesi})</h3>
             
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
